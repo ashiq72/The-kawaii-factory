@@ -1,14 +1,11 @@
-'use client';
+"use client";
 
-import { Hero } from "@components";
+import Home from "@components/Home/Home";
 
-
-export default function Home() {
-  
-
+export default function HomePage() {
   return (
-    <main className='overflow-hidden'>
-      <Hero/>
+    <main className="overflow-hidden">
+      <Home />
     </main>
   );
 }
