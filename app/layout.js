@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
           </div>
           <main className="app">
             {/* <Navbar /> */}
-            <TopNavbar />
+            {/* <TopNavbar /> */}
             {children}
             <Footer />
           </main>

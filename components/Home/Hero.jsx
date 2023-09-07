@@ -11,6 +11,7 @@ import Link from "next/link";
 import { BsFillCarFrontFill } from "react-icons/bs";
 import { UserButton } from "@clerk/nextjs";
 import { BiSolidLike } from "react-icons/bi";
+import TopNavbar from "@components/Shared/TopNavber";
 
 export default function Hero() {
   return (
@@ -133,7 +134,7 @@ export default function Hero() {
         {/* Navber  */}
         <div className=" w-full absolute z-10  top-0">
           <div className="flex items-center justify-between p-2 lg:px-20 px-6 shadow-sm border-b-[1px] ">
-            <Link href="/">
+            {/* <Link href="/">
               <h1 className="text-white font-extrabold text-2xl flex items-center">
                 <span className="text-yellow-500 pr-1">
                   <BsFillCarFrontFill />
@@ -154,7 +155,8 @@ export default function Hero() {
                 Content
               </h2>
             </div>
-            <UserButton afterSignOutUrl="/" />
+            <UserButton afterSignOutUrl="/" /> */}
+            <TopNavbar />
           </div>
         </div>
         {/* Text section  */}
