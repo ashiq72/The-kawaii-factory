@@ -3,6 +3,7 @@ import Navbar from "@components/Navbar";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Footer } from "@components";
 import TopNavbar from "@components/Shared/TopNavber";
+import TextScrolling from "@components/InfiniteScrolling/TextScrolling";
 
 export const metadata = {
   title: "Clerk-Organizations",
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
             <div className="gradient" />
           </div>
           <main className="app">
+            <TextScrolling />
             {/* <Navbar /> */}
             {/* <TopNavbar /> */}
             {children}

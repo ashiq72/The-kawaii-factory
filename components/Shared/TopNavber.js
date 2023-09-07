@@ -9,7 +9,7 @@ const TopNavbar = () => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <nav className=" w-full text-white">
+      <nav className=" w-full ">
         <div className="flex items-center font-medium justify-around">
           <div className="z-50 p-5 md:w-auto w-full flex justify-between">
             <h1>Logo</h1>

@@ -35,7 +35,7 @@ export default function Hero() {
             <SwiperSlide>
               <div className="carousel-item">
                 <Image
-                  src="https://i.postimg.cc/jdYP1NpK/3.jpg"
+                  src="https://i.postimg.cc/B67St410/slider-1.png"
                   alt=""
                   height={300}
                   width={1920}
@@ -45,7 +45,7 @@ export default function Hero() {
             <SwiperSlide>
               <div className="carousel-item">
                 <Image
-                  src="https://i.postimg.cc/C1mZ46bv/2.jpg"
+                  src="https://i.postimg.cc/SKJq5Hv1/slider-2.png"
                   alt=""
                   height={900}
                   width={1920}
@@ -55,14 +55,14 @@ export default function Hero() {
             <SwiperSlide>
               <div className="carousel-item">
                 <Image
-                  src="https://i.postimg.cc/YSBm2Fpx/3.jpg"
+                  src="https://i.postimg.cc/zvqQmgfD/slider-3.png"
                   alt=""
                   height={900}
                   width={1920}
                 />
               </div>
             </SwiperSlide>
-            <SwiperSlide>
+            {/* <SwiperSlide>
               <div className="carousel-item">
                 <Image
                   src="https://i.postimg.cc/ZntGzCL2/1.jpg"
@@ -71,7 +71,7 @@ export default function Hero() {
                   width={1920}
                 />
               </div>
-            </SwiperSlide>
+            </SwiperSlide> */}
           </Swiper>
         </div>
         {/* Slider for small screen  */}
@@ -133,7 +133,7 @@ export default function Hero() {
         </div>
         {/* Navber  */}
         <div className=" w-full absolute z-10  top-0">
-          <div className="flex items-center justify-between p-2 lg:px-20 px-6 shadow-sm border-b-[1px] ">
+          <div className="flex items-center justify-between p-2 lg:px-20 px-6 shadow-sm border-b-[1px] bg-white text-black ">
             {/* <Link href="/">
               <h1 className="text-white font-extrabold text-2xl flex items-center">
                 <span className="text-yellow-500 pr-1">
@@ -160,7 +160,7 @@ export default function Hero() {
           </div>
         </div>
         {/* Text section  */}
-        <div className="absolute flex justify-end transform -translate-y-1/2 lg:px-40 px-4 top-1/2 z-20 flex-col  sm:pl-0">
+        {/* <div className="absolute flex justify-end transform -translate-y-1/2 lg:px-40 px-4 top-1/2 z-20 flex-col  sm:pl-0">
           <div>
             <div className="bg-slate-100 flex items-start rounded-2xl px-3 py-1 w-fit sm:text-[10px]">
               <span className="text-yellow-600 pr-2 ">
@@ -188,7 +188,7 @@ export default function Hero() {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
