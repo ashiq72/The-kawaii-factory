@@ -3,7 +3,6 @@ import React from "react";
 import Link from "next/link";
 import { SignedOut, UserButton, SignedIn, useSession } from "@clerk/nextjs";
 import { checkUserRole } from "../utils/userUtils";
-import Image from "next/image";
 
 const Navbar = () => {
   const { session } = useSession();
@@ -44,7 +43,7 @@ const Navbar = () => {
           </SignedIn>
         </nav>
         <div className="md:flex items-center">
-          <SignedOut>
+          {/* <SignedOut>
             <a href="/sign-in">
               <button className="text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-base mr-4">
                 Login
@@ -60,7 +59,7 @@ const Navbar = () => {
             <div className="ml-4">
               <UserButton afterSignOutUrl="/" />
             </div>
-          </SignedIn>
+          </SignedIn> */}
         </div>
       </div>
     </header>

@@ -1,9 +1,9 @@
 import "@styles/globals.css";
 import Navbar from "@components/Navbar";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Footer } from "@components";
-import TopNavbar from "@components/Shared/TopNavber";
+
 import TextScrolling from "@components/InfiniteScrolling/TextScrolling";
+import { Footer } from "@components";
 
 export const metadata = {
   title: "Clerk-Organizations",

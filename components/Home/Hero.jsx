@@ -8,10 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import Link from "next/link";
-import { BsFillCarFrontFill } from "react-icons/bs";
-import { UserButton } from "@clerk/nextjs";
-import { BiSolidLike } from "react-icons/bi";
-import TopNavbar from "@components/Shared/TopNavber";
+import TopNavbar from "@components/Shared/MainTopNavber/TopNavber";
 
 export default function Hero() {
   return (
@@ -92,7 +89,7 @@ export default function Hero() {
             <SwiperSlide>
               <div className="carousel-item">
                 <Image
-                  src="https://i.postimg.cc/Vkfy94Bh/s-1.jpg"
+                  src="https://i.postimg.cc/B6xhg9F1/orginal-the-kawaii-factory-1-sm.png"
                   alt=""
                   height={900}
                   width={1920}
@@ -102,7 +99,7 @@ export default function Hero() {
             <SwiperSlide>
               <div className="carousel-item">
                 <Image
-                  src="https://i.postimg.cc/5NMWyfHb/s-2.jpg"
+                  src="https://i.postimg.cc/3J3N8XJX/original-the-kawaii-factory-2-sm.png"
                   alt=""
                   height={900}
                   width={1920}
@@ -112,17 +109,7 @@ export default function Hero() {
             <SwiperSlide>
               <div className="carousel-item">
                 <Image
-                  src="https://i.postimg.cc/YqfKmTgg/s-3.jpg"
-                  alt=""
-                  height={900}
-                  width={1920}
-                />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="carousel-item">
-                <Image
-                  src="https://i.postimg.cc/SRc0dvvB/s-4.jpg"
+                  src="https://i.postimg.cc/NMfyNR97/orginal-the-kawaii-factory-3-sm.png"
                   alt=""
                   height={900}
                   width={1920}
@@ -132,8 +119,8 @@ export default function Hero() {
           </Swiper>
         </div>
         {/* Navber  */}
-        <div className=" w-full absolute z-10  top-0">
-          <div className="flex items-center justify-between p-2 lg:px-20 px-6 shadow-sm border-b-[1px] bg-white text-black ">
+        <div className=" w-full z-10 absolute  top-0">
+          <div className="flex items-center justify-between p-2 lg:px-28 px-6 lg:shadow-sm lg:bg-white  text-black ">
             {/* <Link href="/">
               <h1 className="text-white font-extrabold text-2xl flex items-center">
                 <span className="text-yellow-500 pr-1">
@@ -159,36 +146,6 @@ export default function Hero() {
             <TopNavbar />
           </div>
         </div>
-        {/* Text section  */}
-        {/* <div className="absolute flex justify-end transform -translate-y-1/2 lg:px-40 px-4 top-1/2 z-20 flex-col  sm:pl-0">
-          <div>
-            <div className="bg-slate-100 flex items-start rounded-2xl px-3 py-1 w-fit sm:text-[10px]">
-              <span className="text-yellow-600 pr-2 ">
-                <BiSolidLike />
-              </span>
-              {"  "}
-              100% Trusted car rental platform in the Bangladesh
-            </div>
-            <h1 className="text-6xl pt-3 font-bold text-white">
-              Find Your Best Car for
-              <br />
-              <span className="text-yellow-500"> Rental</span>
-            </h1>
-            <p className="text-xl text-white pt-5">
-              Everything your taxi business needs is already here!
-            </p>
-            <div className="flex pt-5">
-              <button className="btn btn-warning mr-5 warning hover:btn-neutral ease-in duration-200">
-                <Link href="#" className="text-base">
-                  Rent Now
-                </Link>
-              </button>
-              <button className="btn btn-outline btn-warning">
-                <Link href="/login">Login</Link>
-              </button>
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   );
