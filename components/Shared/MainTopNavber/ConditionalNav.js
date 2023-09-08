@@ -20,7 +20,7 @@ const ConditionalNav = () => {
           (link.role === "admin" && userRole === "admin") || !link.role ? (
             <Link key={link.title} href={link.url}>
               {/* Use a div instead of an anchor tag */}
-              <div className="mr-5 cursor-pointe">{link.title}</div>
+              <div className="py-7 cursor-pointer lg:px-7 ">{link.title}</div>
             </Link>
           ) : null
         )}

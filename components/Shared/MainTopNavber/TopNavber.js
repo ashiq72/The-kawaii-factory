@@ -1,11 +1,13 @@
 "use client";
+
 import NavLinks from "./NavLinks";
 import Link from "next/link";
 import { useState } from "react";
 import { FcMenu } from "react-icons/fc";
 import { MdClose } from "react-icons/md";
 import { BiSolidShoppingBags } from "react-icons/bi";
-import ProfileNav from "./ProfileNav";
+
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import ConditionalNav from "./ConditionalNav";
 
 const TopNavbar = () => {
@@ -35,20 +37,36 @@ const TopNavbar = () => {
                 Home
               </Link>
             </li>
-            <li>
+            <NavLinks />
+            <li className=" lg:flex sm:hidden">
               <ConditionalNav />
             </li>
-            <NavLinks />
           </ul>
-          <div className="md:block hidden">
+          <div className="md:block hidden ">
             {/* <Button /> */}
-            <ProfileNav />
+            <SignedOut>
+              <a href="/sign-in">
+                <button className="text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-base mr-4">
+                  Login
+                </button>
+              </a>
+              <a href="/sign-up">
+                <button className="text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-base">
+                  Sign Up
+                </button>
+              </a>
+            </SignedOut>
+            <SignedIn>
+              <div className="ml-4">
+                <UserButton afterSignOutUrl="/" />
+              </div>
+            </SignedIn>
           </div>
           {/* Mobile nav */}
           <ul
             className={`
         md:hidden bg-white fixed w-full top-0 overflow-y-auto bottom-0 py-24 pl-4
-        duration-500 items-start   ${open ? "left-0" : "left-[-100%]"}
+        duration-500  ${open ? "left-0" : "left-[-100%]"}
         `}
           >
             <li>
@@ -56,13 +74,28 @@ const TopNavbar = () => {
                 Home
               </Link>
             </li>
-            <li>
+            <NavLinks />
+            <li className="">
               <ConditionalNav />
             </li>
-            <NavLinks />
             <div className="py-5">
-              {/* <Button /> */}
-              <ProfileNav />
+              <SignedOut>
+                <a href="/sign-in">
+                  <button className="text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-base mr-4">
+                    Login
+                  </button>
+                </a>
+                <a href="/sign-up">
+                  <button className="text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-base">
+                    Sign Up
+                  </button>
+                </a>
+              </SignedOut>
+              <SignedIn>
+                <div className="">
+                  <UserButton afterSignOutUrl="/" />
+                </div>
+              </SignedIn>
             </div>
           </ul>
         </div>

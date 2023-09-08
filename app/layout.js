@@ -1,9 +1,9 @@
 import "@styles/globals.css";
-import Navbar from "@components/Navbar";
 import { ClerkProvider } from "@clerk/nextjs";
-
 import TextScrolling from "@components/InfiniteScrolling/TextScrolling";
 import { Footer } from "@components";
+import { RouterProvider } from "react-router-dom";
+import { ThemeContextProvider } from "./context/store";
 
 export const metadata = {
   title: "Clerk-Organizations",
@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
             <TextScrolling />
             {/* <Navbar /> */}
             {/* <TopNavbar /> */}
-            {children}
+            <ThemeContextProvider>{children}</ThemeContextProvider>
             <Footer />
           </main>
         </body>

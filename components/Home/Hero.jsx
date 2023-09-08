@@ -12,7 +12,7 @@ import TopNavbar from "@components/Shared/MainTopNavber/TopNavber";
 
 export default function Hero() {
   return (
-    <div className="bg-transparent bg-opacity-400 w-full relative overflow-hidden ">
+    <div className="bg-transparent bg-opacity-400 w-full relative overflow-hidden border-b-2">
       <div className=" top-0">
         {/* Slider for large screen  */}
         <div className="hidden lg:flex">
