@@ -1,12 +1,15 @@
 import ProductDetails from "@components/ProductDetails/ProductsDetails";
-import React from "react";
 
-export default function ProductView({ params }) {
-  const res = fetch("http://localhost:5000/products");
-
+const ProductView = async ({ params }) => {
+  const res = await fetch(`http://localhost:5000/products/${params.id}`, {
+    cache: "no-store",
+  });
+  const product = await res.json();
+  console.log(params.id);
   return (
     <div>
-      <ProductDetails />
+      <ProductDetails key={product._id} data={product} />
     </div>
   );
-}
+};
+export default ProductView;

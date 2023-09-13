@@ -7,7 +7,7 @@ const nextConfig = {
         hostname: "img.clerk.com",
       },
     ],
-    domains: ["i.postimg.cc"],
+    domains: ["i.postimg.cc", "static.nike.com", "www.aarong.com"],
   },
 };
 
