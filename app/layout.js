@@ -6,6 +6,8 @@ import { ThemeContextProvider } from "./context/store";
 import Footer from "@components/Shared/Footer/Footer";
 import { Provider } from "react-redux";
 import { store } from "@redux/app/store";
+import TopNavbar from "@components/Shared/MainTopNavber/TopNavber";
+import Header from "@utils/Header";
 
 export const metadata = {
   title: "Clerk-Organizations",
@@ -24,8 +26,9 @@ export default function RootLayout({ children }) {
 
           <main className="app">
             <TextScrolling />
-            {/* <Navbar /> */}
+
             {/* <TopNavbar /> */}
+            <Header />
             <ThemeContextProvider>{children}</ThemeContextProvider>
             <Footer />
           </main>

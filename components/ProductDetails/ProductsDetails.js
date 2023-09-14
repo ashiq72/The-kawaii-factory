@@ -12,7 +12,6 @@ export default function ProductDetails({ data }) {
 
   const [amount, setAmount] = useState(1);
 
-  console.log(data);
   return (
     <div className="px-72 py-24">
       <div className="flex flex-col justify-between lg:flex-row gap-16 lg:items-center">
