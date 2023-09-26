@@ -1,0 +1,1 @@
+const uri = `mongodb+srv://the-kawaii-factory:ndBt5IomNyUL5Sev@cluster0.wjwxjso.mongodb.net/`;
