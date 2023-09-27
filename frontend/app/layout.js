@@ -3,6 +3,9 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { Provider } from "react-redux";
 import { StoreProvider } from "@/store/StoreProvider";
+import MainNavber from "@/components/shared/Navber/MainNavber";
+import TextScrolling from "@/components/shared/InfiniteScrolling/TextScrolling";
+import { Footer } from "@/components/shared/Footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,7 +18,12 @@ export default function RootLayout({ children }) {
   return (
     <StoreProvider>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <TextScrolling />
+          <MainNavber />
+          {children}
+          <Footer />
+        </body>
       </html>
     </StoreProvider>
   );

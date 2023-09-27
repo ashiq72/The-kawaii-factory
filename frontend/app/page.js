@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 export default function Home() {
   const count = useSelector((state) => state.counter.value);
   const data = useGetAllProductsQuery("");
-  console.log(data);
+  // console.log(data);
   const dispatch = useDispatch();
   return (
     <>
