@@ -1,33 +1,18 @@
 "use client";
 
+import Home from "@/components/Home/Home";
 import { decrement, increment } from "@/store/features/counter/counterSlice";
 import { useGetAllProductsQuery } from "@/store/features/productsAPI/productsAPI";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function Home() {
+export default function HomePage() {
   const count = useSelector((state) => state.counter.value);
-  const data = useGetAllProductsQuery("");
-  // console.log(data);
+  const products = useGetAllProductsQuery();
+
   const dispatch = useDispatch();
   return (
     <>
-      <div>
-        <div>
-          <button
-            aria-label="Increment value"
-            onClick={() => dispatch(increment())}
-          >
-            Increment
-          </button>
-          <span>{count}</span>
-          <button
-            aria-label="Decrement value"
-            onClick={() => dispatch(decrement())}
-          >
-            Decrement
-          </button>
-        </div>
-      </div>
+      <Home products={products} />
     </>
   );
 }

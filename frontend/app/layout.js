@@ -1,13 +1,16 @@
 import { store } from "@/store/store";
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { Provider } from "react-redux";
 import { StoreProvider } from "@/store/StoreProvider";
 import MainNavber from "@/components/shared/Navber/MainNavber";
 import TextScrolling from "@/components/shared/InfiniteScrolling/TextScrolling";
 import { Footer } from "@/components/shared/Footer/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
 
 export const metadata = {
   title: "Create Next App",

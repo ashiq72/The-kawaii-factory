@@ -12,7 +12,7 @@ export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
     <ul
       className={`
         md:hidden bg-white fixed h-screen w-[300px] left-0 top-0 bottom-0 shadow-xl
-        duration-500 z-50}
+        duration-500 z-50 ${mobileMenu ? "left-0" : "left-[-100%]"}
         `}
     >
       <li>
@@ -38,7 +38,7 @@ export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
       {/*--------------------------------------
                 All categories start
        ---------------------------------------- */}
-      {categories.map((link, index) => (
+      {categories?.map((link, index) => (
         <div key={index}>
           <div className="text-left cursor-pointer group">
             <h1
