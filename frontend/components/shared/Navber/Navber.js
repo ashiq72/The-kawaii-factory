@@ -7,24 +7,13 @@ import { BsCart } from "react-icons/bs";
 import { BiMenuAltRight } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { BiSolidShoppingBags } from "react-icons/bi";
-import Wrapper from "../../Wrapper";
+import Wrapper from "../../Wrapper/Wrapper";
 import { MenuMobile } from "./MenuMobile";
-// import { fetchDataFromApi } from "@/utils/api";
 
 function Navber({ categories }) {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showCatMenu, setShowCatMenu] = useState("");
 
-  // const [category, setCategory] = useState(null);
-  // useEffect(() => {
-  //   fetchCategory();
-  // }, []);
-
-  // const fetchCategory = async () => {
-  //   const { data } = await fetchDataFromApi("/api/categories?populate=*");
-  //   setCategory(data);
-  // };
-  // console.log(category);
   return (
     <header
       className={`w-full h-[50px] md:h-[80px] bg-white flex items-center justify-between  sticky top-0 shadow-sm transition-transform duration-300 z-30 `}

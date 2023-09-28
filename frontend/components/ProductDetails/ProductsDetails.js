@@ -7,8 +7,8 @@ import { RadioGroup } from "@headlessui/react";
 import { IoMdHeartEmpty } from "react-icons/io";
 
 // import ReactMarkdown from "react-markdown";
-import Wrapper from "../Wrapper";
-import ProductDetailsCarousel from "../ProductDetailsCarousel";
+import Wrapper from "../Wrapper/Wrapper";
+import ProductDetailsCarousel from "./ProductDetailsCarousel";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
