@@ -28,44 +28,40 @@ export function ProductCard({ product }) {
         <>
           {/*---------------- Front Image ----------------*/}
           {image.slice(1, 2).map((img, index) => (
-            <>
-              <div
-                key={index}
-                className={`h-full w-full absolute object-cover  z-40  ${
-                  hoverCart
-                    ? "scale-105 hover:opacity-100 ease-in-out duration-1000"
-                    : "opacity-0 ease-in-out duration-1000"
-                }  `}
-              >
-                <Image
-                  src={img}
-                  width={340}
-                  height={300}
-                  alt="card-image"
-                  className="object-cover"
-                />
-              </div>
-            </>
+            <div
+              key={index}
+              className={`h-full w-full absolute object-cover  z-40  ${
+                hoverCart
+                  ? "scale-105 hover:opacity-100 ease-in-out duration-1000"
+                  : "opacity-0 ease-in-out duration-1000"
+              }  `}
+            >
+              <Image
+                src={img}
+                width={340}
+                height={300}
+                alt="card-image"
+                className="object-cover"
+              />
+            </div>
           ))}
 
           {/*------------ Background Image --------------- */}
           {image.slice(0, 1).map((img, index) => (
-            <>
-              <div
-                key={index}
-                className={`h-full w-full absolute z-20 object-cover ${
-                  hoverCart ? " hover:opacity-0" : " opacity-100"
-                }  `}
-              >
-                <Image
-                  src={img}
-                  width={340}
-                  height={300}
-                  alt="card-image"
-                  className="object-cover"
-                />
-              </div>
-            </>
+            <div
+              key={index}
+              className={`h-full w-full absolute z-20 object-cover ${
+                hoverCart ? " hover:opacity-0" : " opacity-100"
+              }  `}
+            >
+              <Image
+                src={img}
+                width={340}
+                height={300}
+                alt="card-image"
+                className="object-cover"
+              />
+            </div>
           ))}
           {/* Start Button & Wishlist & Add to cart  */}
           <h1
