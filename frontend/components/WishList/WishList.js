@@ -2,8 +2,8 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { useSelector } from "react-redux";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
   const [open, setOpen] = useState(true);
@@ -72,14 +72,13 @@ export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
                                   {product.image
                                     .slice(0, 1)
                                     .map((img, index) => (
-                                      <>
-                                        <Image
-                                          src={img}
-                                          width={340}
-                                          height={300}
-                                          alt="card-image"
-                                        />
-                                      </>
+                                      <Image
+                                        src={img}
+                                        key={index}
+                                        width={340}
+                                        height={300}
+                                        alt="card-image"
+                                      />
                                     ))}
                                 </div>
 
@@ -99,7 +98,7 @@ export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
                                     <p className="text-gray-500">
-                                      {/* Qty {product.quantity} */}
+                                      Qty {product.wQuantity}
                                     </p>
 
                                     <div className="flex">
@@ -138,14 +137,15 @@ export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
                           or
-                          <button
+                          <Link
+                            href="/products"
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
                             onClick={() => setWishListOpen(false)}
                           >
                             Continue Shopping
                             <span aria-hidden="true"> &rarr;</span>
-                          </button>
+                          </Link>
                         </p>
                       </div>
                     </div>

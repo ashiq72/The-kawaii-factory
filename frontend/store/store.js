@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterSlice from "./features/counter/counterSlice";
 import { productsApi } from "./features/productsAPI/productsAPI";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { categoriesApi } from "./features/categoriesAPI/categoriesAPI";
@@ -8,7 +7,6 @@ import wishListSlice from "./features/wishListSlice/wishListSlice";
 
 export const store = configureStore({
   reducer: {
-    counter: counterSlice,
     cart: cartSlice,
     wishlist: wishListSlice,
     [productsApi.reducerPath]: productsApi.reducer,

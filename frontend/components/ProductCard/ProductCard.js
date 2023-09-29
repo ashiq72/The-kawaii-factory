@@ -8,12 +8,16 @@ import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineHeart, AiOutlineEye } from "react-icons/ai";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export function ProductCard({ product }) {
   const { name, price, image, slug, thumbnail, orginalPrice } = product;
   const [hoverCart, setHoverCart] = useState(false);
   const dispatch = useDispatch();
+  const selectedWishlist = useSelector(
+    (state) => state.wishlist.selectedWishlist
+  );
+  console.log(selectedWishlist);
 
   return (
     <div className="w-80 h-[520px]  border-2 border-gray-50 rounded-md">

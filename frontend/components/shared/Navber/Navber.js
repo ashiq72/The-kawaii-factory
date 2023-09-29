@@ -19,6 +19,7 @@ function Navber({ categories }) {
   const [wishListOpen, setWishListOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const wishLists = useSelector((state) => state.wishlist.wishlist);
+
   const cartItems = useSelector((state) => state.cart.cart);
 
   return (
