@@ -32,8 +32,8 @@ const FilterLeftLinks = () => {
           {categories?.data?.map((link, index) => (
             <div key={index}>
               <div className="text-left cursor-pointer group">
-                {/* <h1
-                  className="w-full py-2 hover:bg-gray-200 flex justify-between items-center md:pr-0 pr-5 group capitalize px-4 border-b-2"
+                <h1
+                  className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500 hover:bg-blue-gray-50 rounded-sm px-1 capitalize"
                   onClick={() => {
                     heading !== link.name
                       ? setHeading(link.name)
@@ -41,46 +41,25 @@ const FilterLeftLinks = () => {
                     setSubHeading("");
                   }}
                 >
-                 
-                  <span>{link.name}</span>
-                  <span className="text-xl ">
+                  <span className="font-medium text-gray-600">{link.name}</span>
+                  <span className="text-xl hover:text-gray-500">
                     {link?.firstsublinks ? (
                       <span>
                         {heading === link.name ? (
-                          <IoIosArrowUp />
+                          <MinusIcon
+                            className="h-5 w-5 hover:text-gray-500"
+                            aria-hidden="true"
+                          />
                         ) : (
-                          <IoIosArrowDown />
+                          <PlusIcon
+                            className="h-5 w-5 hover:text-gray-500"
+                            aria-hidden="true"
+                          />
                         )}
                       </span>
                     ) : null}
                   </span>
-                </h1> */}
-                <h3
-                  className="-my-3 flex justify-between w-full"
-                  onClick={() => {
-                    heading !== link.name
-                      ? setHeading(link.name)
-                      : setHeading("");
-                    setSubHeading("");
-                  }}
-                >
-                  <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
-                    <span className="font-medium text-gray-900">
-                      {link.name}
-                    </span>
-                    <span className=" flex items-center">
-                      {link?.firstsublinks ? (
-                        <span>
-                          {heading === link.name ? (
-                            <MinusIcon className="h-5 w-5" aria-hidden="true" />
-                          ) : (
-                            <PlusIcon className="h-5 w-5" aria-hidden="true" />
-                          )}
-                        </span>
-                      ) : null}
-                    </span>
-                  </Disclosure.Button>
-                </h3>
+                </h1>
               </div>
               {/*-----------------------------------------------
            Mobile firstsublinks && secondsublinks menu start 
@@ -103,17 +82,28 @@ const FilterLeftLinks = () => {
                             ? setSubHeading(slinks.name)
                             : setSubHeading("")
                         }
-                        className="py-4 pl-7 font-semibold md:pr-0 pr-5 flex justify-between items-center "
+                        className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500 pl-2 hover:bg-blue-gray-50 rounded-sm px-1 cursor-pointer capitalize"
                       >
                         {/* Mobile firstsublinks menu */}
-                        {slinks.name}
-
+                        <span className="font-medium text-gray-600">
+                          {slinks.name}
+                        </span>
                         <span className="text-xl md:mt-1 md:ml-2 inline">
-                          {subHeading === slinks.name ? (
-                            <IoIosArrowUp />
-                          ) : (
-                            <IoIosArrowDown />
-                          )}
+                          {slinks?.secondsublinks ? (
+                            <>
+                              {subHeading === slinks.name ? (
+                                <MinusIcon
+                                  className="h-5 w-5 hover:text-gray-500"
+                                  aria-hidden="true"
+                                />
+                              ) : (
+                                <PlusIcon
+                                  className="h-5 w-5 hover:text-gray-500"
+                                  aria-hidden="true"
+                                />
+                              )}
+                            </>
+                          ) : null}
                         </span>
                       </h1>
                       <div
@@ -124,9 +114,16 @@ const FilterLeftLinks = () => {
                         }`}
                       >
                         {slinks?.secondsublinks?.map((slink, index) => (
-                          <li key={index} className="py-3 pl-14">
+                          <li
+                            key={index}
+                            className="py-3 hover:bg-blue-gray-50 rounded-sm cursor-pointer "
+                          >
                             {/* Mobile secondsublinks menu */}
-                            <Link href="">{slink.name}</Link>
+                            <Link href="">
+                              <span className="font-medium pl-6 text-sm text-gray-600 capitalize ">
+                                {slink.name}
+                              </span>
+                            </Link>
                           </li>
                         ))}
                       </div>

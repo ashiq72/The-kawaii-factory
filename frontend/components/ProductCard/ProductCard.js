@@ -1,4 +1,6 @@
 "use client";
+import { addToCart } from "@/store/features/cartSlice/cartSlice";
+import { addToWishList } from "@/store/features/wishListSlice/wishListSlice";
 // import { getDiscountPricePercentage } from "@/utils/helper";
 import { Typography, Button, Tooltip } from "@material-tailwind/react";
 import Image from "next/image";
@@ -6,10 +8,12 @@ import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineHeart, AiOutlineEye } from "react-icons/ai";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 
 export function ProductCard({ product }) {
   const { name, price, image, slug, thumbnail, orginalPrice } = product;
   const [hoverCart, setHoverCart] = useState(false);
+  const dispatch = useDispatch();
 
   return (
     <div className="w-80 h-[520px]  border-2 border-gray-50 rounded-md">
@@ -69,7 +73,10 @@ export function ProductCard({ product }) {
               hoverCart ? "right-2" : "-right-20"
             }`}
           >
-            <div className="flex gap-3">
+            <div
+              className="flex gap-3"
+              onClick={() => dispatch(addToWishList(product))}
+            >
               <Tooltip
                 className="z-40 p-1 px-2"
                 content="Add to wishlist"
@@ -106,7 +113,10 @@ export function ProductCard({ product }) {
             }`}
           >
             <div class="relative flex  flex-col items-center justify-center overflow-hidden bg-gray-50 z-10 rounded-md ">
-              <button class="relative w-full bg-transparent py-2 px-6 font-medium uppercase text-gray-800 transition-colors before:absolute before:left-0 before:top-0 before:-z-10 before:h-full before:w-full before:origin-top-left before:scale-x-0 before:bg-gray-800 before:transition-transform before:duration-300 before:content-[''] hover:text-white before:hover:scale-x-100 rounded-md ">
+              <button
+                onClick={() => dispatch(addToCart(product))}
+                class="relative w-full bg-transparent py-2 px-6 font-medium uppercase text-gray-800 transition-colors before:absolute before:left-0 before:top-0 before:-z-10 before:h-full before:w-full before:origin-top-left before:scale-x-0 before:bg-gray-800 before:transition-transform before:duration-300 before:content-[''] hover:text-white before:hover:scale-x-100 rounded-md "
+              >
                 Add to cart
               </button>
             </div>
