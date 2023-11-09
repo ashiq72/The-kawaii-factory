@@ -1,6 +1,7 @@
 "use client";
 import { addToCart } from "@/store/features/cartSlice/cartSlice";
 import { addToWishList } from "@/store/features/wishListSlice/wishListSlice";
+import { PricceCalculation } from "@/utilis/PricceCalculation/PricceCalculation";
 import { Typography, Button, Tooltip } from "@material-tailwind/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,7 +15,16 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export function ProductCard({ product }) {
-  const { _id, name, price, image, slug, thumbnail, orginalPrice } = product;
+  const {
+    _id,
+    name,
+    price,
+    image,
+    slug,
+    thumbnail,
+    orginalPrice,
+    discountRate,
+  } = product;
 
   const [hoverCart, setHoverCart] = useState(false);
   const [isToastVisible, setToastVisibility] = useState(false);
@@ -57,6 +67,12 @@ export function ProductCard({ product }) {
       setToastVisibility(true);
     }
   };
+
+  function pricceCalculation(orginalPrice, discountRate) {
+    const discountPrice = orginalPrice - orginalPrice / discountRate;
+    return parseInt(discountPrice);
+  }
+
   return (
     <div className="w-80 h-[520px]  border-2 border-gray-50 rounded-md">
       {/* --------------------------------------------------
@@ -231,14 +247,14 @@ export function ProductCard({ product }) {
         </div>
         {/*------------ Price ----------- */}
         <div className="font-normal text-base py-1 flex px-1 gap-3">
-          &#2547; {price}
+          &#2547; {pricceCalculation(orginalPrice, discountRate)}
           {/* {orginalPrice && ( */}
           <>
             <div className="text-base text-red-700 font-medium line-through">
-              &#2547; 1200
+              &#2547; {orginalPrice}
             </div>
             <div className="ml-auto text-base font-medium text-green-500">
-              <p>12 % Off</p>
+              {discountRate}% Off
             </div>
           </>
           {/* )} */}
