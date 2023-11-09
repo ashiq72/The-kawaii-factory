@@ -69,7 +69,7 @@ export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
                                     alt={product.imageAlt}
                                     className="h-full w-full object-cover object-center"
                                   /> */}
-                                  {product.image
+                                  {product?.image
                                     .slice(0, 1)
                                     .map((img, index) => (
                                       <Image

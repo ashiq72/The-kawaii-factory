@@ -9,7 +9,21 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      state.cart.push(action.payload);
+      // state.cart.push(action.payload);
+
+      const selectedProduct = state.cart.find(
+        (product) => product._id === action.payload._id
+      );
+      if (!selectedProduct) {
+        const product = { ...action.payload, cQuantity: 1 };
+        state.cart.push(product);
+      } else {
+        selectedProduct.cQuantity += 1;
+        state.cart
+          .filter((product) => product._id !== selectedProduct._id)
+          .push(selectedProduct);
+        // state.selectedWishlist = true;
+      }
     },
   },
 });

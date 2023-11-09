@@ -1,16 +1,10 @@
-import { store } from "@/store/store";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import { Poppins } from "next/font/google";
-import { Provider } from "react-redux";
+import MainNavber from "./components/Shared/Navber/MainNavber";
 import { StoreProvider } from "@/store/StoreProvider";
-import MainNavber from "@/components/shared/Navber/MainNavber";
-import TextScrolling from "@/components/shared/InfiniteScrolling/TextScrolling";
-import { Footer } from "@/components/shared/Footer/Footer";
+import { ToastContainer } from "react-toastify";
 
-const inter = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -22,10 +16,9 @@ export default function RootLayout({ children }) {
     <StoreProvider>
       <html lang="en">
         <body className={inter.className}>
-          <TextScrolling />
           <MainNavber />
+          <ToastContainer />
           {children}
-          <Footer />
         </body>
       </html>
     </StoreProvider>

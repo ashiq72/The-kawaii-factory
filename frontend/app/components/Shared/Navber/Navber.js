@@ -1,17 +1,17 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import Menu from "./Menu";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { BsCart } from "react-icons/bs";
 import { BiMenuAltRight } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { BiSolidShoppingBags } from "react-icons/bi";
 import Wrapper from "../../Wrapper/Wrapper";
+import Menu from "./Menu";
 import { MenuMobile } from "./MenuMobile";
-import Cart from "@/app/cart/page";
-import WishList from "@/components/WishList/WishList";
+import WishList from "../../WishList/WishList";
 import { useSelector } from "react-redux";
+// import Cart from "@/app/cart/page";
 
 function Navber({ categories }) {
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -19,7 +19,7 @@ function Navber({ categories }) {
   const [wishListOpen, setWishListOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const wishLists = useSelector((state) => state.wishlist.wishlist);
-
+  // console.log(wishLists);
   const cartItems = useSelector((state) => state.cart.cart);
 
   return (
@@ -64,7 +64,7 @@ function Navber({ categories }) {
                 wishLists={wishLists}
               />
               <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
-                {wishLists.length}
+                {wishLists?.length}
               </div>
             </div>
           </button>

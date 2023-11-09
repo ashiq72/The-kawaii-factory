@@ -1,7 +1,7 @@
 "use client";
 
-import Home from "@/components/Home/Home";
 import { useGetAllProductsQuery } from "@/store/features/productsAPI/productsAPI";
+import Home from "./components/Home/Home";
 
 export default function HomePage() {
   const products = useGetAllProductsQuery();

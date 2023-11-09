@@ -1,4 +1,4 @@
-import { ProductCard } from "@/components/ProductCard/ProductCard";
+import { ProductCard } from "@/app/components/ProductCard/ProductCard";
 import { useGetAllProductsQuery } from "@/store/features/productsAPI/productsAPI";
 
 export default function AllProducts() {

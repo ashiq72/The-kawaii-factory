@@ -9,9 +9,11 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
+import Wrapper from "../components/Wrapper/Wrapper";
 import AllProducts from "./AllProducts/AllProducts";
-import Wrapper from "@/components/Wrapper/Wrapper";
-import FilterLeftLinks from "@/components/FilterLeftLinks/FilterLeftLinks";
+import FilterLeftLinks from "../components/FilterLeftLinks/FilterLeftLinks";
+
+// import FilterLeftLinks from "@/components/FilterLeftLinks/FilterLeftLinks";
 
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },

@@ -6,30 +6,34 @@ import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 
 const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
   const [heading, setHeading] = useState("");
-  // console.log(category);
+
   return (
     <div className="lg:flex lg:gap-8 hidden">
       {/* Only for Woman category start */}
       {categories?.slice(0, 1).map((link, index) => (
-        <div key={index}>
+        <div
+          onMouseEnter={() => {
+            heading !== link._id ? setHeading(link._id) : setHeading("");
+          }}
+          onMouseLeave={() => {
+            setHeading("");
+          }}
+          key={index}
+        >
           <div className="text-left md:cursor-pointer group">
-            <h1
-              className="py-7 flex justify-between items-center md:pr-0 pr-5 group capitalize"
-              onMouseEnter={() => {
-                heading !== link.name ? setHeading(link.name) : setHeading("");
-              }}
-              onMouseLeave={() => {
-                setHeading("");
-              }}
-            >
+            <h1 className="py-7 flex justify-between items-center md:pr-0 pr-5 group capitalize">
               {link.name}
-              <span className="text-base pt-1 inline transition duration-300 ease-in-out">
+              <span className="text-base pt-1 inline transition duration-1000 ease-in-out">
                 {link.firstsublinks ? (
                   <span>
-                    {heading === link.name ? (
-                      <IoIosArrowUp />
+                    {heading === link._id ? (
+                      <span className="">
+                        <IoIosArrowUp />
+                      </span>
                     ) : (
-                      <IoIosArrowDown />
+                      <span className="">
+                        <IoIosArrowDown />
+                      </span>
                     )}
                   </span>
                 ) : null}
@@ -50,7 +54,7 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
                   <div className="bg-white grid grid-cols-3 gap-7 p-2 rounded">
                     {link.firstsublinks.map((mysublinks, index) => (
                       <div key={index}>
-                        <h1 className="text-base font-medium border-b-2">
+                        <h1 className="text-base font-medium border-b-2 cursor-default">
                           {mysublinks.name}
                         </h1>
                         {mysublinks?.secondsublinks?.map((slink, index) => (
@@ -75,22 +79,22 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
       {/* Only for Woman category End */}
       {/* Only for others category start */}
       {categories?.slice(1).map((link, index) => (
-        <div key={index}>
+        <div
+          onMouseEnter={() => {
+            heading !== link._id ? setHeading(link._id) : setHeading("");
+          }}
+          onMouseLeave={() => {
+            setHeading("");
+          }}
+          key={index}
+        >
           <div className="text-left md:cursor-pointer group">
-            <h1
-              className="py-7 flex justify-between items-center md:pr-0 pr-2 group capitalize"
-              onMouseEnter={() => {
-                heading !== link.name ? setHeading(link.name) : setHeading("");
-              }}
-              onMouseLeave={() => {
-                setHeading("");
-              }}
-            >
+            <h1 className="py-7 flex justify-between items-center md:pr-0 pr-2 group capitalize">
               {link.name}
               <span className="text-base pt-1 inline ">
                 {link.firstsublinks ? (
                   <span>
-                    {heading === link.name ? (
+                    {heading === link._id ? (
                       <IoIosArrowUp />
                     ) : (
                       <IoIosArrowDown />

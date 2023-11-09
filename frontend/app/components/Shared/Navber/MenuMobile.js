@@ -28,20 +28,26 @@ export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
             </h1>
           </Link>
           <div
-            className="text-3xl md:hidden"
+            className=" md:hidden w-8 md:w-12 h-8 md:h-12 rounded-full flex lg:hidden justify-center items-center hover:bg-black/[0.05] cursor-pointer"
             onClick={() => setMobileMenu(!mobileMenu)}
           >
-            {mobileMenu ? <MdClose /> : <FcMenu />}
+            {/* {mobileMenu ? <MdClose /> : <FcMenu />} */}
+            {mobileMenu ? (
+              <MdClose className="text-[22px]" />
+            ) : (
+              <FcMenu className="text-[30px]" />
+            )}
           </div>
         </div>
       </li>
       {/*    All categories start   */}
-      <div>
-        {categories?.map((link, index) => (
+      <div className="h-screen overflow-scroll scroll-smooth">
+        {/* Woman category only */}
+        {categories?.slice(0, 1).map((link, index) => (
           <div key={index}>
             <div className="text-left cursor-pointer group">
               <h1
-                className="py-2 hover:bg-gray-200 flex justify-between items-center md:pr-0 pr-5 group capitalize px-4 border-b-2"
+                className="py-3 hover:bg-gray-200 flex justify-between items-center md:pr-0 pr-5 group capitalize px-4 border-b-2"
                 onClick={() => {
                   heading !== link.name
                     ? setHeading(link.name)
@@ -55,7 +61,9 @@ export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
                   {link.firstsublinks ? (
                     <span>
                       {heading === link.name ? (
-                        <IoIosArrowUp />
+                        <span className="">
+                          <IoIosArrowUp />
+                        </span>
                       ) : (
                         <IoIosArrowDown />
                       )}
@@ -84,7 +92,7 @@ export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
                           ? setSubHeading(slinks.name)
                           : setSubHeading("")
                       }
-                      className="py-4 pl-7 font-semibold md:pr-0 pr-5 flex justify-between items-center "
+                      className="py-2 pl-7 font-medium md:pr-0 pr-5 flex justify-between items-center  hover:bg-gray-200 cursor-pointer"
                     >
                       {/* Mobile firstsublinks menu */}
                       {slinks.name}
@@ -103,12 +111,79 @@ export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
                       }`}
                     >
                       {slinks?.secondsublinks?.map((slink, index) => (
-                        <li key={index} className="py-3 pl-14">
+                        <li
+                          key={index}
+                          className="py-3 pl-14 hover:bg-gray-200 cursor-pointer hover:text-green-600"
+                        >
                           {/* Mobile secondsublinks menu */}
                           <Link href="">{slink.name}</Link>
                         </li>
                       ))}
                     </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {/*-----------------------------------------------
+           Mobile firstsublinks && secondsublinks menu end 
+           ------------------------------------------------*/}
+          </div>
+        ))}
+        {/* All Others category */}
+        {categories?.slice(1).map((link, index) => (
+          <div key={index}>
+            <div className="text-left cursor-pointer group">
+              <h1
+                className="py-3 hover:bg-gray-200 flex justify-between items-center md:pr-0 pr-5 group capitalize px-4 border-b-2"
+                onClick={() => {
+                  heading !== link.name
+                    ? setHeading(link.name)
+                    : setHeading("");
+                  setSubHeading("");
+                }}
+              >
+                {/* Mobile MainCategory menu */}
+                {link.name}
+                <span className="text-xl md:hidden inline">
+                  {link.firstsublinks ? (
+                    <span>
+                      {heading === link.name ? (
+                        <span className="">
+                          <IoIosArrowUp />
+                        </span>
+                      ) : (
+                        <IoIosArrowDown />
+                      )}
+                    </span>
+                  ) : null}
+                </span>
+                <span className="text-xl md:mt-1 md:ml-2  md:block hidden group-hover:rotate-180 group-hover:-mt-2">
+                  <ion-icon name="chevron-down"></ion-icon>
+                </span>
+              </h1>
+            </div>
+            {/*-----------------------------------------------
+           Mobile firstsublinks && secondsublinks menu start 
+           ------------------------------------------------*/}
+            <div
+              className={`
+            ${heading === link.name ? "md:hidden" : "hidden"}
+          `}
+            >
+              {link?.firstsublinks?.map((slinks, index) => (
+                <div key={index}>
+                  <div>
+                    <h1
+                      onClick={() =>
+                        subHeading !== slinks.name
+                          ? setSubHeading(slinks.name)
+                          : setSubHeading("")
+                      }
+                      className="py-3 pl-7 font-normal md:pr-0 pr-5 flex justify-between items-center  hover:bg-gray-200 cursor-pointer hover:text-green-600 capitalize"
+                    >
+                      {/* Mobile firstsublinks menu */}
+                      {slinks.name}
+                    </h1>
                   </div>
                 </div>
               ))}

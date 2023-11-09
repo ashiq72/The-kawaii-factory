@@ -80,6 +80,7 @@ export default function Hero() {
                   alt=""
                   height={900}
                   width={1920}
+                  style={{ height: "calc(100vh - 15vh)" }}
                 />
               </div>
             </SwiperSlide>
@@ -90,6 +91,7 @@ export default function Hero() {
                   alt=""
                   height={900}
                   width={1920}
+                  style={{ height: "calc(100vh - 15vh)" }}
                 />
               </div>
             </SwiperSlide>
@@ -100,6 +102,7 @@ export default function Hero() {
                   alt=""
                   height={900}
                   width={1920}
+                  style={{ height: "calc(100vh - 15vh)" }}
                 />
               </div>
             </SwiperSlide>

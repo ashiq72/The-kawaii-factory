@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { productsApi } from "./features/productsAPI/productsAPI";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import { productsApi } from "./features/productsAPI/productsAPI";
 import { categoriesApi } from "./features/categoriesAPI/categoriesAPI";
 import cartSlice from "./features/cartSlice/cartSlice";
 import wishListSlice from "./features/wishListSlice/wishListSlice";

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Category from "./Category";
 import Hero from "./Hero";
+import Category from "./Category";
 import HomeProductsSection from "./HomeProductsSection";
 import MiniBanner from "./MiniBanner";
 import PromoSection from "./PromoSection";

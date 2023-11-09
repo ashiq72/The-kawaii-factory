@@ -4,7 +4,6 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 // import { updateCart, removeFromCart } from "@/store/cartSlice";
 import { useDispatch } from "react-redux";
 const CartItem = ({ data }) => {
-  console.log(data);
   // const p = data.attributes;
 
   // const dispatch = useDispatch();
@@ -90,7 +89,7 @@ const CartItem = ({ data }) => {
                   );
                 })}
               </select> */}
-              30
+              {data.cQuantity}
             </div>
           </div>
           <RiDeleteBin6Line

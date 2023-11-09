@@ -1,24 +1,62 @@
 "use client";
 import { addToCart } from "@/store/features/cartSlice/cartSlice";
 import { addToWishList } from "@/store/features/wishListSlice/wishListSlice";
-// import { getDiscountPricePercentage } from "@/utils/helper";
 import { Typography, Button, Tooltip } from "@material-tailwind/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { AiOutlineHeart, AiOutlineEye } from "react-icons/ai";
+import { useEffect, useState } from "react";
+import { AiOutlineHeart, AiOutlineEye, AiFillHeart } from "react-icons/ai";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { BsCart } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 
-export function ProductCard({ product }) {
-  const { name, price, image, slug, thumbnail, orginalPrice } = product;
-  const [hoverCart, setHoverCart] = useState(false);
-  const dispatch = useDispatch();
-  const selectedWishlist = useSelector(
-    (state) => state.wishlist.selectedWishlist
-  );
-  console.log(selectedWishlist);
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+export function ProductCard({ product }) {
+  const { _id, name, price, image, slug, thumbnail, orginalPrice } = product;
+
+  const [hoverCart, setHoverCart] = useState(false);
+  const [isToastVisible, setToastVisibility] = useState(false);
+  const [selectedWishlist, setSelectedWishlist] = useState([]);
+  const [selectedCart, setSelectedCart] = useState([]);
+
+  const dispatch = useDispatch();
+
+  //Toast for selected wishlists & cart
+  useEffect(() => {
+    if (isToastVisible) {
+      toast.success("Already Added");
+    }
+    return () => {
+      setToastVisibility(false);
+    };
+  }, [isToastVisible]);
+
+  //Handle-checkbox function for selecting images
+  const handleSelectedWishlist = (_id) => {
+    const selectedID = selectedWishlist.find((id) => id === _id);
+    if (!selectedID) {
+      setSelectedWishlist([...selectedWishlist, _id]);
+    } else {
+      selectedWishlist
+        .filter((id) => id !== _id)
+        .push(setSelectedWishlist([selectedID]));
+      setToastVisibility(true);
+    }
+  };
+  //Handle-checkbox function for selecting images
+  const handleSelectedCart = (_id) => {
+    const selectedID = selectedCart.find((id) => id === _id);
+    if (!selectedID) {
+      setSelectedCart([...selectedCart, _id]);
+    } else {
+      selectedCart
+        .filter((id) => id !== _id)
+        .push(setSelectedCart([selectedID]));
+      setToastVisibility(true);
+    }
+  };
   return (
     <div className="w-80 h-[520px]  border-2 border-gray-50 rounded-md">
       {/* --------------------------------------------------
@@ -26,15 +64,17 @@ export function ProductCard({ product }) {
        ---------------------------------------------------*/}
       <div
         className="h-[400px] max-h-full bg-center overflow-hidden shadow-sm relative"
-        onMouseEnter={() => setHoverCart(!hoverCart)}
-        onMouseLeave={() => setHoverCart(!hoverCart)}
+        onMouseOver={() => setHoverCart(true)}
+        onMouseLeave={() => setHoverCart(false)}
       >
         <>
-          {/*---------------- Front Image ----------------*/}
+          {/*----------------
+          Front Image
+          ----------------*/}
           {image.slice(1, 2).map((img, index) => (
             <div
               key={index}
-              className={`h-full w-full absolute object-cover  z-40  ${
+              className={`h-full w-full absolute object-cover  z-10  ${
                 hoverCart
                   ? "scale-105 hover:opacity-100 ease-in-out duration-1000"
                   : "opacity-0 ease-in-out duration-1000"
@@ -54,7 +94,7 @@ export function ProductCard({ product }) {
           {image.slice(0, 1).map((img, index) => (
             <div
               key={index}
-              className={`h-full w-full absolute z-20 object-cover ${
+              className={`h-full w-full absolute z-0 object-cover ${
                 hoverCart ? " hover:opacity-0" : " opacity-100"
               }  `}
             >
@@ -69,10 +109,11 @@ export function ProductCard({ product }) {
           ))}
           {/* Start Button & Wishlist & Add to cart  */}
           <h1
-            className={`absolute top-5 duration-500 z-40 text-2xl flex flex-col gap-2 ${
+            className={`absolute top-5 duration-500 z-20 text-2xl flex flex-col gap-2 ${
               hoverCart ? "right-2" : "-right-20"
             }`}
           >
+            {/* start Add wishlist */}
             <div
               className="flex gap-3"
               onClick={() => dispatch(addToWishList(product))}
@@ -86,41 +127,69 @@ export function ProductCard({ product }) {
                   unmount: { scale: 0, y: 25 },
                 }}
               >
-                <div className="bg-white rounded-full p-1 border-2 ease-in-out duration-100 border-gray-50 hover:border-2 hover:border-gray-900">
-                  <AiOutlineHeart />
+                <div
+                  className={`bg-white rounded-full p-1 border-2 ease-in-out duration-100 border-gray-50 hover:border-2  ${
+                    selectedWishlist.includes(_id)
+                      ? "hover:border-red-600 text-red-600"
+                      : "hover:border-gray-900"
+                  }`}
+                  onClick={() => {
+                    // e.preventDefault(); // Prevent the default checkbox behavior
+                    handleSelectedWishlist(_id);
+                  }}
+                >
+                  {selectedWishlist.includes(_id) ? (
+                    <AiFillHeart />
+                  ) : (
+                    <AiOutlineHeart />
+                  )}
                 </div>
               </Tooltip>
             </div>
-            <div className="flex gap-3">
+            {/* Quick add to cart  */}
+            <div
+              className="flex gap-3"
+              onClick={() => dispatch(addToCart(product))}
+            >
               <Tooltip
-                className="z-40 py-1 px-2"
-                content="Quick view"
+                className="z-20 py-1 px-2"
+                content="Add to cart"
                 placement="left"
                 animate={{
                   mount: { scale: 1, y: 0 },
                   unmount: { scale: 0, y: 25 },
                 }}
               >
-                <div className="bg-white rounded-full p-1 border-2 ease-in-out duration-100 border-gray-50 hover:border-2 hover:border-gray-900">
-                  <AiOutlineEye />
+                <div
+                  className={`bg-white rounded-full p-1 border-2 ease-in-out duration-100 border-gray-50 hover:border-2 text-[20px] ${
+                    selectedCart.includes(_id)
+                      ? "hover:border-green-600 text-green-600 "
+                      : "hover:border-gray-900"
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault(); // Prevent the default checkbox behavior
+                    handleSelectedCart(_id);
+                  }}
+                >
+                  {/* <AiOutlineEye /> */}
+                  {selectedCart.includes(_id) ? <BsCart /> : <BsCart />}
                 </div>
               </Tooltip>
             </div>
           </h1>
-          <div
-            className={`absolute origin-center  duration-500 z-40 translate-x-1/2  gap-2 bg-white rounded-md  ${
-              hoverCart ? "bottom-2" : "-bottom-20"
-            }`}
-          >
-            <div class="relative flex  flex-col items-center justify-center overflow-hidden bg-gray-50 z-10 rounded-md ">
-              <button
-                onClick={() => dispatch(addToCart(product))}
-                class="relative w-full bg-transparent py-2 px-6 font-medium uppercase text-gray-800 transition-colors before:absolute before:left-0 before:top-0 before:-z-10 before:h-full before:w-full before:origin-top-left before:scale-x-0 before:bg-gray-800 before:transition-transform before:duration-300 before:content-[''] hover:text-white before:hover:scale-x-100 rounded-md "
-              >
-                Add to cart
-              </button>
+          <Link href={`/product-view/${_id}`}>
+            <div
+              className={`absolute origin-center  duration-500 z-20 translate-x-1/2  gap-2 bg-white rounded-md  ${
+                hoverCart ? "bottom-2" : "-bottom-20"
+              }`}
+            >
+              <div className="relative flex  flex-col items-center justify-center overflow-hidden bg-gray-50 z-10 rounded-md ">
+                <button className="relative w-full bg-transparent py-2 px-6 font-medium uppercase text-gray-800 transition-colors before:absolute before:left-0 before:top-0 before:-z-10 before:h-full before:w-full before:origin-top-left before:scale-x-0 before:bg-gray-800 before:transition-transform before:duration-300 before:content-[''] hover:text-white before:hover:scale-x-100 rounded-md ">
+                  Details view
+                </button>
+              </div>
             </div>
-          </div>
+          </Link>
           {/* End Button & Wishlist & Add to cart  */}
         </>
       </div>

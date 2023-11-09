@@ -13,9 +13,10 @@ import { BiSolidShoppingBags } from "react-icons/bi";
 import { FcMenu } from "react-icons/fc";
 import { MdClose } from "react-icons/md";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
-import { useGetAllCategoriesQuery } from "@/store/features/categoriesAPI/categoriesAPI";
+
 import { useState } from "react";
 import Link from "next/link";
+import { useGetAllCategoriesQuery } from "@/store/features/categoriesAPI/categoriesAPI";
 
 const FilterLeftLinks = () => {
   const categories = useGetAllCategoriesQuery();
