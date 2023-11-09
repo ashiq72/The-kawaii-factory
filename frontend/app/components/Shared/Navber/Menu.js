@@ -8,7 +8,7 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
   const [heading, setHeading] = useState("");
 
   return (
-    <div className="lg:flex lg:gap-8 hidden">
+    <div className="lg:flex lg:gap-6  hidden">
       {/* Only for Woman category start */}
       {categories?.slice(0, 1).map((link, index) => (
         <div
@@ -51,7 +51,7 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
                   mt-1 bg-white rotate-45 -z-10"
                     ></div>
                   </div>
-                  <div className="bg-white grid grid-cols-3 gap-7 p-2 rounded">
+                  <div className="bg-white grid grid-cols-3 gap-7 p-2 rounded shadow-md">
                     {link.firstsublinks.map((mysublinks, index) => (
                       <div key={index}>
                         <h1 className="text-base font-medium border-b-2 cursor-default">
@@ -62,7 +62,7 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
                             key={index}
                             className="text-sm text-gray-600 rounded-md py-2 px-2 list-none hover:bg-slate-100 "
                           >
-                            <Link href="" className="hover:text-primary">
+                            <Link href="" className="hover:text-green-600 ">
                               {slink.name}
                             </Link>
                           </li>
@@ -116,10 +116,10 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
                   mt-1 bg-white rotate-45 -z-10"
                     ></div>
                   </div>
-                  <div className="bg-white p-2 rounded">
+                  <div className="bg-white shadow p-2 rounded">
                     {link.firstsublinks.map((mysublinks, index) => (
                       <div key={index}>
-                        <h1 className="text-sm text-gray-600 rounded-md py-2 px-2 list-none hover:bg-slate-100 capitalize">
+                        <h1 className="text-sm text-gray-600 rounded-md py-2 px-2 list-none hover:bg-slate-100 capitalize hover:text-green-600">
                           {mysublinks.name}
                         </h1>
                       </div>

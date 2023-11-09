@@ -24,7 +24,7 @@ function Navber({ categories }) {
 
   return (
     <header
-      className={`w-full h-[50px] md:h-[80px] bg-white flex items-center justify-between  sticky top-0 shadow-sm transition-transform duration-300 z-30 `}
+      className={`w-full h-[50px] lg:h-[80px] bg-white flex items-center justify-between sticky top-0 shadow-sm transition-transform duration-300 z-30 `}
     >
       <Wrapper className="h-[60px] flex justify-between items-center">
         <Link href="/">
