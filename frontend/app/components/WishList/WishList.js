@@ -99,9 +99,9 @@ export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
                                     ))}
                                 </div>
 
-                                <div className="ml-4 flex flex-1 flex-col">
+                                <div className="lg:ml-4 ml-2 flex flex-1 flex-col">
                                   <div>
-                                    <div className="flex justify-between text-sm font-medium text-gray-900">
+                                    <div className="flex justify-between lg:text-sm text-[10px] font-medium text-gray-900">
                                       <h3>
                                         {/* <a href={product.href}> */}
                                         {product.name}
@@ -116,7 +116,7 @@ export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
                                       {/* {product.color} */} red
                                     </p>
                                   </div>
-                                  <div className="flex flex-1 items-end justify-between text-sm">
+                                  <div className="flex flex-1 items-end justify-between lg:text-sm text-[10px]">
                                     {/* <p className="text-gray-500">
                                       Qty {product.wQuantity}
                                     </p> */}
