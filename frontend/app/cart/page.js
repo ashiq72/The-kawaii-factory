@@ -17,7 +17,6 @@ import Wrapper from "../components/Wrapper/Wrapper";
 const Cart = () => {
   const [loading, setLoading] = useState(false);
   const cartItems = useSelector((state) => state.cart.cart);
-  console.log(cartItems);
 
   //   const subTotal = useMemo(() => {
   //     return cartItems.reduce((total, val) => total + val.attributes.price, 0);
@@ -58,7 +57,7 @@ const Cart = () => {
               <div className="flex-[2]">
                 <div className="text-lg font-bold">Cart Items</div>
                 {cartItems.map((item) => (
-                  <CartItem key={item._id} data={item} />
+                  <CartItem key={item._id} product={item} />
                 ))}
               </div>
               {/* CART ITEMS END */}

@@ -5,7 +5,10 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { removeFromCart } from "@/store/features/wishListSlice/wishListSlice";
+import {
+  removeFromCart,
+  removeFromWishList,
+} from "@/store/features/wishListSlice/wishListSlice";
 import { toast } from "react-hot-toast";
 import { addToCart } from "@/store/features/cartSlice/cartSlice";
 
@@ -126,7 +129,7 @@ export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
                                             "addtocart",
                                             product.name
                                           );
-                                          dispatch(removeFromCart(product));
+                                          dispatch(removeFromWishList(product));
                                         }}
                                         type="button"
                                         className="font-normal hover:bg-green-500 text-green-500 border-2 border-green-200 rounded-md px-2 hover:text-white duration-700 ease-in-out"
@@ -138,7 +141,7 @@ export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
                                     <div className="flex">
                                       <button
                                         onClick={() => {
-                                          dispatch(removeFromCart(product));
+                                          dispatch(removeFromWishList(product));
 
                                           handleButtonClick(
                                             "removeformwishlist",

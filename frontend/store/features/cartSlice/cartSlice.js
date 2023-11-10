@@ -25,10 +25,15 @@ export const cartSlice = createSlice({
         // state.selectedWishlist = true;
       }
     },
+    removeFromCart: (state, action) => {
+      state.cart = state.cart.filter(
+        (product) => product._id !== action.payload._id
+      );
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, removeFromCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
