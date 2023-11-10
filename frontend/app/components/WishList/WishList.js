@@ -4,9 +4,12 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { removeFromCart } from "@/store/features/wishListSlice/wishListSlice";
 
 export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
   const [open, setOpen] = useState(true);
+  const dispatch = useDispatch();
 
   return (
     <Transition.Root show={wishListOpen} as={Fragment}>
@@ -84,27 +87,42 @@ export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
 
                                 <div className="ml-4 flex flex-1 flex-col">
                                   <div>
-                                    <div className="flex justify-between text-base font-medium text-gray-900">
+                                    <div className="flex justify-between text-sm font-medium text-gray-900">
                                       <h3>
                                         {/* <a href={product.href}> */}
                                         {product.name}
                                         {/* </a> */}
                                       </h3>
-                                      <p className="ml-4">{product.price}</p>
+                                      <p className="ml-4 flex">
+                                        <span>&#2547; </span>
+                                        <span> {product.orginalPrice}</span>
+                                      </p>
                                     </div>
                                     <p className="mt-1 text-sm text-gray-500">
                                       {/* {product.color} */} red
                                     </p>
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">
+                                    {/* <p className="text-gray-500">
                                       Qty {product.wQuantity}
-                                    </p>
-
+                                    </p> */}
+                                    {/* Add to cart  */}
                                     <div className="flex">
                                       <button
                                         type="button"
-                                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                                        className="font-normal hover:bg-green-500 text-green-500 border-2 border-green-200 rounded-md px-2 hover:text-white duration-700 ease-in-out"
+                                      >
+                                        Add to cart
+                                      </button>
+                                    </div>
+                                    {/* Remove from cart  */}
+                                    <div className="flex">
+                                      <button
+                                        onClick={() =>
+                                          dispatch(removeFromCart(product))
+                                        }
+                                        type="button"
+                                        className="font-normal text-red-600 border-2 border-red-200 rounded-md px-2 hover:bg-red-400 hover:text-white duration-700 ease-in-out"
                                       >
                                         Remove
                                       </button>

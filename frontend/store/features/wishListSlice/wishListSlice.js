@@ -24,10 +24,17 @@ export const wishListSlice = createSlice({
         state.selectedWishlist = true;
       }
     },
+    removeFromCart: (state, action) => {
+      const newProducts = state.wishlist.filter(
+        (product) => product._id !== action.payload._id
+      );
+
+      state.wishlist.push(newProducts);
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addToWishList } = wishListSlice.actions;
+export const { addToWishList, removeFromCart } = wishListSlice.actions;
 
 export default wishListSlice.reducer;
