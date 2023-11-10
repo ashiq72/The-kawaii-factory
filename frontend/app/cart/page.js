@@ -105,7 +105,8 @@ const Cart = () => {
         {cartItems?.length < 1 && (
           <div className="flex-[2] flex flex-col items-center pb-[50px] md:-mt-14">
             <Image
-              src="/empty-cart.jpg"
+              src="https://i.postimg.cc/SRnNpJvh/ezgif-com-webp-to-jpg-1.jpg"
+              alt=""
               width={300}
               height={300}
               className="w-[300px] md:w-[400px]"

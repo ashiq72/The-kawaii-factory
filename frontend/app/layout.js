@@ -4,6 +4,7 @@ import MainNavber from "./components/Shared/Navber/MainNavber";
 import { StoreProvider } from "@/store/StoreProvider";
 import { ToastContainer } from "react-toastify";
 import Footer from "./components/Shared/Footer/Footer";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body className={inter.className}>
           <MainNavber />
+          <Toaster position="top-center " />
           <ToastContainer />
           {children}
           <Footer />

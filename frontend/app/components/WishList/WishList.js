@@ -6,10 +6,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { removeFromCart } from "@/store/features/wishListSlice/wishListSlice";
+import { toast } from "react-hot-toast";
+import { addToCart } from "@/store/features/cartSlice/cartSlice";
 
 export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
   const [open, setOpen] = useState(true);
   const dispatch = useDispatch();
+
+  const handleButtonClick = (type, name) => {
+    if (type === "removeformwishlist") {
+      toast.error("Remove form wishlist"); // Displays a success message
+    }
+    if (type === "addtocart") {
+      toast.success("Added to cart");
+    }
+  };
 
   return (
     <Transition.Root show={wishListOpen} as={Fragment}>
@@ -109,6 +120,14 @@ export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
                                     {/* Add to cart  */}
                                     <div className="flex">
                                       <button
+                                        onClick={() => {
+                                          addToCart(product);
+                                          handleButtonClick(
+                                            "addtocart",
+                                            product.name
+                                          );
+                                          dispatch(removeFromCart(product));
+                                        }}
                                         type="button"
                                         className="font-normal hover:bg-green-500 text-green-500 border-2 border-green-200 rounded-md px-2 hover:text-white duration-700 ease-in-out"
                                       >
@@ -118,9 +137,14 @@ export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
                                     {/* Remove from cart  */}
                                     <div className="flex">
                                       <button
-                                        onClick={() =>
-                                          dispatch(removeFromCart(product))
-                                        }
+                                        onClick={() => {
+                                          dispatch(removeFromCart(product));
+
+                                          handleButtonClick(
+                                            "removeformwishlist",
+                                            product.name
+                                          );
+                                        }}
                                         type="button"
                                         className="font-normal text-red-600 border-2 border-red-200 rounded-md px-2 hover:bg-red-400 hover:text-white duration-700 ease-in-out"
                                       >

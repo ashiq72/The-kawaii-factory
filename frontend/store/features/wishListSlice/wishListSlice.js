@@ -25,11 +25,14 @@ export const wishListSlice = createSlice({
       }
     },
     removeFromCart: (state, action) => {
-      const newProducts = state.wishlist.filter(
+      // const newProducts = state.wishlist.filter(
+      //   (product) => product._id !== action.payload._id
+      // );
+
+      // state.wishlist.push(newProducts);
+      state.wishlist = state.wishlist.filter(
         (product) => product._id !== action.payload._id
       );
-
-      state.wishlist.push(newProducts);
     },
   },
 });
