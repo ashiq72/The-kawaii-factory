@@ -1,11 +1,13 @@
 import { removeFromCart } from "@/store/features/cartSlice/cartSlice";
+import { Button, ButtonGroup } from "@material-tailwind/react";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { RiDeleteBin6Line } from "react-icons/ri";
 // import { updateCart, removeFromCart } from "@/store/cartSlice";
 import { useDispatch } from "react-redux";
 const CartItem = ({ product }) => {
+  const [quantity, setQuantity] = useState(0);
   // const p = data.attributes;
 
   const dispatch = useDispatch();
@@ -22,6 +24,11 @@ const CartItem = ({ product }) => {
     if (type === "removeformCart") {
       toast.error("Remove form cart"); // Displays a success message
     }
+  };
+
+  const priceByQuantity = () => {
+    const discountPrice = orginalPrice - orginalPrice / discountRate;
+    return parseInt(discountPrice);
   };
 
   return (
@@ -43,7 +50,7 @@ const CartItem = ({ product }) => {
       <div className="w-full flex flex-col">
         <div className="flex flex-col md:flex-row justify-between">
           {/* PRODUCT TITLE */}
-          <div className="text-lg md:text-2xl font-semibold text-black/[0.8]">
+          <div className="lg:text-2xl text-xs font-semibold text-black/[0.8]">
             {product.name}
           </div>
 
@@ -53,8 +60,8 @@ const CartItem = ({ product }) => {
           </div>
 
           {/* PRODUCT PRICE */}
-          <div className="text-sm md:text-md font-bold text-black/[0.5] mt-2">
-            MRP : &#8377;{product.price}
+          <div className="lg:text-md text-[9px] font-bold text-black/[0.5] mt-2">
+            MRP : &#2547; {product.orginalPrice}
           </div>
         </div>
 
@@ -63,8 +70,8 @@ const CartItem = ({ product }) => {
           {/* {p.subtitle} */} sub Title 2
         </div>
 
-        <div className="flex items-center justify-between mt-4">
-          <div className="flex items-center gap-2 md:gap-10 text-black/[0.5] text-sm md:text-md">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center  text-black/[0.5] text-sm md:text-md">
             {/* <div className="flex items-center gap-1">
               <div className="font-semibold">Size:</div>
               <select
@@ -86,8 +93,8 @@ const CartItem = ({ product }) => {
               </select>
             </div> */}
 
-            <div className="flex items-center gap-1">
-              <div className="font-semibold">Quantity:</div>
+            <div className="flex items-center gap-1 font-normal text-[10px]">
+              <div className="lg:font-semibold  ">Quantity:</div>
               {/* <select
                 className="hover:text-black"
                 onChange={(e) => updateCartItem(e, "quantity")}
@@ -100,14 +107,21 @@ const CartItem = ({ product }) => {
                   );
                 })}
               </select> */}
-              {product?.cQuantity}
+              {/* <ButtonGroup>
+                <Button>One</Button>
+                <Button>Two</Button>
+                <Button>Three</Button>
+              </ButtonGroup> */}
+              <div className="flex items-center">
+                <button className="btn btn-xs text-gray-400">-</button>
+
+                <span className="px-2">{product?.cQuantity}</span>
+
+                <button className="btn btn-xs text-gray-400">+</button>
+              </div>
             </div>
           </div>
           <div
-            // onClick={() => {
-            //   dispatch(removeFromCart(product));
-            //   console.log("r");
-            // }}
             onClick={() => {
               dispatch(removeFromCart(product));
 

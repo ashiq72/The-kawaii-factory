@@ -102,7 +102,7 @@ const Cart = () => {
 
         {/* This is empty screen */}
         {cartItems?.length < 1 && (
-          <div className="flex-[2] flex flex-col items-center pb-[50px] md:-mt-14">
+          <div className="flex-[2] flex flex-col items-center pb-[50px] md:-mt-14 mt-5">
             <Image
               src="https://i.postimg.cc/SRnNpJvh/ezgif-com-webp-to-jpg-1.jpg"
               alt=""
