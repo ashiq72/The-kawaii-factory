@@ -1,17 +1,15 @@
 "use client";
 
-import { UserButton, UserProfile } from "@clerk/nextjs";
-import Link from "next/link";
-import { BiSolidShoppingBags } from "react-icons/bi";
+import { UserButton } from "@clerk/nextjs";
+
 import { FaBars } from "react-icons/fa";
 import { Input } from "@material-tailwind/react";
 import { IoMdSearch } from "react-icons/io";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { isSidebar } from "@/store/features/SideberSlice/SideberSlice";
 
 const Navber = ({ users }) => {
-  // const count = useSelector((state) => state.sidebar.value);
-  // console.log(count);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   return (
     <div className="bg-[#181C3B] shadow-lg px-4 py-3">

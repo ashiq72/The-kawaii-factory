@@ -3,7 +3,6 @@ import React from "react";
 import Navber from "./Navber";
 
 const MainNavber = async () => {
-  const { userId } = auth();
   const user = await currentUser();
 
   const users = [
