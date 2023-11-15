@@ -1,13 +1,10 @@
 "use client";
 import { Button } from "@material-tailwind/react";
 import Image from "next/image";
-import { MdOutlineAttachMoney } from "react-icons/md";
-import { HiOutlineDocumentReport } from "react-icons/hi";
-import { FaGetPocket } from "react-icons/fa6";
 
 export default function Home() {
   return (
-    <div className="text-white px-4 pt-4">
+    <div className="text-white px-4 pt-4 ">
       <div className="grid md:grid-cols-2 grid-cols-1 gap-2">
         <div>
           <h1 className="text-2xl font-bold text-gray-200"> Dashboard</h1>

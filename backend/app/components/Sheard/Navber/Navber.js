@@ -12,7 +12,7 @@ const Navber = ({ users }) => {
   const dispatch = useDispatch();
 
   return (
-    <div className="bg-[#181C3B] shadow-lg px-4 py-3">
+    <div className="bg-[#181C3B] shadow-lg px-4 py-3 ">
       <div className="flex justify-between items-center">
         <div className="flex gap-3">
           <button
