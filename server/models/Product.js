@@ -12,9 +12,12 @@ const productSchema = mongoose.Schema(
       mixLength: [100, "Name is too large"],
       lowercase: true,
     },
-    price: {
+    orginalPrice: {
       type: Number,
       required: true,
+    },
+    discountPrice: {
+      type: Number,
     },
     description: {
       type: String,
