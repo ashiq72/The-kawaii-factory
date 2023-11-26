@@ -2,6 +2,7 @@ const {
   getProductsService,
   createProductsService,
   deleteProductById,
+  getProductById,
 } = require("../services/product.services");
 
 // Dashboard product get
@@ -47,6 +48,25 @@ module.exports.deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
     const result = await deleteProductById(id);
+
+    res.status(200).json({
+      stauts: "success",
+      message: "Delete successfully!",
+      data: result,
+    });
+  } catch (error) {
+    res.status(400).json({
+      stauts: "fail",
+      message: "Couldn't delete product",
+      error: error.message,
+    });
+  }
+};
+
+module.exports.getProductById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await getProductById(id);
 
     res.status(200).json({
       stauts: "success",

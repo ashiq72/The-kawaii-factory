@@ -1,4 +1,4 @@
-export function PricceCalculation(orginalPrice, discountPrice) {
-  const percentage = (orginalPrice - discountPrice / orginalPrice) * 100;
-  return percentage;
+export default function pricceCalculation(orginalPrice, discountRate) {
+  const discountPrice = orginalPrice - orginalPrice / discountRate;
+  return parseInt(discountPrice);
 }

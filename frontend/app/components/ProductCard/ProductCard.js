@@ -43,7 +43,7 @@ export function ProductCard({ product }) {
     };
   }, [isToastVisible]);
 
-  //Handle-checkbox function for selecting images
+  //Handle-checkbox Wishlist function for selecting images
   const handleSelectedWishlist = (_id) => {
     const selectedID = selectedWishlist.find((id) => id === _id);
     if (!selectedID) {
@@ -55,7 +55,7 @@ export function ProductCard({ product }) {
       setToastVisibility(true);
     }
   };
-  //Handle-checkbox function for selecting images
+  //Handle-checkbox cart function for selecting images
   const handleSelectedCart = (_id) => {
     const selectedID = selectedCart.find((id) => id === _id);
     if (!selectedID) {

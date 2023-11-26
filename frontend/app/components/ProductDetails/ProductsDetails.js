@@ -1,23 +1,67 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@material-tailwind/react";
 import Image from "next/image";
 import { RadioGroup } from "@headlessui/react";
 
 import { IoMdHeartEmpty } from "react-icons/io";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // import ReactMarkdown from "react-markdown";
 import Wrapper from "../Wrapper/Wrapper";
 import ProductDetailsCarousel from "./ProductDetailsCarousel";
+import { addToCart } from "@/store/features/cartSlice/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToWishList,
+  selectedWishlist,
+} from "@/store/features/wishListSlice/wishListSlice";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 export default function ProductDetails({ data }) {
-  const { name, image, price } = data;
+  const { _id, name, image, orginalPrice, discountPrice, size, description } =
+    data;
+  const [quantity, setQuantity] = useState(1);
   const [activeImg, setActiveImage] = useState(image[0]);
+  const [selectedSize, setSelectedSize] = useState("");
+  const [price, setPrice] = useState(orginalPrice);
+  // const [selectedWishlist, setSelectedWishlist] = useState([]);
+  const [isToastVisible, setToastVisibility] = useState(false);
+
+  const dispatch = useDispatch();
+  //Toast for selected wishlists & cart
+  useEffect(() => {
+    if (isToastVisible) {
+      toast.success("Already Added");
+    }
+    return () => {
+      setToastVisibility(false);
+    };
+  }, [isToastVisible]);
+
+  const wishLists = useSelector((state) => state.wishlist.wishlist);
+  const wishlistSelected = useSelector(
+    (state) => state.wishlist.selectedWishlist
+  );
 
   const [amount, setAmount] = useState(1);
+  const totalPrice = (quantity * orginalPrice).toFixed(2);
+  const handleIncrement = () => {
+    if (quantity < 10) {
+      setQuantity((prevQuantity) => prevQuantity + 1);
+    }
+  };
+
+  const handleDecrement = () => {
+    if (quantity > 1) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
+    }
+  };
 
   return (
     <div className="w-full md:py-20">
@@ -32,38 +76,54 @@ export default function ProductDetails({ data }) {
           {/* right column start */}
           <div className="flex-[1] py-3">
             {/* PRODUCT TITLE */}
-            <div className="text-[34px] font-semibold mb-2 leading-tight">
+            <div className="text-[26px] font-semibold mb-2 leading-tight">
               {name}
             </div>
 
-            {/* PRODUCT SUBTITLE */}
-            <div className="text-lg font-semibold mb-5">
-              ert a4w4erfwe 4wrf rt4we{" "}
-            </div>
-
             {/* PRODUCT PRICE */}
-            <div className="flex items-center">
-              <p className="mr-2 text-lg font-semibold">MRP : &#8377;{price}</p>
-              {/* {p.original_price && (
+            <div className="flex items-center pt-4">
+              {/* <p className="mr-2 text-lg font-semibold">BDT : {price}</p> */}
+              {/*------------ Price ----------- */}
+              <div className="font-normal text-xl py-1 flex px-1 gap-3">
+                &#2547; {totalPrice}
+                {/* {orginalPrice && ( */}
                 <>
-                  <p className="text-base  font-medium line-through">
-                    &#8377;{p.original_price}
-                  </p>
-                  <p className="ml-auto text-base font-medium text-green-500">
-                    {getDiscountedPricePercentage(p.original_price, p.price)}%
-                    off
-                  </p>
+                  <div className="text-lg text-red-700 font-medium line-through">
+                    {/* &#2547; {orginalPrice} */}
+                  </div>
+                  <div className="ml-auto text-base font-medium text-green-500">
+                    {/* {discountRate}% Off */}
+                  </div>
                 </>
-              )} */}
+                {/* )} */}
+              </div>
             </div>
 
             <div className="text-md font-medium text-black/[0.5]">
               incl. of taxes
             </div>
-            <div className="text-md font-medium text-black/[0.5] mb-20">
+            <div className="text-md font-medium text-black/[0.5] mb-5">
               {`(Also includes all applicable duties)`}
             </div>
-
+            {/* Quantity  */}
+            <div className="mb-5">
+              <h1 className="text-md font-semibold">Quantity</h1>
+              <div className="flex items-center mt-2">
+                <button
+                  className="bg-pink-200 text-white px-3 py-1 rounded-l"
+                  onClick={handleDecrement}
+                >
+                  -
+                </button>
+                <span className="mx-4">{quantity}</span>
+                <button
+                  className="bg-pink-200 text-white px-3 py-1 rounded-r"
+                  onClick={handleIncrement}
+                >
+                  +
+                </button>
+              </div>
+            </div>
             {/* PRODUCT SIZE RANGE START */}
             <div className="mb-10">
               {/* HEADING START */}
@@ -76,24 +136,27 @@ export default function ProductDetails({ data }) {
               {/* HEADING END */}
 
               {/* SIZE START */}
-              {/* <div id="sizesGrid" className="grid grid-cols-3 gap-2">
-                {p.size.data.map((item, i) => (
+              <div id="sizesGrid" className="grid grid-cols-3 gap-2">
+                {size?.map((item, i) => (
                   <div
                     key={i}
                     className={`border rounded-md text-center py-3 font-medium ${
-                      item.enabled
-                        ? "hover:border-black cursor-pointer"
-                        : "cursor-not-allowed bg-black/[0.1] opacity-50"
-                    } ${selectedSize === item.size ? "border-black" : ""}`}
+                      selectedSize === item
+                        ? "hover:border-black cursor-pointer bg-pink-200"
+                        : ""
+                    } 
+                   
+                    `}
                     onClick={() => {
-                      setSelectedSize(item.size);
-                      setShowError(false);
+                      setSelectedSize("");
+                      setSelectedSize(item);
+                      // setShowError(false);
                     }}
                   >
-                    {item.size}
+                    {item}
                   </div>
                 ))}
-              </div> */}
+              </div>
               {/* SIZE END */}
 
               {/* SHOW ERROR START */}
@@ -107,44 +170,49 @@ export default function ProductDetails({ data }) {
             {/* PRODUCT SIZE RANGE END */}
 
             {/* ADD TO CART BUTTON START */}
-            {/* <button
-              className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75"
+            <button
+              className="w-full py-4 rounded-full bg-pink-200 text-blcak text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75"
               onClick={() => {
                 if (!selectedSize) {
-                  setShowError(true);
-                  document.getElementById("sizesGrid").scrollIntoView({
-                    block: "center",
-                    behavior: "smooth",
-                  });
+                  toast.error("Please select your size");
                 } else {
-                  dispatch(
-                    addToCart({
-                      ...product?.data?.[0],
-                      selectedSize,
-                      oneQuantityPrice: p.price,
-                    })
-                  );
-                  notify();
+                  dispatch(addToCart(data));
                 }
+                handleClick();
               }}
             >
               Add to Cart
-            </button> */}
+            </button>
             {/* ADD TO CART BUTTON END */}
 
             {/* WHISHLIST BUTTON START */}
-            <button className="w-full py-4 rounded-full border border-black text-lg font-medium transition-transform active:scale-95 flex items-center justify-center gap-2 hover:opacity-75 mb-10">
+            <button
+              // disabled={wishlistSelected}
+              onClick={() => {
+                dispatch(addToWishList(data));
+                dispatch(selectedWishlist(_id));
+                handleClick();
+              }}
+              className="w-full py-4 rounded-full border border-black text-lg font-medium transition-transform active:scale-95 flex items-center justify-center gap-2 hover:opacity-75 mb-10"
+            >
               Whishlist
-              <IoMdHeartEmpty size={20} />
+              {wishlistSelected?.includes(_id) ? (
+                <span className="text-pink-200">
+                  <AiFillHeart />
+                </span>
+              ) : (
+                <AiOutlineHeart />
+              )}
+              {/* <IoMdHeartEmpty size={20} /> */}
             </button>
             {/* WHISHLIST BUTTON END */}
 
-            {/* <div>
+            <div>
               <div className="text-lg font-bold mb-5">Product Details</div>
               <div className="markdown text-md mb-5">
-                <ReactMarkdown>{p.description}</ReactMarkdown>
+                <p>{description}</p>
               </div>
-            </div> */}
+            </div>
           </div>
           {/* right column end */}
         </div>

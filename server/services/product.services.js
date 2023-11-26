@@ -14,3 +14,8 @@ exports.deleteProductById = async (id) => {
   const result = await Product.deleteOne({ _id: id });
   return result;
 };
+
+exports.getProductById = async (id) => {
+  const products = await Product.find({ _id: id });
+  return products;
+};

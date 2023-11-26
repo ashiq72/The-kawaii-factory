@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   wishlist: [],
-  selectedWishlist: false,
+  selectedWishlist: [],
 };
 
 export const wishListSlice = createSlice({
@@ -33,11 +33,33 @@ export const wishListSlice = createSlice({
       state.wishlist = state.wishlist.filter(
         (product) => product._id !== action.payload._id
       );
+      state.selectedWishlist = state.selectedWishlist.filter(
+        (id) => id !== action.payload._id
+      );
+    },
+    selectedWishlist: (state, action) => {
+      const selectedID = action.payload;
+
+      // Ensure that selectedWishlist is initialized as an array
+      if (!state.selectedWishlist || !Array.isArray(state.selectedWishlist)) {
+        state.selectedWishlist = [];
+      }
+
+      const isSelected = state.selectedWishlist.includes(selectedID);
+
+      if (!isSelected) {
+        state.selectedWishlist = [...state.selectedWishlist, selectedID];
+      } else {
+        state.selectedWishlist = state.selectedWishlist.filter(
+          (id) => id !== selectedID
+        );
+      }
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addToWishList, removeFromWishList } = wishListSlice.actions;
+export const { addToWishList, removeFromWishList, selectedWishlist } =
+  wishListSlice.actions;
 
 export default wishListSlice.reducer;

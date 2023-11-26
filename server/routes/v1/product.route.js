@@ -10,6 +10,11 @@ router.post(
 );
 
 router
+  .route("/:id")
+  .get(productController.getProductById)
+  .delete(productController.deleteProduct);
+
+router
   .route("/")
   /**
    * @api {get} /tools All womens
@@ -43,8 +48,6 @@ router
    * @apiError (Forbidden 403)     Forbidden     Only admins can access the data
    */
   .post(productController.createProduct);
-
-router.route("/:id").delete(productController.deleteProduct);
 
 // ekhane viewCount middleware ti shudu matro ei route er jonno
 // router.route("/:id").get(viewCount, womensController.getWomensView);

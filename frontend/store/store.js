@@ -9,6 +9,7 @@ export const store = configureStore({
   reducer: {
     cart: cartSlice,
     wishlist: wishListSlice,
+    selectedWishlist: wishListSlice,
     [productsApi.reducerPath]: productsApi.reducer,
     [categoriesApi.reducerPath]: categoriesApi.reducer,
   },
