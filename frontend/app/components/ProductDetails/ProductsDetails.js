@@ -49,6 +49,10 @@ export default function ProductDetails({ data }) {
     (state) => state.wishlist.selectedWishlist
   );
 
+  const handleClick = () => {
+    // Show an alert
+  };
+
   const [amount, setAmount] = useState(1);
   const totalPrice = (quantity * orginalPrice).toFixed(2);
   const handleIncrement = () => {
@@ -178,7 +182,6 @@ export default function ProductDetails({ data }) {
                 } else {
                   dispatch(addToCart(data));
                 }
-                handleClick();
               }}
             >
               Add to Cart
@@ -192,6 +195,9 @@ export default function ProductDetails({ data }) {
                 dispatch(addToWishList(data));
                 dispatch(selectedWishlist(_id));
                 handleClick();
+                if (wishlistSelected) {
+                  toast.success("Added wishlist");
+                }
               }}
               className="w-full py-4 rounded-full border border-black text-lg font-medium transition-transform active:scale-95 flex items-center justify-center gap-2 hover:opacity-75 mb-10"
             >
