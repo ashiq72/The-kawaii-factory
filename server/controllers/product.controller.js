@@ -1,8 +1,10 @@
 const {
   getProductsService,
   createProductsService,
+  deleteProductById,
 } = require("../services/product.services");
 
+// Dashboard product get
 module.exports.getProducts = async (req, res, next) => {
   try {
     const products = await getProductsService();
@@ -20,6 +22,8 @@ module.exports.getProducts = async (req, res, next) => {
     });
   }
 };
+
+// Dashboard product create
 module.exports.createProduct = async (req, res) => {
   try {
     const result = await createProductsService(req.body);
@@ -38,9 +42,26 @@ module.exports.createProduct = async (req, res) => {
   }
 };
 
-// module.exports.getWomensView = (req, res) => {
-//   res.send("view counted");
-// };
+// Dashboard product Delete
+module.exports.deleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await deleteProductById(id);
+
+    res.status(200).json({
+      stauts: "success",
+      message: "Delete successfully!",
+      data: result,
+    });
+  } catch (error) {
+    res.status(400).json({
+      stauts: "fail",
+      message: "Couldn't delete product",
+      error: error.message,
+    });
+  }
+};
+
 exports.fileUpload = (req, res) => {
   try {
     res.status(200).json(req.file);

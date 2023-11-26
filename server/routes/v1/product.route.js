@@ -44,6 +44,8 @@ router
    */
   .post(productController.createProduct);
 
+router.route("/:id").delete(productController.deleteProduct);
+
 // ekhane viewCount middleware ti shudu matro ei route er jonno
 // router.route("/:id").get(viewCount, womensController.getWomensView);
 

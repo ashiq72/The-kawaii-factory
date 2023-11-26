@@ -5,56 +5,56 @@ const productSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Plase provide a name for this product"],
-      trim: true,
-      unique: [true, "Name must be uniqe"],
-      minLength: [3, "Name must be at least 3 characters."],
-      mixLength: [100, "Name is too large"],
-      lowercase: true,
+      // required: [true, "Plase provide a name for this product"],
+      // trim: true,
+      // unique: [true, "Name must be uniqe"],
+      // minLength: [3, "Name must be at least 3 characters."],
+      // mixLength: [100, "Name is too large"],
+      // lowercase: true,
     },
     orginalPrice: {
       type: Number,
-      required: true,
+      // required: true,
     },
     discountPrice: {
       type: Number,
     },
     description: {
       type: String,
-      required: true,
+      // required: true,
     },
-    imageURLs: [
-      {
-        type: String,
-        // required: true,
-        Validate: {
-          validator: (value) => {
-            if (!Array.isArray(value)) {
-              return false;
-            }
-            let isValid = true;
-            value.forEach((url) => {
-              if (!validator.isURL(url)) {
-                isValid = false;
-              }
-            });
-            return isValid;
-          },
-          message: "Please provide a  valid url",
-        },
-      },
-    ],
+    imageURLs: {
+      type: Array,
+    },
+    // {
+    // required: true,
+    // Validate: {
+    //   validator: (value) => {
+    //     if (!Array.isArray(value)) {
+    //       return false;
+    //     }
+    //     let isValid = true;
+    //     value.forEach((url) => {
+    //       if (!validator.isURL(url)) {
+    //         isValid = false;
+    //       }
+    //     });
+    //     return isValid;
+    //   },
+    //   message: "Please provide a  valid url",
+    // },
+    // },
     size: {
-      type: String,
-      required: true,
-      enum: {
-        values: ["XS", "S", "M", "L", "XL"],
-        message: "Unit value can't be {Value}, must be kg/litre/pcs",
-      },
+      type: Array,
+      // required: true,
+      // enum: {
+      //   values: ["XS", "S", "M", "L", "XL"],
+      //   message: "Unit value can't be {Value}, must be kg/litre/pcs",
+      // },
     },
     color: {
       type: String,
-      required: true,
+      // required: true,
       enum: {
         values: [
           "White",
@@ -125,7 +125,10 @@ const productSchema = mongoose.Schema(
         message: "Unit value can't be {Value}, must be kg/litre/pcs",
       },
     },
-    category: { type: String, required: true },
+    category: {
+      type: String,
+      //  required: true
+    },
     status: {
       type: String,
       enum: ["in-stock", "out-of-stock"],

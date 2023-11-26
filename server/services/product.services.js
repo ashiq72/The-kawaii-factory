@@ -8,8 +8,9 @@ exports.createProductsService = async (data) => {
   //save method
   const product = new Product(data);
   const result = await product.save();
-
-  // Create method
-  // const result = await Product.create(req.body);
+  return result;
+};
+exports.deleteProductById = async (id) => {
+  const result = await Product.deleteOne({ _id: id });
   return result;
 };
