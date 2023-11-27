@@ -1,16 +1,10 @@
 "use client";
-import { useEffect, useState } from "react";
-import { Button } from "@material-tailwind/react";
-import Image from "next/image";
-import { RadioGroup } from "@headlessui/react";
-
-import { IoMdHeartEmpty } from "react-icons/io";
+import { useState } from "react";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // import ReactMarkdown from "react-markdown";
-import Wrapper from "../Wrapper/Wrapper";
 import ProductDetailsCarousel from "./ProductDetailsCarousel";
 import { addToCart } from "@/store/features/cartSlice/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,27 +18,13 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 export default function ProductDetails({ data }) {
-  const { _id, name, image, orginalPrice, discountPrice, size, description } =
-    data;
+  const { _id, name, image, orginalPrice, size, description } = data;
   const [quantity, setQuantity] = useState(1);
-  const [activeImg, setActiveImage] = useState(image[0]);
   const [selectedSize, setSelectedSize] = useState("");
-  const [price, setPrice] = useState(orginalPrice);
-  // const [selectedWishlist, setSelectedWishlist] = useState([]);
-  const [isToastVisible, setToastVisibility] = useState(false);
 
   const dispatch = useDispatch();
   //Toast for selected wishlists & cart
-  useEffect(() => {
-    if (isToastVisible) {
-      toast.success("Already Added");
-    }
-    return () => {
-      setToastVisibility(false);
-    };
-  }, [isToastVisible]);
 
-  const wishLists = useSelector((state) => state.wishlist.wishlist);
   const wishlistSelected = useSelector(
     (state) => state.wishlist.selectedWishlist
   );
@@ -53,7 +33,6 @@ export default function ProductDetails({ data }) {
     // Show an alert
   };
 
-  const [amount, setAmount] = useState(1);
   const totalPrice = (quantity * orginalPrice).toFixed(2);
   const handleIncrement = () => {
     if (quantity < 10) {

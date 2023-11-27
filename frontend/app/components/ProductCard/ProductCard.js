@@ -1,12 +1,14 @@
 "use client";
 import { addToCart } from "@/store/features/cartSlice/cartSlice";
-import { addToWishList } from "@/store/features/wishListSlice/wishListSlice";
-import { PricceCalculation } from "@/utilis/PricceCalculation/PricceCalculation";
-import { Typography, Button, Tooltip } from "@material-tailwind/react";
+import {
+  addToWishList,
+  selectedWishlist,
+} from "@/store/features/wishListSlice/wishListSlice";
+import { Tooltip } from "@material-tailwind/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { AiOutlineHeart, AiOutlineEye, AiFillHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BsCart } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,20 +17,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export function ProductCard({ product }) {
-  const {
-    _id,
-    name,
-    price,
-    image,
-    slug,
-    thumbnail,
-    orginalPrice,
-    discountRate,
-  } = product;
+  const { _id, name, image, orginalPrice, discountRate } = product;
 
   const [hoverCart, setHoverCart] = useState(false);
   const [isToastVisible, setToastVisibility] = useState(false);
-  const [selectedWishlist, setSelectedWishlist] = useState([]);
   const [selectedCart, setSelectedCart] = useState([]);
 
   const dispatch = useDispatch();
@@ -43,18 +35,6 @@ export function ProductCard({ product }) {
     };
   }, [isToastVisible]);
 
-  //Handle-checkbox Wishlist function for selecting images
-  const handleSelectedWishlist = (_id) => {
-    const selectedID = selectedWishlist.find((id) => id === _id);
-    if (!selectedID) {
-      setSelectedWishlist([...selectedWishlist, _id]);
-    } else {
-      selectedWishlist
-        .filter((id) => id !== _id)
-        .push(setSelectedWishlist([selectedID]));
-      setToastVisibility(true);
-    }
-  };
   //Handle-checkbox cart function for selecting images
   const handleSelectedCart = (_id) => {
     const selectedID = selectedCart.find((id) => id === _id);
@@ -73,6 +53,15 @@ export function ProductCard({ product }) {
     return parseInt(discountPrice);
   }
 
+  const wishlistSelected = useSelector(
+    (state) => state.wishlist.selectedWishlist
+  );
+
+  const handleClick = (id) => {
+    // Show an alert
+    console.log("id", typeof id);
+  };
+  console.log(wishlistSelected);
   return (
     <div className="w-80 h-[520px]  border-2 border-gray-50 rounded-md">
       {/* --------------------------------------------------
@@ -132,7 +121,7 @@ export function ProductCard({ product }) {
             {/* start Add wishlist */}
             <div
               className="flex gap-3"
-              onClick={() => dispatch(addToWishList(product))}
+              // onClick={() => }
             >
               <Tooltip
                 className="z-40 p-1 px-2"
@@ -144,18 +133,25 @@ export function ProductCard({ product }) {
                 }}
               >
                 <div
-                  className={`bg-white rounded-full p-1 border-2 ease-in-out duration-100 border-gray-50 hover:border-2  ${
-                    selectedWishlist.includes(_id)
+                  className={`bg-white rounded-full p-1 border-2 ease-in-out duration-100 border-gray-50 hover:border-2 ${
+                    wishlistSelected?.includes(_id)
                       ? "hover:border-red-600 text-red-600"
                       : "hover:border-gray-900"
-                  }`}
+                  }
+                  `}
                   onClick={() => {
-                    // e.preventDefault(); // Prevent the default checkbox behavior
-                    handleSelectedWishlist(_id);
+                    dispatch(addToWishList(product));
+                    dispatch(selectedWishlist(_id));
+                    handleClick(_id);
+                    if (wishlistSelected) {
+                      toast.success("Added wishlist");
+                    }
                   }}
                 >
-                  {selectedWishlist.includes(_id) ? (
-                    <AiFillHeart />
+                  {wishlistSelected.includes(_id) ? (
+                    <span className="text-pink-400">
+                      <AiFillHeart />
+                    </span>
                   ) : (
                     <AiOutlineHeart />
                   )}

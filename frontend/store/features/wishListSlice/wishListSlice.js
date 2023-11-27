@@ -53,6 +53,7 @@ export const wishListSlice = createSlice({
         state.selectedWishlist = state.selectedWishlist.filter(
           (id) => id !== selectedID
         );
+        state.selectedWishlist.push(selectedID);
       }
     },
   },
