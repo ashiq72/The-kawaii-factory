@@ -16,7 +16,7 @@ import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 
 import { useState } from "react";
 import Link from "next/link";
-import { useGetAllCategoriesQuery } from "@/store/features/categoriesAPI/categoriesAPI";
+
 import { useDispatch } from "react-redux";
 import { toggleCategory } from "@/store/features/categoryFilterSlice/categoryFilterSlice";
 import {
@@ -27,12 +27,12 @@ import {
   ListItemPrefix,
   Typography,
 } from "@material-tailwind/react";
+import { useGetAllCategoriesQuery } from "@/store/features/categoriesAPI/categoriesAPI";
 
 const FilterLeftLinks = () => {
   const categories = useGetAllCategoriesQuery();
   const [heading, setHeading] = useState("");
   const [subHeading, setSubHeading] = useState("");
-
   const dispatch = useDispatch();
 
   return (
@@ -43,7 +43,7 @@ const FilterLeftLinks = () => {
       >
         {/*    All categories start   */}
         <div className="w-full">
-          {categories?.data?.slice(0, 1).map((link, index) => (
+          {categories?.data?.data?.slice(0, 1).map((link, index) => (
             <div key={index}>
               <div className="text-left cursor-pointer group">
                 <h1
@@ -141,6 +141,7 @@ const FilterLeftLinks = () => {
                           // </li>
 
                           <Checkbox
+                            key={index}
                             onClick={() => dispatch(toggleCategory(slink.name))}
                             label={
                               <Typography
