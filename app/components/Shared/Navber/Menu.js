@@ -3,9 +3,15 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { BsChevronDown } from "react-icons/bs";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import {
+  menuCategory,
+  toggleCategory,
+} from "@/store/features/categoryFilterSlice/categoryFilterSlice";
+import { useDispatch } from "react-redux";
 
 const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
   const [heading, setHeading] = useState("");
+  const dispatch = useDispatch();
 
   return (
     <div className="lg:flex lg:gap-6  hidden">
@@ -62,7 +68,14 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
                             key={index}
                             className="text-sm text-gray-600 rounded-md py-2 px-2 list-none hover:bg-slate-100 "
                           >
-                            <Link href="" className="hover:text-green-600 ">
+                            <Link
+                              href="/products"
+                              onClick={() => {
+                                dispatch(toggleCategory(slink.name));
+                                dispatch(menuCategory(slink.name));
+                              }}
+                              className="hover:text-green-600 "
+                            >
                               {slink.name}
                             </Link>
                           </li>

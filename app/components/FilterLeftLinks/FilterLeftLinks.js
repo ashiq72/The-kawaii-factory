@@ -1,32 +1,11 @@
 "use client";
-
-import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import {
-  ChevronDownIcon,
-  FunnelIcon,
-  MinusIcon,
-  PlusIcon,
-  Squares2X2Icon,
-} from "@heroicons/react/20/solid";
-import { BiSolidShoppingBags } from "react-icons/bi";
-import { FcMenu } from "react-icons/fc";
-import { MdClose } from "react-icons/md";
-import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 
 import { useState } from "react";
-import Link from "next/link";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleCategory } from "@/store/features/categoryFilterSlice/categoryFilterSlice";
-import {
-  Checkbox,
-  Card,
-  List,
-  ListItem,
-  ListItemPrefix,
-  Typography,
-} from "@material-tailwind/react";
+import { Checkbox, Typography } from "@material-tailwind/react";
 import { useGetAllCategoriesQuery } from "@/store/features/categoriesAPI/categoriesAPI";
 
 const FilterLeftLinks = () => {
@@ -34,6 +13,8 @@ const FilterLeftLinks = () => {
   const [heading, setHeading] = useState("");
   const [subHeading, setSubHeading] = useState("");
   const dispatch = useDispatch();
+  const filters = useSelector((state) => state.categoryFilter.category);
+  console.log(filters);
 
   return (
     <div className="w-full">
@@ -129,18 +110,8 @@ const FilterLeftLinks = () => {
                         } flex flex-col `}
                       >
                         {slinks?.secondsublinks?.map((slink, index) => (
-                          // <li
-                          //   onClick={() => dispatch(toggleCategory(slink.name))}
-                          //   key={index}
-                          //   className="py-3 hover:bg-pink-100 cursor-pointer hover:text-green-600 pl-2"
-                          // >
-                          //   {/* Mobile secondsublinks menu */}
-                          //   <span className="font-medium  text-sm capitalize">
-                          //     {slink.name}
-                          //   </span>
-                          // </li>
-
                           <Checkbox
+                            checked={filters == slink.name}
                             key={index}
                             onClick={() => dispatch(toggleCategory(slink.name))}
                             label={

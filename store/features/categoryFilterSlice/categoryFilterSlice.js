@@ -19,8 +19,12 @@ const categoryFilterSlice = createSlice({
         );
       }
     },
+    menuCategory: (state, action) => {
+      // Clear the array and add the new value
+      state.category = [action.payload];
+    },
   },
 });
-export const { toggleCategory } = categoryFilterSlice.actions;
+export const { toggleCategory, menuCategory } = categoryFilterSlice.actions;
 
 export default categoryFilterSlice.reducer;
