@@ -92,7 +92,7 @@ export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
                           ? setSubHeading(slinks.name)
                           : setSubHeading("")
                       }
-                      className="py-2 pl-7 font-medium  pr-5 flex justify-between items-center  hover:bg-gray-200 cursor-pointer"
+                      className="py-2 pl-7 font-medium  pr-5 flex justify-between items-center  hover:bg-gray-200 cursor-pointer capitalize"
                     >
                       {/* Mobile firstsublinks menu */}
                       {slinks.name}
@@ -113,7 +113,7 @@ export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
                       {slinks?.secondsublinks?.map((slink, index) => (
                         <li
                           key={index}
-                          className="py-3 pl-14 hover:bg-gray-200 cursor-pointer hover:text-green-600"
+                          className="py-3 pl-14 hover:bg-gray-200 cursor-pointer hover:text-green-600 capitalize"
                         >
                           {/* Mobile secondsublinks menu */}
                           <Link href="">{slink.name}</Link>

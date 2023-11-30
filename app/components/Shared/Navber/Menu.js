@@ -60,13 +60,13 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
                   <div className="bg-white grid grid-cols-3 gap-7 p-2 rounded shadow-md">
                     {link.firstsublinks.map((mysublinks, index) => (
                       <div key={index}>
-                        <h1 className="text-base font-medium border-b-2 cursor-default">
+                        <h1 className="text-base font-medium border-b-2 cursor-default capitalize">
                           {mysublinks.name}
                         </h1>
                         {mysublinks?.secondsublinks?.map((slink, index) => (
                           <li
                             key={index}
-                            className="text-sm text-gray-600 rounded-md py-2 px-2 list-none hover:bg-slate-100 "
+                            className="text-sm text-gray-600 rounded-md py-2 px-2 list-none hover:bg-slate-100 capitalize"
                           >
                             <Link
                               href="/products"
@@ -74,7 +74,7 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
                                 dispatch(toggleCategory(slink.name));
                                 dispatch(menuCategory(slink.name));
                               }}
-                              className="hover:text-green-600 "
+                              className="hover:text-green-600 capitalize"
                             >
                               {slink.name}
                             </Link>

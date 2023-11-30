@@ -3,6 +3,8 @@ import { useState } from "react";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { TbTruckDelivery } from "react-icons/tb";
+import { IoShieldCheckmarkOutline } from "react-icons/io5";
 
 // import ReactMarkdown from "react-markdown";
 import ProductDetailsCarousel from "./ProductDetailsCarousel";
@@ -13,6 +15,7 @@ import {
   selectedWishlist,
 } from "@/store/features/wishListSlice/wishListSlice";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { ProductDescription } from "./ProductDescription";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -195,12 +198,38 @@ export default function ProductDetails({ data }) {
             <div>
               <div className="text-lg font-bold mb-5">Product Details</div>
               <div className="markdown text-md mb-5">
-                <p>{description}</p>
+                <div>
+                  <div className="flex items-start gap-6">
+                    <div className="text-2xl">
+                      <TbTruckDelivery />
+                    </div>
+                    <div className="">
+                      <h1 className="font-semibold text-base">Free Shipping</h1>
+                      <p className="pt-1 text-sm">
+                        Free standard shipping on orders over $99 Estimated to
+                        be delivered on 12/01/2022 - 15/10/2022.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-6 pt-4">
+                    <div className="text-2xl">
+                      <IoShieldCheckmarkOutline />
+                    </div>
+                    <div className="">
+                      <h1 className="font-semibold text-base">Free Returns</h1>
+                      <p className="pt-1 text-sm">
+                        Free standard shipping on orders over $99 Estimated to
+                        be delivered on 12/01/2022 - 15/10/2022.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           {/* right column end */}
         </div>
+        <ProductDescription description={description} />
 
         {/* <RelatedProducts products={products} /> */}
       </div>
