@@ -7,9 +7,7 @@
 </h1>
 
 <p align="center">
-  Live Site: <a href="https://car-rental-olive-one.vercel.app/">https://carrental-ashik72.vercel.app/
-</a>
-  
+  Live Site:
 </p>
 
 ## Project Features
