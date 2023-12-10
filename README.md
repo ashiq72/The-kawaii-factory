@@ -7,7 +7,8 @@
 </h1>
 
 <p align="center">
-  Live Site:
+  Live Site: <a href="https://kawaiisss.vercel.app/">https://kawaiisss.vercel.app/
+</a>
 </p>
 
 ## Project Features
@@ -84,6 +85,6 @@ MIT
 
 ---
 
-> [ashiquzzaman.netlify.app](https://ashiquzzaman.netlify.app/) &nbsp;&middot;&nbsp;
+> [md-ashiquzzaman.vercel.app/](https://md-ashiquzzaman.vercel.app/) &nbsp;&middot;&nbsp;
 > GitHub [@ashiq72](https://github.com/ashiq72) &nbsp;&middot;&nbsp;
 > Twitter [@ashiq72](https://twitter.com/)
