@@ -76,8 +76,8 @@ This software uses the following open source packages:
 
 ## You may also like...
 
-- [Pomolectron](https://github.com/ashiq72) - A pomodoro app
-- [Correo](https://github.com/ashiq72) - A menubar/taskbar Gmail App for Windows and macOS
+- [crowdfunding](https://github.com/ashiq72/crowdfunding-application-client) - A crowdfunding for Windows and mac
+- [Travel To Go](https://github.com/ashiq72/travel-services-reviews-website-client) - A Travel reaviw website
 
 ## License
 
