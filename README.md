@@ -7,9 +7,8 @@
 </h1>
 
 <p align="center">
-  Live Site: <a href="https://car-rental-olive-one.vercel.app/">https://carrental-ashik72.vercel.app/
+  Live Site: <a href="https://kawaiisss.vercel.app/">https://kawaiisss.vercel.app/
 </a>
-  
 </p>
 
 ## Project Features
@@ -77,8 +76,8 @@ This software uses the following open source packages:
 
 ## You may also like...
 
-- [Pomolectron](https://github.com/ashiq72) - A pomodoro app
-- [Correo](https://github.com/ashiq72) - A menubar/taskbar Gmail App for Windows and macOS
+- [crowdfunding](https://github.com/ashiq72/crowdfunding-application-client) - A crowdfunding for Windows and mac
+- [Travel To Go](https://github.com/ashiq72/travel-services-reviews-website-client) - A Travel reaviw website
 
 ## License
 
@@ -86,6 +85,6 @@ MIT
 
 ---
 
-> [ashiquzzaman.netlify.app](https://ashiquzzaman.netlify.app/) &nbsp;&middot;&nbsp;
+> [md-ashiquzzaman.vercel.app/](https://md-ashiquzzaman.vercel.app/) &nbsp;&middot;&nbsp;
 > GitHub [@ashiq72](https://github.com/ashiq72) &nbsp;&middot;&nbsp;
 > Twitter [@ashiq72](https://twitter.com/)
