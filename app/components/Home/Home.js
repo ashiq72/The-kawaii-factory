@@ -4,6 +4,7 @@ import MiniBanner from "./MiniBanner";
 import { TopCategory } from "./TopCategory/TopCategory";
 import JewelleryBanner from "./JewelleryBanner/JewelleryBanner";
 import NewArrivalsBanner from "./NewArrivalsBanner/NewArrivalsBanner";
+import TrendCategory from "./TrendCategory/TrendCategory";
 
 export default function Home({ products }) {
   return (
@@ -14,6 +15,7 @@ export default function Home({ products }) {
       <HomeProductsSection products={products} />
       <JewelleryBanner />
       <MiniBanner />
+      <TrendCategory />
     </div>
   );
 }

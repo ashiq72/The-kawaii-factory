@@ -13,18 +13,18 @@ export const TopCategory = () => {
     <div className="bg-gray-50">
       <div className="py-20  w-11/12 mx-auto">
         <div className="text-center">
-          <h1 className="text-2xl font-bold">Top Categories</h1>
+          <h1 className="lg:text-2xl text-xl font-bold">Top Categories</h1>
         </div>
-        <div className="grid grid-cols-5 gap-4 pt-8">
+        <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 lg:gap-4 gap-2 pt-8">
           {/* 1- Tops category  */}
           <Link
             href="/products"
             onClick={() => {
               dispatch(menuCategory("tops"));
             }}
-            className="bg-pink-100 rounded flex justify-between items-center px-8 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
+            className="bg-pink-100 rounded flex justify-between items-center lg:px-8 px-4 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
           >
-            <span className="text-3xl text-gray-600">
+            <span className=" text-gray-600">
               <Image
                 alt=" "
                 src="https://i.postimg.cc/7LznkTjY/ezgif-com-png-to-jpg-converted-removebg-preview.png"
@@ -33,7 +33,9 @@ export const TopCategory = () => {
               />
             </span>
 
-            <h3 className="text-lg font-medium text-gray-600">Tops</h3>
+            <h3 className="lg:text-lg text-sm font-medium text-gray-600">
+              Tops
+            </h3>
           </Link>
           {/* 2- Long Frock category  */}
           <Link
@@ -41,7 +43,7 @@ export const TopCategory = () => {
             onClick={() => {
               dispatch(menuCategory("long frock"));
             }}
-            className="bg-pink-100 rounded flex justify-between items-center px-8 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
+            className="bg-pink-100 rounded flex justify-between items-center lg:px-8 px-4 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
           >
             <span className="text-3xl text-gray-600">
               <Image
@@ -52,7 +54,9 @@ export const TopCategory = () => {
               />
             </span>
 
-            <h3 className="text-lg font-medium text-gray-600"> Long Frock </h3>
+            <h3 className="lg:text-lg text-sm font-medium text-gray-600">
+              Long Frock
+            </h3>
           </Link>
           {/* 3- Jeggings category  */}
           <Link
@@ -60,7 +64,7 @@ export const TopCategory = () => {
             onClick={() => {
               dispatch(menuCategory("jeggings"));
             }}
-            className="bg-pink-100 rounded flex justify-between items-center px-8 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
+            className="bg-pink-100 rounded flex justify-between items-center lg:px-8 px-4 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
           >
             <span className="text-3xl text-gray-600">
               <Image
@@ -71,7 +75,9 @@ export const TopCategory = () => {
               />
             </span>
 
-            <h3 className="text-lg font-medium text-gray-600">Jeggings</h3>
+            <h3 className="lg:text-lg text-sm font-medium text-gray-600">
+              Jeggings
+            </h3>
           </Link>
           {/* 4- Party Dress category  */}
           <Link
@@ -79,7 +85,7 @@ export const TopCategory = () => {
             onClick={() => {
               dispatch(menuCategory("party dress"));
             }}
-            className="bg-pink-100 rounded flex justify-between items-center px-8 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
+            className="bg-pink-100 rounded flex justify-between items-center lg:px-8 px-4 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
           >
             <span className="text-3xl text-gray-600">
               <Image
@@ -90,7 +96,9 @@ export const TopCategory = () => {
               />
             </span>
 
-            <h3 className="text-lg font-medium text-gray-600">Party Dress</h3>
+            <h3 className="lg:text-lg text-sm font-medium text-gray-600">
+              Party Dress
+            </h3>
           </Link>
           {/* 5- Skirt category  */}
           <Link
@@ -98,9 +106,9 @@ export const TopCategory = () => {
             onClick={() => {
               dispatch(menuCategory("skirt"));
             }}
-            className="bg-pink-100 rounded flex justify-between items-center px-8 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
+            className="bg-pink-100 rounded flex justify-between items-center lg:px-8 px-4 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
           >
-            <span className="text-3xl text-gray-600">
+            <span className="lg:text-lg text-base text-gray-600">
               <Image
                 alt=" "
                 src="https://i.postimg.cc/qBDCtJfd/ezgif-com-crop-2-removebg-preview.png"
@@ -109,7 +117,9 @@ export const TopCategory = () => {
               />
             </span>
 
-            <h3 className="text-lg font-medium text-gray-600">Skirt</h3>
+            <h3 className="lg:text-lg text-sm font-medium text-gray-600">
+              Skirt
+            </h3>
           </Link>
           {/* 6- Watch category  */}
           <Link
@@ -117,19 +127,15 @@ export const TopCategory = () => {
             onClick={() => {
               dispatch(menuCategory("shirts"));
             }}
-            className="bg-pink-100 rounded flex justify-between items-center px-8 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
+            className="bg-pink-100 rounded flex justify-between items-center lg:px-8 px-4 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
           >
             <span className="text-5xl text-gray-600">
-              {/* <Image
-              alt=" "
-              src="https://i.postimg.cc/9XqH5bBH/ezgif-com-crop-3-removebg-preview.png"
-              width="40"
-              height="40"
-            /> */}
               <PiTShirtThin />
             </span>
 
-            <h3 className="text-lg font-medium text-gray-600">Women Shirts</h3>
+            <h3 className="lg:text-lg text-sm font-medium text-gray-600">
+              Shirts
+            </h3>
           </Link>
           {/* 7- Kids Dress category  */}
           <Link
@@ -137,7 +143,7 @@ export const TopCategory = () => {
             onClick={() => {
               dispatch(menuCategory("dress"));
             }}
-            className="bg-pink-100 rounded flex justify-between items-center px-8 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
+            className="bg-pink-100 rounded flex justify-between items-center lg:px-8 px-4 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
           >
             <span className="text-3xl text-gray-600">
               <Image
@@ -148,7 +154,9 @@ export const TopCategory = () => {
               />
             </span>
 
-            <h3 className="text-lg font-medium text-gray-600">Kids Dress</h3>
+            <h3 className="lg:text-lg text-sm font-medium text-gray-600">
+              Kids Dress
+            </h3>
           </Link>
 
           {/* 8- Watch category  */}
@@ -157,7 +165,7 @@ export const TopCategory = () => {
             onClick={() => {
               dispatch(menuCategory("watch"));
             }}
-            className="bg-pink-100 rounded flex justify-between items-center px-8 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
+            className="bg-pink-100 rounded flex justify-between items-center lg:px-8 px-4 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
           >
             <span className="text-5xl text-gray-600">
               {/* <Image
@@ -169,7 +177,9 @@ export const TopCategory = () => {
               <PiWatchThin />
             </span>
 
-            <h3 className="text-lg font-medium text-gray-600">Watch</h3>
+            <h3 className="lg:text-lg text-sm font-medium text-gray-600">
+              Watch
+            </h3>
           </Link>
 
           {/* 9- Shoes category  */}
@@ -178,7 +188,7 @@ export const TopCategory = () => {
             onClick={() => {
               dispatch(menuCategory("shoes"));
             }}
-            className="bg-pink-100 rounded flex justify-between items-center px-8 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
+            className="bg-pink-100 rounded flex justify-between items-center lg:px-8 px-4 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
           >
             <span className="text-3xl text-gray-600">
               <Image
@@ -189,7 +199,9 @@ export const TopCategory = () => {
               />
             </span>
 
-            <h3 className="text-lg font-medium text-gray-600">Shoes</h3>
+            <h3 className="lg:text-lg text-sm font-medium text-gray-600">
+              Shoes
+            </h3>
           </Link>
 
           {/* 10- Bags category  */}
@@ -198,7 +210,7 @@ export const TopCategory = () => {
             onClick={() => {
               dispatch(menuCategory("bags"));
             }}
-            className="bg-pink-100 rounded flex justify-between items-center px-8 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
+            className="bg-pink-100 rounded flex justify-between items-center lg:px-8 px-4 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
           >
             <span className="text-5xl text-gray-600">
               {/* <Image
@@ -210,7 +222,7 @@ export const TopCategory = () => {
               <PiHandbagSimpleThin />
             </span>
 
-            <h3 className="text-lg font-medium text-gray-600  duration-500">
+            <h3 className="lg:text-lg text-sm font-medium text-gray-600  duration-500">
               Bags
             </h3>
           </Link>
