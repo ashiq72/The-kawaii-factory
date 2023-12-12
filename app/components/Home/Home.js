@@ -1,22 +1,19 @@
-import { useEffect, useState } from "react";
 import Hero from "./Hero";
-import Category from "./Category";
 import HomeProductsSection from "./HomeProductsSection";
 import MiniBanner from "./MiniBanner";
-import PromoSection from "./PromoSection";
 import { TopCategory } from "./TopCategory/TopCategory";
-import HomeNewArrivals from "./HomeNewArrivals/HomeNewArrivals";
+import JewelleryBanner from "./JewelleryBanner/JewelleryBanner";
+import NewArrivalsBanner from "./NewArrivalsBanner/NewArrivalsBanner";
 
 export default function Home({ products }) {
   return (
     <div>
       <Hero />
       <TopCategory />
-      <HomeNewArrivals />
-      <Category />
+      <NewArrivalsBanner />
       <HomeProductsSection products={products} />
+      <JewelleryBanner />
       <MiniBanner />
-      <PromoSection />
     </div>
   );
 }

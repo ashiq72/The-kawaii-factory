@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-export default function HomeNewArrivals() {
+export default function NewArrivalsBanner() {
   return (
     <div>
       <div>
