@@ -101,23 +101,38 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
           key={index}
         >
           <div className="text-left md:cursor-pointer group">
-            <h1 className="py-7 flex justify-between items-center md:pr-0 pr-2 group capitalize">
-              {link.name}
-              <span className="text-base pt-1 inline ">
-                {link.firstsublinks ? (
-                  <span>
-                    {heading === link._id ? (
-                      <IoIosArrowUp />
-                    ) : (
-                      <IoIosArrowDown />
-                    )}
-                  </span>
-                ) : null}
-              </span>
-              <span className="text-xl md:mt-1 md:ml-2  md:block hidden group-hover:rotate-180 group-hover:-mt-2">
-                <ion-icon name="chevron-down"></ion-icon>
-              </span>
-            </h1>
+            {link?.firstsublinks ? (
+              <h1 className="py-7 flex justify-between items-center md:pr-0 pr-2 group capitalize">
+                {link?.name}
+                <span className="text-base pt-1 inline ">
+                  {link?.firstsublinks ? (
+                    <span>
+                      {heading === link._id ? (
+                        <IoIosArrowUp />
+                      ) : (
+                        <IoIosArrowDown />
+                      )}
+                    </span>
+                  ) : null}
+                </span>
+                <span className="text-xl md:mt-1 md:ml-2  md:block hidden group-hover:rotate-180 group-hover:-mt-2">
+                  <ion-icon name="chevron-down"></ion-icon>
+                </span>
+              </h1>
+            ) : (
+              <Link
+                href="/products"
+                onClick={() => {
+                  dispatch(menuCategory(link?.name));
+                }}
+                className="py-7 flex justify-between items-center md:pr-0 pr-2 group capitalize"
+              >
+                {link?.name}
+                <span className="text-xl md:mt-1 md:ml-2  md:block hidden group-hover:rotate-180 group-hover:-mt-2">
+                  <ion-icon name="chevron-down"></ion-icon>
+                </span>
+              </Link>
+            )}
 
             {link.firstsublinks && (
               <div>
@@ -131,9 +146,15 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
                   <div className="bg-white shadow p-2 rounded">
                     {link.firstsublinks.map((mysublinks, index) => (
                       <div key={index}>
-                        <h1 className="text-sm text-gray-600 rounded-md py-2 px-2 list-none hover:bg-slate-100 capitalize hover:text-green-600">
+                        <Link
+                          href="/products"
+                          onClick={() => {
+                            dispatch(menuCategory(mysublinks.name));
+                          }}
+                          className="text-sm text-gray-600 rounded-md py-2 px-2 list-none hover:bg-slate-100 capitalize hover:text-green-600"
+                        >
                           {mysublinks.name}
-                        </h1>
+                        </Link>
                       </div>
                     ))}
                   </div>

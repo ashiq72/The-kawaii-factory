@@ -18,6 +18,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 export function ProductCard({ product }) {
   const { _id, name, imageURLs, orginalPrice, discountRate } = product;
+
   const [hoverCart, setHoverCart] = useState(false);
   const [isToastVisible, setToastVisibility] = useState(false);
   const [selectedCart, setSelectedCart] = useState([]);
@@ -213,15 +214,14 @@ export function ProductCard({ product }) {
       <div className="px-1">
         {/*------------ Name ----------- */}
         <div className="font-[500] text-[16px] pt-5 hover:text-green-500">
-          {/* {name.length > 32 ? (
+          {name.length > 32 ? (
             <Link className="cursor-pointer" href={`/product-view/${_id}`}>
               {name.slice(0, 32)}
               <span>...</span>
             </Link>
           ) : (
-            { name }
-          )} */}
-          {name}
+            name
+          )}
         </div>
         {/* -----------Reviews ------------ */}
         <div className="flex gap-1 text-xl py-2">

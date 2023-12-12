@@ -28,7 +28,7 @@ function Navber({ categories }) {
     >
       <Wrapper className="h-[60px] flex justify-between items-center">
         <Link href="/">
-          <h1 className="text-black font-extrabold text-2xl flex items-center">
+          <h1 className="text-black font-extrabold lx:text-2xl text-xl flex items-center">
             <span className="text-[#F9C1CE] pr-1">
               <BiSolidShoppingBags />
             </span>

@@ -15,7 +15,7 @@ import { addToCart } from "@/store/features/cartSlice/cartSlice";
 export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
   const [open, setOpen] = useState(true);
   const dispatch = useDispatch();
-  console.log(wishLists);
+
   const handleButtonClick = (type, name) => {
     if (type === "removeformwishlist") {
       toast.error("Remove form wishlist"); // Displays a success message
