@@ -71,7 +71,6 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
                             <Link
                               href="/products"
                               onClick={() => {
-                                dispatch(toggleCategory(slink.name));
                                 dispatch(menuCategory(slink.name));
                               }}
                               className="hover:text-green-600 capitalize"
