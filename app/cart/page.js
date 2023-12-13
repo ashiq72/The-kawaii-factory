@@ -5,40 +5,13 @@ import Link from "next/link";
 
 import { useSelector } from "react-redux";
 
-// import { makePaymentRequest } from "@/utils/api";
-// import { loadStripe } from "@stripe/stripe-js";
-
 import CartItem from "./CartItem";
 import Wrapper from "../components/Wrapper/Wrapper";
-// const stripePromise = loadStripe(
-//   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-// );
 
 const Cart = () => {
   const [loading, setLoading] = useState(false);
   const cartItems = useSelector((state) => state.cart.cart);
-  console.log(cartItems.length);
-
-  //   const subTotal = useMemo(() => {
-  //     return cartItems.reduce((total, val) => total + val.attributes.price, 0);
-  //   }, [cartItems]);
-
-  //   const handlePayment = async () => {
-  //     try {
-  //       setLoading(true);
-  //       const stripe = await stripePromise;
-  //       const res = await makePaymentRequest("/api/orders", {
-  //         products: cartItems,
-  //       });
-  //       await stripe.redirectToCheckout({
-  //         sessionId: res.stripeSession.id,
-  //       });
-  //     } catch (error) {
-  //       setLoading(false);
-  //       console.log(error);
-  //     }
-  //   };
-
+  console.log(cartItems);
   return (
     <div className="w-full md:py-20">
       <Wrapper>
@@ -68,23 +41,49 @@ const Cart = () => {
 
               {/* SUMMARY START */}
               <div className="flex-[1]">
-                <div className="text-lg font-bold">Summary</div>
+                <div className="text-lg font-bold">ORDER SUMMARY</div>
 
                 <div className="p-5 my-5 bg-black/[0.05] rounded-xl">
                   <div className="flex justify-between">
-                    <div className="uppercase text-md md:text-lg font-medium text-black">
+                    <div className="text-sm  font-serif md:text-md text-black/[0.8] w-8/12">
                       Subtotal
                     </div>
-                    <div className="text-md md:text-lg font-medium text-black">
-                      &#8377; 45
+                    <div className="text-md md:text-lg font-normal text-black flex gap-1">
+                      &#2547; 45
                       {/* {subTotal} */}
                     </div>
                   </div>
-                  <div className="text-sm md:text-md py-5 border-t mt-5">
-                    The subtotal reflects the total price of your order,
-                    including duties and taxes, before any applicable discounts.
-                    It does not include delivery costs and international
-                    transaction fees.
+                  <div className="flex justify-between  py-4">
+                    <div className="text-sm  font-serif md:text-md text-black/[0.8] w-8/12">
+                      Shipping (Standard Shipping: within 3-4 days inside Dhaka,
+                      within 4-7 days outside Dhaka)
+                    </div>
+                    <div className="text-md md:text-lg font-normal text-black flex gap-1">
+                      <span>&#2547; </span> <span> 80</span>
+                      {/* {subTotal} */}
+                    </div>
+                  </div>
+                  <div className="flex justify-between">
+                    <div className="text-sm  font-serif md:text-md text-black/[0.8] w-8/12">
+                      VAT
+                    </div>
+                    <div className="text-md md:text-lg font-normal text-black flex gap-1">
+                      &#2547; 00
+                      {/* {subTotal} */}
+                    </div>
+                  </div>
+                  <div className=" border-solid border-t-2 border-gray-300 flex justify-between mt-5 pt-5">
+                    <div className="text-lg  font-serif font-semibold md:text-md text-black/[0.8] w-8/12">
+                      Total
+                    </div>
+                    <div className="text-lg font-semibold md:text-lg  text-black flex gap-1">
+                      &#2547; 45
+                      {/* {subTotal} */}
+                    </div>
+                  </div>
+                  <div className="text-sm md:text-md py-5  ">
+                    Express delivery within 24 to 48 hours available for Dhaka
+                    City. Select option on next screen.
                   </div>
                 </div>
 

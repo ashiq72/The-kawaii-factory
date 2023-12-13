@@ -9,8 +9,6 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      // state.cart.push(action.payload);
-
       const selectedProduct = state.cart.find(
         (product) => product._id === action.payload._id
       );
@@ -30,10 +28,38 @@ export const cartSlice = createSlice({
         (product) => product._id !== action.payload._id
       );
     },
+    handleIncrement: (state, action) => {
+      const selectedProduct = state.cart.find(
+        (product) => product._id === action.payload
+      );
+      if (selectedProduct && selectedProduct.cQuantity <= 9) {
+        const unitPrice = parseFloat(selectedProduct.orginalPrice);
+        selectedProduct.orginalPrice = (
+          (unitPrice / selectedProduct.cQuantity) *
+          (selectedProduct.cQuantity += 1)
+        ).toFixed(2);
+
+        selectedProduct.cQuantity += 1;
+      }
+    },
+    handleDecrement: (state, action) => {
+      const selectedProduct = state.cart.find(
+        (product) => product._id === action.payload
+      );
+      if (selectedProduct && selectedProduct.cQuantity >= 2) {
+        selectedProduct.cQuantity -= 1;
+
+        const unitPrice = parseFloat(selectedProduct.orginalPrice);
+        selectedProduct.orginalPrice = (
+          (unitPrice / selectedProduct.cQuantity) *
+          (selectedProduct.cQuantity -= 1)
+        ).toFixed(2);
+      }
+    },
   },
 });
 
-// Action creators are generated for each case reducer function
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, handleIncrement, handleDecrement } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

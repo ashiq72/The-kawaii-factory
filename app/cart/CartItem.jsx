@@ -1,4 +1,8 @@
-import { removeFromCart } from "@/store/features/cartSlice/cartSlice";
+import {
+  handleDecrement,
+  handleIncrement,
+  removeFromCart,
+} from "@/store/features/cartSlice/cartSlice";
 import { Button, ButtonGroup } from "@material-tailwind/react";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -8,40 +12,28 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 const CartItem = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
+
   // const p = data.attributes;
-  const { _id, name, imageURLs, orginalPrice, size, description } = product;
+  const {
+    _id,
+    name,
+    imageURLs,
+    orginalPrice,
+    size,
+    description,
+    status,
+    cQuantity,
+  } = product;
+  console.log(product);
 
   const dispatch = useDispatch();
 
-  // const updateCartItem = (e, key) => {
-  //     let payload = {
-  //         key,
-  //         val: key === "quantity" ? parseInt(e.target.value) : e.target.value,
-  //         id: data.id,
-  //     };
-  //     dispatch(updateCart(payload));
-  // };
   const handleButtonClick = (type, name) => {
     if (type === "removeformCart") {
       toast.error("Remove form cart"); // Displays a success message
     }
   };
   const totalPrice = (quantity * orginalPrice).toFixed(2);
-  const handleIncrement = () => {
-    if (quantity < 10) {
-      setQuantity((prevQuantity) => prevQuantity + 1);
-    }
-  };
-
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
-    }
-  };
-  const priceByQuantity = () => {
-    const discountPrice = orginalPrice - orginalPrice / discountRate;
-    return parseInt(discountPrice);
-  };
 
   return (
     <div className="flex py-5 gap-3 md:gap-5 border-t">
@@ -62,64 +54,57 @@ const CartItem = ({ product }) => {
       <div className="w-full flex flex-col">
         <div className="flex flex-col md:flex-row justify-between">
           {/* PRODUCT TITLE */}
-          <div className="lg:text-2xl text-xs font-semibold text-black/[0.8]">
+          <div className="lg:text-xl text-xs font-light text-black/[0.8]">
             {product.name}
           </div>
 
           {/* PRODUCT SUBTITLE */}
-          <div className="text-sm md:text-md font-medium text-black/[0.5] block md:hidden">
+          {/* <div className="text-sm md:text-md font-medium text-black/[0.5] block md:hidden">
             Sub Title
-          </div>
+          </div> */}
 
           {/* PRODUCT PRICE */}
-          <div className="lg:text-md text-[9px] font-bold text-black/[0.5] mt-2">
-            MRP : &#2547; {totalPrice}
+          <div
+            className={`lg:text-lg text-[9px] font-semibold text-black/[0.8] mt-2 ${
+              status === "out-of-stock" ? "line-through text-red-500" : ""
+            }`}
+          >
+            {status === "out-of-stock" ? (
+              <>MRP : &#2547; 00.00</>
+            ) : (
+              <>MRP : &#2547; {totalPrice}</>
+            )}
           </div>
         </div>
 
         {/* PRODUCT SUBTITLE */}
-        <div className="text-md font-medium text-black/[0.5] hidden md:block">
-          {/* {p.subtitle} */} sub Title 2
+        <div
+          className={`text-sm font-medium text-black/[0.5] capitalize ${
+            status === "out-of-stock" ? "text-red-500" : ""
+          }`}
+        >
+          {status}
         </div>
 
         <div className="flex items-center justify-between">
           <div className="flex items-center  text-black/[0.5] text-sm md:text-md">
-            {/* <div className="flex items-center gap-1">
-              <div className="font-semibold">Size:</div>
-              <select
-                className="hover:text-black"
-                onChange={(e) => updateCartItem(e, "selectedSize")}
-              >
-                {p.size.data.map((item, i) => {
-                  return (
-                    <option
-                      key={i}
-                      value={item.size}
-                      disabled={!item.enabled ? true : false}
-                      selected={data.selectedSize === item.size}
-                    >
-                      {item.size}
-                    </option>
-                  );
-                })}
-              </select>
-            </div> */}
-
             <div className="flex items-center gap-1 font-normal text-[10px]">
               {/* Quantity  */}
-              <div className="mb-5">
-                <h1 className="text-md font-semibold">Quantity</h1>
+              <div className="mb-5 ">
+                <h1 className="text-sm font-medium">Quantity:</h1>
                 <div className="flex items-center mt-2">
                   <button
-                    className="bg-pink-200 text-white px-3 py-1 rounded-l"
-                    onClick={handleDecrement}
+                    disabled={status === "out-of-stock"}
+                    className="text-xl hover:bg-pink-200 hover:text-white duration-200 hover:border-pink-200 text-black border-2 px-4 py-0 rounded-r"
+                    onClick={() => dispatch(handleDecrement(_id))}
                   >
                     -
                   </button>
-                  <span className="mx-4">{quantity}</span>
+                  <span className="mx-4 text-base">{cQuantity}</span>
                   <button
-                    className="bg-pink-200 text-white px-3 py-1 rounded-r"
-                    onClick={handleIncrement}
+                    disabled={status === "out-of-stock"}
+                    className=" text-xl hover:bg-pink-200 hover:text-white duration-200 hover:border-pink-200 text-black border-2 px-4 py-0 rounded-r"
+                    onClick={() => dispatch(handleIncrement(_id))}
                   >
                     +
                   </button>
