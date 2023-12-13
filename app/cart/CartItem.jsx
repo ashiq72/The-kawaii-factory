@@ -7,8 +7,9 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 // import { updateCart, removeFromCart } from "@/store/cartSlice";
 import { useDispatch } from "react-redux";
 const CartItem = ({ product }) => {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   // const p = data.attributes;
+  const { _id, name, imageURLs, orginalPrice, size, description } = product;
 
   const dispatch = useDispatch();
 
@@ -25,14 +26,25 @@ const CartItem = ({ product }) => {
       toast.error("Remove form cart"); // Displays a success message
     }
   };
+  const totalPrice = (quantity * orginalPrice).toFixed(2);
+  const handleIncrement = () => {
+    if (quantity < 10) {
+      setQuantity((prevQuantity) => prevQuantity + 1);
+    }
+  };
 
+  const handleDecrement = () => {
+    if (quantity > 1) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
+    }
+  };
   const priceByQuantity = () => {
     const discountPrice = orginalPrice - orginalPrice / discountRate;
     return parseInt(discountPrice);
   };
 
   return (
-    <div className="flex py-5 gap-3 md:gap-5 border-b">
+    <div className="flex py-5 gap-3 md:gap-5 border-t">
       {/* IMAGE START */}
       <div className="shrink-0 aspect-square w-[50px] md:w-[120px]">
         {product?.imageURLs?.slice(1, 2).map((img, index) => (
@@ -61,7 +73,7 @@ const CartItem = ({ product }) => {
 
           {/* PRODUCT PRICE */}
           <div className="lg:text-md text-[9px] font-bold text-black/[0.5] mt-2">
-            MRP : &#2547; {product.orginalPrice}
+            MRP : &#2547; {totalPrice}
           </div>
         </div>
 
@@ -94,30 +106,24 @@ const CartItem = ({ product }) => {
             </div> */}
 
             <div className="flex items-center gap-1 font-normal text-[10px]">
-              <div className="lg:font-semibold  ">Quantity:</div>
-              {/* <select
-                className="hover:text-black"
-                onChange={(e) => updateCartItem(e, "quantity")}
-              >
-                {Array.from({ length: 10 }, (_, i) => i + 1).map((q, i) => {
-                  return (
-                    <option key={i} value={q} selected={data.quantity === q}>
-                      {q}
-                    </option>
-                  );
-                })}
-              </select> */}
-              {/* <ButtonGroup>
-                <Button>One</Button>
-                <Button>Two</Button>
-                <Button>Three</Button>
-              </ButtonGroup> */}
-              <div className="flex items-center">
-                <button className="btn btn-xs text-gray-400">-</button>
-
-                <span className="px-2">{product?.cQuantity}</span>
-
-                <button className="btn btn-xs text-gray-400">+</button>
+              {/* Quantity  */}
+              <div className="mb-5">
+                <h1 className="text-md font-semibold">Quantity</h1>
+                <div className="flex items-center mt-2">
+                  <button
+                    className="bg-pink-200 text-white px-3 py-1 rounded-l"
+                    onClick={handleDecrement}
+                  >
+                    -
+                  </button>
+                  <span className="mx-4">{quantity}</span>
+                  <button
+                    className="bg-pink-200 text-white px-3 py-1 rounded-r"
+                    onClick={handleIncrement}
+                  >
+                    +
+                  </button>
+                </div>
               </div>
             </div>
           </div>

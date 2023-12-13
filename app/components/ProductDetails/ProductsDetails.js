@@ -37,6 +37,7 @@ export default function ProductDetails({ data }) {
   };
 
   const totalPrice = (quantity * orginalPrice).toFixed(2);
+
   const handleIncrement = () => {
     if (quantity < 10) {
       setQuantity((prevQuantity) => prevQuantity + 1);
