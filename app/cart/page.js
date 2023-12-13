@@ -7,10 +7,15 @@ import { useSelector } from "react-redux";
 
 import CartItem from "./CartItem";
 import Wrapper from "../components/Wrapper/Wrapper";
+import { selectCartTotalPrice } from "@/store/selectors/productSelectors";
 
 const Cart = () => {
   const [loading, setLoading] = useState(false);
   const cartItems = useSelector((state) => state.cart.cart);
+  const totalCartPrice = useSelector(selectCartTotalPrice);
+
+  const totalPrice = parseInt(totalCartPrice + 80);
+
   console.log(cartItems);
   return (
     <div className="w-full md:py-20">
@@ -49,7 +54,7 @@ const Cart = () => {
                       Subtotal
                     </div>
                     <div className="text-md md:text-lg font-normal text-black flex gap-1">
-                      &#2547; 45
+                      &#2547; {parseInt(totalCartPrice)}
                       {/* {subTotal} */}
                     </div>
                   </div>
@@ -77,7 +82,7 @@ const Cart = () => {
                       Total
                     </div>
                     <div className="text-lg font-semibold md:text-lg  text-black flex gap-1">
-                      &#2547; 45
+                      &#2547; {totalPrice}
                       {/* {subTotal} */}
                     </div>
                   </div>
