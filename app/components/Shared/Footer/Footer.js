@@ -29,7 +29,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2">
             {/* <Typography variant="h5" className="mb-6"> */}
 
-            <h1 className="text-black font-extrabold text-5xl text-start flex items-start">
+            <h1 className="text-black font-extrabold lg:text-5xl text-3xl text-start flex items-start">
               <Link href="/">
                 <span className="text-[#F9C1CE] pr-1">
                   <BiSolidShoppingBags />

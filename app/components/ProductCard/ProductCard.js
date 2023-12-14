@@ -13,8 +13,7 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BsCart } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast from "react-hot-toast";
 
 export function ProductCard({ product }) {
   const { _id, name, imageURLs, orginalPrice, discountRate } = product;
@@ -28,7 +27,7 @@ export function ProductCard({ product }) {
   //Toast for selected wishlists & cart
   useEffect(() => {
     if (isToastVisible) {
-      toast.info("Already Added");
+      toast.success("Already Added");
     }
     return () => {
       setToastVisibility(false);

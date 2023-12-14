@@ -3,27 +3,15 @@ import {
   handleIncrement,
   removeFromCart,
 } from "@/store/features/cartSlice/cartSlice";
-import { Button, ButtonGroup } from "@material-tailwind/react";
 import Image from "next/image";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { RiDeleteBin6Line } from "react-icons/ri";
-// import { updateCart, removeFromCart } from "@/store/cartSlice";
+
 import { useDispatch } from "react-redux";
 const CartItem = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
-
-  // const p = data.attributes;
-  const {
-    _id,
-    name,
-    imageURLs,
-    orginalPrice,
-    size,
-    description,
-    status,
-    cQuantity,
-  } = product;
+  const { _id, orginalPrice, status, cQuantity } = product;
   console.log(product);
 
   const dispatch = useDispatch();

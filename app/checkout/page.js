@@ -11,9 +11,11 @@ function classNames(...classes) {
 const Checkout = () => {
   const [agreed, setAgreed] = useState(false);
   return (
-    <div className="w-7/12 mx-auto  py-8">
+    <div className="lg:w-7/12 w-full lg:p-0 p-4 mx-auto  py-8">
       <div className="pb-2">
-        <h1 className="font-medium font-sans text-3xl pb-1">CHECKOUT</h1>
+        <h1 className="font-medium font-sans lg:text-3xl text-xl pb-1">
+          CHECKOUT
+        </h1>
         <p className="text-sm text-gray-400 font-sans">
           Please fill in the fields below and place order to complete your
           purchase!
@@ -28,7 +30,7 @@ const Checkout = () => {
               <h1 className="bg-white rounded-full w-6 h-6 flex items-center text-center justify-center">
                 1
               </h1>
-              <span className="text-white font-sans text-base font-medium">
+              <span className="text-white font-sans lg:text-base text-sm font-medium">
                 SHIPPING ADDRESS
               </span>
             </div>
@@ -160,7 +162,7 @@ const Checkout = () => {
               <h1 className="bg-white rounded-full w-6 h-6 flex items-center text-center justify-center">
                 2
               </h1>
-              <span className="text-white font-sans text-base font-medium">
+              <span className="text-white font-sans lg:text-base text-sm font-medium">
                 SHIPPING METHOD
               </span>
             </div>
@@ -172,7 +174,7 @@ const Checkout = () => {
               <h1 className="bg-white rounded-full w-6 h-6 flex items-center text-center justify-center">
                 2
               </h1>
-              <span className="text-white font-sans text-base font-medium">
+              <span className="text-white font-sans lg:text-base text-sm font-medium">
                 PAYMENT METHOD
               </span>
             </div>
@@ -221,7 +223,7 @@ const Checkout = () => {
                 <MdDone />
               </span>
             </h1>
-            <span className="text-white font-sans text-base font-medium">
+            <span className="text-white font-sans lg:text-base text-sm font-medium">
               ORDER REVIEW
             </span>
           </div>

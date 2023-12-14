@@ -36,10 +36,8 @@ export const cartSlice = createSlice({
         const unitPrice = parseFloat(selectedProduct.orginalPrice);
         selectedProduct.orginalPrice = (
           (unitPrice / selectedProduct.cQuantity) *
-          selectedProduct.cQuantity
+          (selectedProduct.cQuantity += 1)
         ).toFixed(2);
-
-        selectedProduct.cQuantity += 1;
       }
     },
     handleDecrement: (state, action) => {
@@ -47,12 +45,10 @@ export const cartSlice = createSlice({
         (product) => product._id === action.payload
       );
       if (selectedProduct && selectedProduct.cQuantity >= 2) {
-        selectedProduct.cQuantity -= 1;
-
         const unitPrice = parseFloat(selectedProduct.orginalPrice);
         selectedProduct.orginalPrice = (
           (unitPrice / selectedProduct.cQuantity) *
-          selectedProduct.cQuantity
+          (selectedProduct.cQuantity -= 1)
         ).toFixed(2);
       }
     },
