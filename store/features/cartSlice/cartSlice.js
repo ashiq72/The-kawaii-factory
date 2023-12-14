@@ -36,7 +36,7 @@ export const cartSlice = createSlice({
         const unitPrice = parseFloat(selectedProduct.orginalPrice);
         selectedProduct.orginalPrice = (
           (unitPrice / selectedProduct.cQuantity) *
-          (selectedProduct.cQuantity += 1)
+          selectedProduct.cQuantity
         ).toFixed(2);
 
         selectedProduct.cQuantity += 1;
@@ -52,7 +52,7 @@ export const cartSlice = createSlice({
         const unitPrice = parseFloat(selectedProduct.orginalPrice);
         selectedProduct.orginalPrice = (
           (unitPrice / selectedProduct.cQuantity) *
-          (selectedProduct.cQuantity -= 1)
+          selectedProduct.cQuantity
         ).toFixed(2);
       }
     },

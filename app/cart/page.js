@@ -53,27 +53,31 @@ const Cart = () => {
                     <div className="text-sm  font-serif md:text-md text-black/[0.8] w-8/12">
                       Subtotal
                     </div>
-                    <div className="text-md md:text-lg font-normal text-black flex gap-1">
-                      &#2547; {parseInt(totalCartPrice)}
-                      {/* {subTotal} */}
+                    <div className="text-md md:text-lg font-normal text-black flex gap-1 items-center">
+                      <span className="font-light text-base">&#2547;</span>
+                      <span className="font-sans">
+                        {parseInt(totalCartPrice)}
+                      </span>
                     </div>
                   </div>
-                  <div className="flex justify-between  py-4">
+                  <div className="flex justify-between items-start py-4">
                     <div className="text-sm  font-serif md:text-md text-black/[0.8] w-8/12">
                       Shipping (Standard Shipping: within 3-4 days inside Dhaka,
                       within 4-7 days outside Dhaka)
                     </div>
-                    <div className="text-md md:text-lg font-normal text-black flex gap-1">
-                      <span>&#2547; </span> <span> 80</span>
+                    <div className="text-md md:text-lg font-normal text-black flex gap-1 items-center">
+                      <span className="font-light text-base">&#2547; </span>
+                      <span className="font-sans"> 80</span>
                       {/* {subTotal} */}
                     </div>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between items-start">
                     <div className="text-sm  font-serif md:text-md text-black/[0.8] w-8/12">
                       VAT
                     </div>
-                    <div className="text-md md:text-lg font-normal text-black flex gap-1">
-                      &#2547; 00
+                    <div className="text-md md:text-lg font-normal text-black flex gap-1 items-center">
+                      <span className="font-light text-base">&#2547; </span>
+                      <span className="font-sans">00</span>
                       {/* {subTotal} */}
                     </div>
                   </div>
@@ -81,9 +85,9 @@ const Cart = () => {
                     <div className="text-lg  font-serif font-semibold md:text-md text-black/[0.8] w-8/12">
                       Total
                     </div>
-                    <div className="text-lg font-semibold md:text-lg  text-black flex gap-1">
-                      &#2547; {totalPrice}
-                      {/* {subTotal} */}
+                    <div className="text-lg md:text-lg  text-black flex gap-1 items-center">
+                      <span className="font-light text-base">&#2547; </span>
+                      <span className="font-sans">{totalPrice}</span>
                     </div>
                   </div>
                   <div className="text-sm md:text-md py-5  ">
@@ -93,13 +97,15 @@ const Cart = () => {
                 </div>
 
                 {/* BUTTON START */}
-                <button
-                  className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 flex items-center gap-2 justify-center"
-                  // onClick={handlePayment}
-                >
-                  Checkout
-                  {/* {loading && <img src="/spinner.svg" />} */}
-                </button>
+                <Link href="/checkout">
+                  <button
+                    className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 flex items-center gap-2 justify-center"
+                    // onClick={handlePayment}
+                  >
+                    Checkout
+                    {/* {loading && <img src="/spinner.svg" />} */}
+                  </button>
+                </Link>
                 {/* BUTTON END */}
               </div>
               {/* SUMMARY END */}
