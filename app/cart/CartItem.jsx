@@ -53,7 +53,7 @@ const CartItem = ({ product }) => {
 
           {/* PRODUCT PRICE */}
           <div
-            className={`lg:text-lg text-[9px] font-semibold text-black/[0.8] mt-2 ${
+            className={`lg:text-lg text-[9px] font-semibold text-black/[0.8] lg:mt-2 mt-0 ${
               status === "out-of-stock" ? "line-through text-red-500" : ""
             }`}
           >
@@ -67,7 +67,7 @@ const CartItem = ({ product }) => {
 
         {/* PRODUCT SUBTITLE */}
         <div
-          className={`text-sm font-medium text-black/[0.5] capitalize ${
+          className={`lg:text-sm text-xs font-medium text-black/[0.5] capitalize ${
             status === "out-of-stock" ? "text-red-500" : ""
           }`}
         >
@@ -79,23 +79,23 @@ const CartItem = ({ product }) => {
             <div className="flex items-center gap-1 font-normal text-[10px]">
               {/* Quantity  */}
               <div className="mb-5 ">
-                <h1 className="text-sm font-medium">Quantity:</h1>
+                <h1 className="lg:text-sm text-xs font-medium">Quantity:</h1>
                 <div className="flex items-center mt-2">
-                  <button
+                  <div
                     disabled={status === "out-of-stock"}
-                    className="text-xl hover:bg-pink-200 hover:text-white duration-200 hover:border-pink-200 text-black border-2 px-4 py-0 rounded-r"
+                    className=" border-2 px-2 py-0 rounded-r"
                     onClick={() => dispatch(handleDecrement(_id))}
                   >
                     -
-                  </button>
+                  </div>
                   <span className="mx-4 text-base">{cQuantity}</span>
-                  <button
+                  <div
                     disabled={status === "out-of-stock"}
                     className=" text-xl hover:bg-pink-200 hover:text-white duration-200 hover:border-pink-200 text-black border-2 px-4 py-0 rounded-r"
                     onClick={() => dispatch(handleIncrement(_id))}
                   >
                     +
-                  </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -108,8 +108,12 @@ const CartItem = ({ product }) => {
             }}
             className="hover:bg-red-500/5  rounded-full p-2 hover:shadow"
           >
-            <RiDeleteBin6Line className="cursor-pointer text-red-400   md:text-[20px] duration-300" />
+            {/* <RiDeleteBin6Line className="cursor-pointer text-red-400   md:text-[20px] duration-300" /> */}
           </div>
+        </div>
+        <div>
+          <div className="border-2">-</div>
+          <div className="border-2">-</div>
         </div>
       </div>
     </div>

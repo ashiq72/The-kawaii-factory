@@ -4,10 +4,12 @@ import { BiSolidShoppingBags } from "react-icons/bi";
 import { FcMenu } from "react-icons/fc";
 import { MdClose } from "react-icons/md";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import { useDispatch } from "react-redux";
 
 export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
   const [heading, setHeading] = useState("");
   const [subHeading, setSubHeading] = useState("");
+  const dispatch = useDispatch();
   return (
     <ul
       className={`
@@ -116,7 +118,15 @@ export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
                           className="py-3 pl-14 hover:bg-gray-200 cursor-pointer hover:text-green-600 capitalize"
                         >
                           {/* Mobile secondsublinks menu */}
-                          <Link href="">{slink.name}</Link>
+                          <Link
+                            href="/products"
+                            onClick={() => {
+                              dispatch(menuCategory(slink.name));
+                            }}
+                            className="hover:text-green-600 capitalize"
+                          >
+                            {slink.name}
+                          </Link>
                         </li>
                       ))}
                     </div>
