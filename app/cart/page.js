@@ -16,7 +16,6 @@ const Cart = () => {
 
   const totalPrice = parseInt(totalCartPrice + 80);
 
-  console.log(cartItems);
   return (
     <div className="w-full md:py-20">
       <Wrapper>
