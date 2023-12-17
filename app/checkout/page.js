@@ -11,7 +11,7 @@ function classNames(...classes) {
 const Checkout = () => {
   const [agreed, setAgreed] = useState(false);
   return (
-    <div className="lg:w-7/12 w-full lg:p-0 p-4 mx-auto  py-8">
+    <div className="lg:w-7/12 w-full lg:px-0 px-4 mx-auto py-8">
       <div className="pb-2">
         <h1 className="font-medium font-sans lg:text-3xl text-xl pb-1">
           CHECKOUT

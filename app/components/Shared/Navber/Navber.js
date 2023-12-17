@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { BsCart } from "react-icons/bs";
+import { AiOutlineUser } from "react-icons/ai";
 import { BiMenuAltRight } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { BiSolidShoppingBags } from "react-icons/bi";
@@ -11,6 +12,7 @@ import Menu from "./Menu";
 import { MenuMobile } from "./MenuMobile";
 import WishList from "../../WishList/WishList";
 import { useSelector } from "react-redux";
+import { Tooltip, Button } from "@material-tailwind/react";
 // import Cart from "@/app/cart/page";
 
 function Navber({ categories }) {
@@ -55,32 +57,69 @@ function Navber({ categories }) {
 
         <div className="flex items-center gap-2  text-black">
           {/* Icon start */}
-          <button onClick={() => setWishListOpen(!wishListOpen)}>
-            <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative ">
-              <IoMdHeartEmpty className="text-[19px] md:text-[24px]" />
-              <WishList
-                wishListOpen={wishListOpen}
-                setWishListOpen={setWishListOpen}
-                wishLists={wishLists}
-              />
-              <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
-                {wishLists?.length}
+          <Tooltip
+            content="Wishlist"
+            placement="bottom-center"
+            className="z-50 border border-blue-gray-50 bg-white text-black shadow-xl shadow-black/10 rounded"
+            animate={{
+              mount: { scale: 1, y: 0 },
+              unmount: { scale: 0, y: 25 },
+            }}
+          >
+            <button onClick={() => setWishListOpen(!wishListOpen)}>
+              <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative ">
+                <IoMdHeartEmpty className="text-[19px] md:text-[24px]" />
+                <WishList
+                  wishListOpen={wishListOpen}
+                  setWishListOpen={setWishListOpen}
+                  wishLists={wishLists}
+                />
+                <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
+                  {wishLists?.length}
+                </div>
               </div>
-            </div>
-          </button>
+            </button>
+          </Tooltip>
           {/* Icon end */}
 
           {/* Icon start */}
-          <Link href="/cart">
-            <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative ">
-              <BsCart className="text-[15px] md:text-[20px]" />
+          <Tooltip
+            content="Cart"
+            placement="bottom-center"
+            className="z-50 border border-blue-gray-50 bg-white text-black  shadow-xl shadow-black/10 rounded"
+            animate={{
+              mount: { scale: 1, y: 0 },
+              unmount: { scale: 0, y: 25 },
+            }}
+          >
+            <Link href="/cart">
+              <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative ">
+                <BsCart className="text-[15px] md:text-[20px]" />
 
-              <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
-                {cartItems.length}
+                <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
+                  {cartItems.length}
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </Tooltip>
           {/* Icon end */}
+          {/* Account Icon start */}
+          <Tooltip
+            content="My Account"
+            placement="bottom-center"
+            className="z-50 border border-blue-gray-50 bg-white text-black  shadow-xl shadow-black/10 rounded"
+            animate={{
+              mount: { scale: 1, y: 0 },
+              unmount: { scale: 0, y: 25 },
+            }}
+          >
+            <Link href="/customer/account">
+              <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative ">
+                <AiOutlineUser className="text-[18px] md:text-[25px]" />
+              </div>
+            </Link>
+          </Tooltip>
+          {/* Account Icon end */}
 
           {/* Mobile icon start */}
           <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex lg:hidden justify-center items-center hover:bg-black/[0.05] cursor-pointer">
