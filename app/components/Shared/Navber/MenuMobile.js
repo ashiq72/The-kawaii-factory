@@ -5,6 +5,7 @@ import { FcMenu } from "react-icons/fc";
 import { MdClose } from "react-icons/md";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { useDispatch } from "react-redux";
+import { menuCategory } from "@/store/features/categoryFilterSlice/categoryFilterSlice";
 
 export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
   const [heading, setHeading] = useState("");
@@ -122,6 +123,7 @@ export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
                             href="/products"
                             onClick={() => {
                               dispatch(menuCategory(slink.name));
+                              setMobileMenu(!mobileMenu);
                             }}
                             className="hover:text-green-600 capitalize"
                           >
@@ -153,7 +155,24 @@ export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
                 }}
               >
                 {/* Mobile MainCategory menu */}
-                {link.name}
+
+                {!link?.firstsublinks?.length > 0 ? (
+                  <>
+                    <Link
+                      href="/products"
+                      onClick={() => {
+                        dispatch(menuCategory(link.name));
+                        setMobileMenu(!mobileMenu);
+                      }}
+                    >
+                      {link.name}
+                    </Link>
+                  </>
+                ) : (
+                  link.name
+                )}
+
+                {/* {link.name} */}
                 <span className="text-xl lg:hidden ">
                   {link.firstsublinks ? (
                     <span>
@@ -183,17 +202,20 @@ export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
               {link?.firstsublinks?.map((slinks, index) => (
                 <div key={index}>
                   <div>
-                    <h1
-                      onClick={() =>
+                    <Link
+                      href="/products"
+                      onClick={() => {
                         subHeading !== slinks.name
                           ? setSubHeading(slinks.name)
-                          : setSubHeading("")
-                      }
+                          : setSubHeading("");
+                        dispatch(menuCategory(slinks.name));
+                        setMobileMenu(!mobileMenu);
+                      }}
                       className="py-3 pl-7 font-normal md:pr-0 pr-5 flex justify-between items-center  hover:bg-gray-200 cursor-pointer hover:text-green-600 capitalize"
                     >
                       {/* Mobile firstsublinks menu */}
                       {slinks.name}
-                    </h1>
+                    </Link>
                   </div>
                 </div>
               ))}
