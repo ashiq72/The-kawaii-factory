@@ -1,15 +1,13 @@
 "use client";
 import { ProductCard } from "@/app/components/ProductCard/ProductCard";
 import { useGetAllProductsQuery } from "@/store/features/productsAPI/productsAPI";
-import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Spinner } from "@material-tailwind/react";
 
 export default function AllProducts() {
   const products = useGetAllProductsQuery();
 
   const filters = useSelector((state) => state.categoryFilter.category);
-
+  console.log(filters);
   let content;
 
   if (products) {

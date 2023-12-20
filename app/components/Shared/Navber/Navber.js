@@ -59,7 +59,7 @@ function Navber({ categories }) {
           {/* Icon start */}
           <Tooltip
             content="Wishlist"
-            placement="bottom-center"
+            placement="bottom"
             className="z-50 border border-blue-gray-50 bg-white text-black shadow-xl shadow-black/10 rounded"
             animate={{
               mount: { scale: 1, y: 0 },
@@ -85,7 +85,7 @@ function Navber({ categories }) {
           {/* Icon start */}
           <Tooltip
             content="Cart"
-            placement="bottom-center"
+            placement="bottom"
             className="z-50 border border-blue-gray-50 bg-white text-black  shadow-xl shadow-black/10 rounded"
             animate={{
               mount: { scale: 1, y: 0 },
@@ -106,7 +106,7 @@ function Navber({ categories }) {
           {/* Account Icon start */}
           <Tooltip
             content="My Account"
-            placement="bottom-center"
+            placement="bottom"
             className="z-50 border border-blue-gray-50 bg-white text-black  shadow-xl shadow-black/10 rounded"
             animate={{
               mount: { scale: 1, y: 0 },

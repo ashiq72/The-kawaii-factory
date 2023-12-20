@@ -111,8 +111,9 @@ const MoblieFilter = () => {
                       >
                         {slinks?.secondsublinks?.map((slink, index) => (
                           <Checkbox
-                            checked={filters == slink.name}
+                            checked={filters.includes(slink.name)}
                             key={index}
+                            readOnly
                             onClick={() => dispatch(toggleCategory(slink.name))}
                             label={
                               <Typography
@@ -151,8 +152,9 @@ const MoblieFilter = () => {
                   {!link?.firstsublinks.length > 0 ? (
                     <>
                       <Checkbox
-                        checked={filters == link.name}
+                        checked={filters.includes(link.name)}
                         key={index}
+                        readOnly
                         onClick={() => dispatch(toggleCategory(link.name))}
                         label={
                           <Typography
@@ -213,7 +215,8 @@ const MoblieFilter = () => {
                         {/*  firstsublinks menu */}
                         <span className="font-normal text-gray-600 capitalize">
                           <Checkbox
-                            checked={filters == slinks.name}
+                            checked={filters.includes(slinks.name)}
+                            readOnly
                             key={index}
                             onClick={() =>
                               dispatch(toggleCategory(slinks.name))

@@ -10,7 +10,7 @@ import { useGetAllCategoriesQuery } from "@/store/features/categoriesAPI/categor
 
 const FilterLeftLinks = () => {
   const categories = useGetAllCategoriesQuery();
-  console.log(categories);
+
   const [heading, setHeading] = useState("");
   const [subHeading, setSubHeading] = useState("");
   const dispatch = useDispatch();
@@ -109,10 +109,14 @@ const FilterLeftLinks = () => {
                             : "hidden ease-in-out duration-500 delay-300"
                         } flex flex-col `}
                       >
+                        {/* cart.find(
+        (product) => product._id === action.payload._id
+      ); */}
                         {slinks?.secondsublinks?.map((slink, index) => (
                           <Checkbox
-                            checked={filters == slink.name}
+                            checked={filters.includes(slink.name)}
                             key={index}
+                            readOnly
                             onClick={() => dispatch(toggleCategory(slink.name))}
                             label={
                               <Typography
@@ -151,8 +155,9 @@ const FilterLeftLinks = () => {
                   {!link?.firstsublinks.length > 0 ? (
                     <>
                       <Checkbox
-                        checked={filters == link.name}
+                        checked={filters.includes(link.name)}
                         key={index}
+                        readOnly
                         onClick={() => dispatch(toggleCategory(link.name))}
                         label={
                           <Typography
@@ -213,8 +218,9 @@ const FilterLeftLinks = () => {
                         {/*  firstsublinks menu */}
                         <span className="font-normal text-gray-600 capitalize">
                           <Checkbox
-                            checked={filters == slinks.name}
+                            checked={filters.includes(slinks.name)}
                             key={index}
+                            readOnly
                             onClick={() =>
                               dispatch(toggleCategory(slinks.name))
                             }
