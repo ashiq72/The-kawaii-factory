@@ -4,8 +4,12 @@
   <br>
 </h1>
 
-<p align="center">
+<p>
   Live Site: <a href="https://kawaiisss.vercel.app/">https://kawaiisss.vercel.app/
+</a>
+</p>
+<p>
+  Server code: <a href="https://github.com/ashiq72/kawaiisss-server.git">https://github.com/ashiq72/kawaiisss-server.git
 </a>
 </p>
 
