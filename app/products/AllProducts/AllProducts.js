@@ -4,73 +4,46 @@ import { useGetAllProductsQuery } from "@/store/features/productsAPI/productsAPI
 import { useSelector } from "react-redux";
 
 export default function AllProducts() {
-  const products = useGetAllProductsQuery();
+  const productsQuery = useGetAllProductsQuery();
 
   const filters = useSelector((state) => state.categoryFilter.category);
-  console.log(filters);
-  let content;
+  const sorts = useSelector((state) => state.categoryFilter.sort);
+  console.log(sorts);
 
-  if (products) {
-    content = products?.data?.data?.map((product, index) => (
+  let content = [];
+
+  if (productsQuery.data) {
+    let productList = [...productsQuery.data.data];
+
+    // Apply category filters
+    if (filters?.length) {
+      productList = productList.filter((product) =>
+        filters.includes(product.category)
+      );
+    }
+
+    // Apply sorting logic - low to high
+    if (sorts.includes("low to high")) {
+      productList?.sort((a, b) => a.orginalPrice - b.orginalPrice);
+    } else if (sorts.includes("high to low")) {
+      productList?.sort((a, b) => b.orginalPrice - a.orginalPrice);
+    } else {
+      return;
+    }
+
+    content = productList.map((product, index) => (
       <div key={index} className="">
         <ProductCard product={product} />
       </div>
     ));
   }
-
-  if (products && filters?.length) {
-    const filteredProducts = products?.data?.data?.filter((product) => {
-      if (filters.length) {
-        const filter = filters.includes(product.category);
-        return filter;
-      }
-      return product;
-    });
-
-    if (filteredProducts.length === 0) {
-      content = (
-        <div className="text-green-500 border-2 px-10 rounded mt-5">
-          There are no products available.
-        </div>
-      );
-    } else {
-      content = filteredProducts.map((product, index) => (
-        <div key={index} className="">
-          <ProductCard product={product} />
-        </div>
-      ));
-    }
+  if (productsQuery.data && filters?.length && content?.length === 0) {
+    content = (
+      <div className="text-green-500 border-2 px-10 rounded mt-5">
+        There are no products available.
+      </div>
+    );
   }
-
-  // if (products && filters?.length) {
-  //   content = products?.data?.data
-  //     ?.filter((product) => {
-  //       if (filters.length) {
-  //         const filter = filters.includes(product.category);
-
-  //         return filter;
-  //       }
-  //       return product;
-  //     })
-  //     .map((product, index) => (
-  //       <div key={index} className="">
-  //         <ProductCard product={product} />
-  //       </div>
-  //     ));
-  // }
-  // if (products && filters?.length === 0) {
-  //   content = (
-  //     <div className="text-red-500">There are no products available.</div>
-  //   );
-  // }
-  // if (products && filters?.length) {
-  //   content = products?.data?.data?.filter((product) => {
-  //     if (filters.length) {
-  //       return filters.includes(product.category);
-  //     }
-  //     return product;
-  //   });
-  // }
 
   return (
     <div className="bg-white">

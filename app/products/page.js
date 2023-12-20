@@ -13,10 +13,16 @@ import Wrapper from "../components/Wrapper/Wrapper";
 import AllProducts from "./AllProducts/AllProducts";
 import MoblieFilter from "../components/Pruducts/MobileFilter/MoblieFilter";
 import FilterLeftLinks from "../components/Pruducts/FilterLeftLinks/FilterLeftLinks";
+import { Checkbox, Typography } from "@material-tailwind/react";
+import {
+  sortCategory,
+  toggleCategory,
+} from "@/store/features/categoryFilterSlice/categoryFilterSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const sortOptions = [
-  { name: "Price: Low to High", href: "#", current: false },
-  { name: "Price: High to Low", href: "#", current: false },
+  { name: "low to high", href: "#", current: false },
+  { name: "high to low", href: "#", current: false },
 ];
 const subCategories = [
   { name: "Home", href: "#" },
@@ -69,6 +75,8 @@ function classNames(...classes) {
 
 export default function Example() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const dispatch = useDispatch();
+  const sorts = useSelector((state) => state.categoryFilter.sort);
 
   return (
     <div className="bg-white">
@@ -229,7 +237,7 @@ export default function Example() {
                   leaveFrom="transform opacity-100 scale-100"
                   leaveTo="transform opacity-0 scale-95"
                 >
-                  <Menu.Items className="absolute right-0  mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                  <Menu.Items className="absolute right-0  mt-2 w-52 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
                     <div className="py-1">
                       {sortOptions.map((option) => (
                         <Menu.Item key={option.name}>
@@ -244,7 +252,25 @@ export default function Example() {
                                 "block px-4 py-2 text-sm"
                               )}
                             >
-                              {option.name}
+                              <Checkbox
+                                checked={sorts.includes(option.name)}
+                                readOnly
+                                onClick={() =>
+                                  dispatch(sortCategory(option.name))
+                                }
+                                label={
+                                  <Typography
+                                    color="blue-gray"
+                                    className="flex gap-1 "
+                                  >
+                                    Price:{" "}
+                                    <span className="capitalize">
+                                      {" "}
+                                      {option.name}
+                                    </span>
+                                  </Typography>
+                                }
+                              />
                             </a>
                           )}
                         </Menu.Item>

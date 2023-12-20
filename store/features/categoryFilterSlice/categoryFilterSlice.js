@@ -4,6 +4,7 @@ const initialState = {
   stock: false,
   category: [],
   Keyboard: "",
+  sort: [],
 };
 
 const categoryFilterSlice = createSlice({
@@ -23,8 +24,13 @@ const categoryFilterSlice = createSlice({
       // Clear the array and add the new value
       state.category = [action.payload];
     },
+    sortCategory: (state, action) => {
+      // Clear the array and add the new value
+      state.sort = [action.payload];
+    },
   },
 });
-export const { toggleCategory, menuCategory } = categoryFilterSlice.actions;
+export const { toggleCategory, menuCategory, sortCategory } =
+  categoryFilterSlice.actions;
 
 export default categoryFilterSlice.reducer;
