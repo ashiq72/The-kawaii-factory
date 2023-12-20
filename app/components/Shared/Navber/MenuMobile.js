@@ -43,7 +43,7 @@ export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
           </div>
         </div>
       </li>
-      {/*    All categories start   */}
+      {/*    Total categories start   */}
       <div className="h-screen overflow-scroll scroll-smooth">
         {/* Woman category only */}
         {categories?.slice(0, 1).map((link, index) => (

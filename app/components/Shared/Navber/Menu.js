@@ -14,7 +14,7 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
   const dispatch = useDispatch();
 
   return (
-    <div className="lg:flex lg:gap-6  hidden">
+    <div className="lg:flex lg:gap-4  hidden">
       {/* Only for Woman category start */}
       {categories?.slice(0, 1).map((link, index) => (
         <div
@@ -27,7 +27,11 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
           key={index}
         >
           <div className="text-left md:cursor-pointer group">
-            <h1 className="py-7 flex justify-between items-center md:pr-0 pr-5 group capitalize">
+            <h1
+              className={`py-1 my-6 flex justify-between items-center md:pr-0 px-2 group capitalize hover:bg-slate-100 rounded ${
+                heading === link._id ? "bg-slate-100" : ""
+              }`}
+            >
               {link.name}
               <span className="text-base pt-1 inline transition duration-1000 ease-in-out">
                 {link.firstsublinks ? (
@@ -64,20 +68,17 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
                           {mysublinks.name}
                         </h1>
                         {mysublinks?.secondsublinks?.map((slink, index) => (
-                          <li
+                          <Link
                             key={index}
-                            className="text-sm text-gray-600 rounded-md py-2 px-2 list-none hover:bg-slate-100 capitalize"
+                            href="/products"
+                            onClick={() => {
+                              dispatch(menuCategory(slink.name));
+                            }}
                           >
-                            <Link
-                              href="/products"
-                              onClick={() => {
-                                dispatch(menuCategory(slink.name));
-                              }}
-                              className="hover:text-green-600 capitalize"
-                            >
+                            <li className="text-sm text-gray-600 rounded-md py-2 px-2 list-none hover:bg-slate-100 capitalize hover:text-green-600">
                               {slink.name}
-                            </Link>
-                          </li>
+                            </li>
+                          </Link>
                         ))}
                       </div>
                     ))}
@@ -102,7 +103,11 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
         >
           <div className="text-left md:cursor-pointer group">
             {link?.firstsublinks ? (
-              <h1 className="py-7 flex justify-between items-center md:pr-0 pr-2 group capitalize">
+              <h1
+                className={`py-1 my-6 flex justify-between items-center md:pr-0 px-2 group capitalize hover:bg-slate-100 rounded ${
+                  heading === link._id ? "bg-slate-100" : ""
+                }`}
+              >
                 {link?.name}
                 <span className="text-base pt-1 inline ">
                   {link?.firstsublinks ? (
@@ -115,7 +120,10 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
                     </span>
                   ) : null}
                 </span>
-                <span className="text-xl md:mt-1 md:ml-2  md:block hidden group-hover:rotate-180 group-hover:-mt-2">
+                <span
+                  className="text-xl md:mt-1 md:ml-2  md:block hidden group-hover:rotate-180 group-hover:-mt-2 rounded
+                "
+                >
                   <ion-icon name="chevron-down"></ion-icon>
                 </span>
               </h1>
@@ -125,7 +133,7 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
                 onClick={() => {
                   dispatch(menuCategory(link?.name));
                 }}
-                className="py-7 flex justify-between items-center md:pr-0 pr-2 group capitalize"
+                className="my-6 py-1 flex justify-between items-center md:pr-0 px-2 group capitalize hover:bg-slate-100"
               >
                 {link?.name}
                 <span className="text-xl md:mt-1 md:ml-2  md:block hidden group-hover:rotate-180 group-hover:-mt-2">
@@ -151,9 +159,10 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories, category }) => {
                           onClick={() => {
                             dispatch(menuCategory(mysublinks.name));
                           }}
-                          className="text-sm text-gray-600 rounded-md py-2 px-2 list-none hover:bg-slate-100 capitalize hover:text-green-600"
                         >
-                          {mysublinks.name}
+                          <li className="text-sm text-gray-600 rounded-md py-2 px-2 list-none hover:bg-slate-100 capitalize hover:text-green-600">
+                            {mysublinks.name}
+                          </li>
                         </Link>
                       </div>
                     ))}

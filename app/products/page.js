@@ -16,15 +16,13 @@ import FilterLeftLinks from "../components/FilterLeftLinks/FilterLeftLinks";
 // import FilterLeftLinks from "@/components/FilterLeftLinks/FilterLeftLinks";
 
 const sortOptions = [
-  { name: "Most Popular", href: "#", current: true },
-  { name: "Best Rating", href: "#", current: false },
-  { name: "Newest", href: "#", current: false },
   { name: "Price: Low to High", href: "#", current: false },
   { name: "Price: High to Low", href: "#", current: false },
 ];
 const subCategories = [
   { name: "Home", href: "#" },
   { name: "New Arrival", href: "#" },
+  { name: "Best Rating", href: "#" },
   { name: "Most Selling", href: "#" },
 ];
 const filters = [
@@ -76,7 +74,7 @@ export default function Example() {
   return (
     <div className="bg-white">
       <div>
-        {/* Mobile filter dialog */}
+        {/* Start Mobile filter dialog */}
         <Transition.Root show={mobileFiltersOpen} as={Fragment}>
           <Dialog
             as="div"
@@ -122,7 +120,7 @@ export default function Example() {
 
                   {/* Filters */}
                   <form className="mt-4 border-t border-gray-200">
-                    <h3 className="sr-only">Categories</h3>
+                    {/* <h3 className="sr-only">Categories</h3> */}
                     <ul
                       role="list"
                       className="px-2 py-3 font-medium text-gray-900"
@@ -199,6 +197,7 @@ export default function Example() {
             </div>
           </Dialog>
         </Transition.Root>
+        {/* End Mobile filter dialog */}
         <Wrapper className=" px-4 sm:px-6 lg:px-8">
           {/*--------------------------------------
              Top heading (Title, sort & grid)
