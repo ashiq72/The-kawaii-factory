@@ -11,7 +11,7 @@ import {
 } from "@heroicons/react/20/solid";
 import Wrapper from "@/app/components/Wrapper/Wrapper";
 import AllProducts from "../AllProducts/AllProducts";
-import FilterLeftLinks from "@/app/components/FilterLeftLinks/FilterLeftLinks";
+import FilterLeftLinks from "@/app/components/Pruducts/FilterLeftLinks/FilterLeftLinks";
 
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },

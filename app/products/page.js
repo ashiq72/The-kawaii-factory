@@ -11,9 +11,8 @@ import {
 } from "@heroicons/react/20/solid";
 import Wrapper from "../components/Wrapper/Wrapper";
 import AllProducts from "./AllProducts/AllProducts";
-import FilterLeftLinks from "../components/FilterLeftLinks/FilterLeftLinks";
-
-// import FilterLeftLinks from "@/components/FilterLeftLinks/FilterLeftLinks";
+import MoblieFilter from "../components/Pruducts/MobileFilter/MoblieFilter";
+import FilterLeftLinks from "../components/Pruducts/FilterLeftLinks/FilterLeftLinks";
 
 const sortOptions = [
   { name: "Price: Low to High", href: "#", current: false },
@@ -37,31 +36,31 @@ const filters = [
       { value: "accessories", label: "Accessories", checked: false },
     ],
   },
-  {
-    id: "color",
-    name: "Color",
-    options: [
-      { value: "white", label: "White", checked: false },
-      { value: "beige", label: "Beige", checked: false },
-      { value: "blue", label: "Blue", checked: true },
-      { value: "brown", label: "Brown", checked: false },
-      { value: "green", label: "Green", checked: false },
-      { value: "purple", label: "Purple", checked: false },
-    ],
-  },
+  // {
+  //   id: "color",
+  //   name: "Color",
+  //   options: [
+  //     { value: "white", label: "White", checked: false },
+  //     { value: "beige", label: "Beige", checked: false },
+  //     { value: "blue", label: "Blue", checked: true },
+  //     { value: "brown", label: "Brown", checked: false },
+  //     { value: "green", label: "Green", checked: false },
+  //     { value: "purple", label: "Purple", checked: false },
+  //   ],
+  // },
 
-  {
-    id: "size",
-    name: "Size",
-    options: [
-      { value: "2l", label: "2L", checked: false },
-      { value: "6l", label: "6L", checked: false },
-      { value: "12l", label: "12L", checked: false },
-      { value: "18l", label: "18L", checked: false },
-      { value: "20l", label: "20L", checked: false },
-      { value: "40l", label: "40L", checked: true },
-    ],
-  },
+  // {
+  //   id: "size",
+  //   name: "Size",
+  //   options: [
+  //     { value: "2l", label: "2L", checked: false },
+  //     { value: "6l", label: "6L", checked: false },
+  //     { value: "12l", label: "12L", checked: false },
+  //     { value: "18l", label: "18L", checked: false },
+  //     { value: "20l", label: "20L", checked: false },
+  //     { value: "40l", label: "40L", checked: true },
+  //   ],
+  // },
 ];
 
 function classNames(...classes) {
@@ -164,7 +163,7 @@ export default function Example() {
                             </h3>
                             <Disclosure.Panel className="pt-6">
                               <div className="space-y-6">
-                                {section.options.map((option, optionIdx) => (
+                                {/* {section.options.map((option, optionIdx) => (
                                   <div
                                     key={option.value}
                                     className="flex items-center"
@@ -184,7 +183,8 @@ export default function Example() {
                                       {option.label}
                                     </label>
                                   </div>
-                                ))}
+                                ))} */}
+                                <MoblieFilter />
                               </div>
                             </Disclosure.Panel>
                           </>
@@ -200,7 +200,7 @@ export default function Example() {
         {/* End Mobile filter dialog */}
         <Wrapper className=" px-4 sm:px-6 lg:px-8">
           {/*--------------------------------------
-             Top heading (Title, sort & grid)
+           Start  Top heading (Title, sort & grid)
           ---------------------------------------  */}
 
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-10">
@@ -271,7 +271,9 @@ export default function Example() {
               </button>
             </div>
           </div>
-
+          {/*--------------------------------------
+           End  Top heading (Title, sort & grid)
+          ---------------------------------------  */}
           <section aria-labelledby="products-heading" className="pb-24 pt-6">
             <h2 id="products-heading" className="sr-only">
               Products
