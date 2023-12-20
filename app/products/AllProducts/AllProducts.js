@@ -8,7 +8,6 @@ export default function AllProducts() {
 
   const filters = useSelector((state) => state.categoryFilter.category);
   const sorts = useSelector((state) => state.categoryFilter.sort);
-  console.log(sorts);
 
   let content = [];
 
@@ -27,8 +26,6 @@ export default function AllProducts() {
       productList?.sort((a, b) => a.orginalPrice - b.orginalPrice);
     } else if (sorts.includes("high to low")) {
       productList?.sort((a, b) => b.orginalPrice - a.orginalPrice);
-    } else {
-      return;
     }
 
     content = productList.map((product, index) => (
