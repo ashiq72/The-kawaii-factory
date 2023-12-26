@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { BsCart } from "react-icons/bs";
@@ -12,18 +12,68 @@ import Menu from "./Menu";
 import { MenuMobile } from "./MenuMobile";
 import WishList from "../../WishList/WishList";
 import { useSelector } from "react-redux";
-import { Tooltip, Button } from "@material-tailwind/react";
-import { UserButton } from "@clerk/nextjs";
+import {
+  Tooltip,
+  Button,
+  Typography,
+  MenuHandler,
+  MenuItem,
+  MenuList,
+  Card,
+  Avatar,
+} from "@material-tailwind/react";
+import { UserButton, UserProfile, useClerk } from "@clerk/nextjs";
+import {
+  CubeTransparentIcon,
+  UserCircleIcon,
+  CodeBracketSquareIcon,
+  Square3Stack3DIcon,
+  ChevronDownIcon,
+  Cog6ToothIcon,
+  InboxArrowDownIcon,
+  LifebuoyIcon,
+  PowerIcon,
+  RocketLaunchIcon,
+  Bars2Icon,
+} from "@heroicons/react/24/solid";
+import { IoPersonAddOutline } from "react-icons/io5";
+
+import { VscAccount } from "react-icons/vsc";
+import { IoSettingsOutline } from "react-icons/io5";
+import { CiLogout } from "react-icons/ci";
+import { PiSignIn } from "react-icons/pi";
+
+import { useRouter } from "next/navigation";
+// import { auth, currentUser } from '@clerk/nextjs';
+
 // import Cart from "@/app/cart/page";
 
-function Navber({ categories }) {
+function Navber({ userImg, userId }) {
+  const [categories, setCategories] = useState(null);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showCatMenu, setShowCatMenu] = useState("");
   const [wishListOpen, setWishListOpen] = useState(false);
   const [open, setOpen] = useState(false);
+  const [isAccountMenu, setIsAccountMenu] = React.useState(false);
+
+  // const closeMenu = () => setIsMenuOpen(!isMenuOpen);
   const wishLists = useSelector((state) => state.wishlist.wishlist);
 
   const cartItems = useSelector((state) => state.cart.cart);
+  const { signOut } = useClerk();
+  const router = useRouter();
+
+  useEffect(() => {
+    // Fetch data from an external API
+    fetch("https://kawaiisss-server.vercel.app/categories")
+      .then((response) => response.json())
+      .then((result) => {
+        setCategories(result);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
   return (
     <header
@@ -105,7 +155,7 @@ function Navber({ categories }) {
           </Tooltip>
           {/* Icon end */}
           {/* Account Icon start */}
-          <Tooltip
+          {/* <Tooltip
             content="My Account"
             placement="bottom"
             className="z-50 border border-blue-gray-50 bg-white text-black  shadow-xl shadow-black/10 rounded"
@@ -116,11 +166,93 @@ function Navber({ categories }) {
           >
             <Link href="/customer/account">
               <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative ">
-                {/* <AiOutlineUser className="text-[18px] md:text-[25px]" /> */}
+                <AiOutlineUser className="text-[18px] md:text-[25px]" />
                 <UserButton />
               </div>
             </Link>
-          </Tooltip>
+          </Tooltip> */}
+          {/* onMouseEnter={() => {
+            heading !== link._id ? setHeading(link._id) : setHeading("");
+          }}
+          onMouseLeave={() => {
+            setHeading("");
+          }} */}
+          <div className="" onMouseLeave={() => setIsAccountMenu(false)}>
+            <div className="relative">
+              <div onMouseEnter={() => setIsAccountMenu(!isAccountMenu)}>
+                {userId ? (
+                  <>
+                    <img
+                      src={userImg}
+                      alt=""
+                      width={35}
+                      height={35}
+                      className="rounded-full"
+                    />
+                  </>
+                ) : (
+                  <>
+                    <AiOutlineUser className="text-[18px] md:text-[25px]" />
+                  </>
+                )}
+              </div>
+              <div
+                className={`-right-8 absolute bg-white p-2  rounded ${
+                  isAccountMenu ? "flex" : "hidden"
+                }`}
+              >
+                <ul className="">
+                  {userId ? (
+                    <>
+                      <li className="hover:bg-gray-100 px-4 duration-200 py-1 cursor-pointer flex items-center gap-2">
+                        <span>
+                          <VscAccount />
+                        </span>
+                        <span>Account</span>
+                      </li>
+                      <Link href="/user-setting">
+                        <li className="hover:bg-gray-100 px-4 duration-200 py-1 cursor-pointer flex items-center gap-2">
+                          <span>
+                            <IoSettingsOutline />
+                          </span>
+                          <span>Setting</span>
+                        </li>
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link href="/sign-up">
+                        <li className="hover:bg-gray-100 px-4 duration-200 py-1 cursor-pointer flex items-center gap-2">
+                          <span>
+                            <PiSignIn />
+                          </span>
+                          <span>Login</span>
+                        </li>
+                      </Link>
+                      <Link href="/sign-in">
+                        <li className="hover:bg-gray-100 px-4 duration-200 py-1 cursor-pointer flex items-center gap-2">
+                          <span>
+                            <IoPersonAddOutline />
+                          </span>
+                          <span>Register</span>
+                        </li>
+                      </Link>
+                    </>
+                  )}
+
+                  <li
+                    className="hover:bg-gray-100 px-4 duration-200 py-1 cursor-pointer text-red-700 flex items-center gap-2"
+                    onClick={() => signOut(() => router.push("/"))}
+                  >
+                    <span>
+                      <CiLogout />
+                    </span>
+                    <span>Logout</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
           {/* Account Icon end */}
 
           {/* Mobile icon start */}

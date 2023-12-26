@@ -1,25 +1,13 @@
-"use client";
-import { useEffect, useState } from "react";
+import { auth, currentUser } from "@clerk/nextjs";
 import Navber from "./Navber";
 
-const MainNavber = () => {
-  const [categories, setCategories] = useState(null);
-
-  useEffect(() => {
-    // Fetch data from an external API
-    fetch("https://kawaiisss-server.vercel.app/categories")
-      .then((response) => response.json())
-      .then((result) => {
-        setCategories(result);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+const MainNavber = async () => {
+  const { userId } = auth();
+  const user = await currentUser();
 
   return (
     <>
-      <Navber categories={categories} />{" "}
+      <Navber userImg={user?.imageUrl} userId={userId} />
     </>
   );
 };
