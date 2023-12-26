@@ -104,6 +104,8 @@ function Navber({ userImg, userId }) {
           setMobileMenu={setMobileMenu}
           mobileMenu={mobileMenu}
           categories={categories}
+          userImg={userImg}
+          userId={userId}
         />
 
         <div className="flex items-center gap-2  text-black">
@@ -155,29 +157,11 @@ function Navber({ userImg, userId }) {
           </Tooltip>
           {/* Icon end */}
           {/* Account Icon start */}
-          {/* <Tooltip
-            content="My Account"
-            placement="bottom"
-            className="z-50 border border-blue-gray-50 bg-white text-black  shadow-xl shadow-black/10 rounded"
-            animate={{
-              mount: { scale: 1, y: 0 },
-              unmount: { scale: 0, y: 25 },
-            }}
+
+          <div
+            className="hidden lg:flex"
+            onMouseLeave={() => setIsAccountMenu(false)}
           >
-            <Link href="/customer/account">
-              <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative ">
-                <AiOutlineUser className="text-[18px] md:text-[25px]" />
-                <UserButton />
-              </div>
-            </Link>
-          </Tooltip> */}
-          {/* onMouseEnter={() => {
-            heading !== link._id ? setHeading(link._id) : setHeading("");
-          }}
-          onMouseLeave={() => {
-            setHeading("");
-          }} */}
-          <div className="" onMouseLeave={() => setIsAccountMenu(false)}>
             <div className="relative">
               <div onMouseEnter={() => setIsAccountMenu(!isAccountMenu)}>
                 {userId ? (
@@ -204,12 +188,14 @@ function Navber({ userImg, userId }) {
                 <ul className="">
                   {userId ? (
                     <>
-                      <li className="hover:bg-gray-100 px-4 duration-200 py-1 cursor-pointer flex items-center gap-2">
-                        <span>
-                          <VscAccount />
-                        </span>
-                        <span>Account</span>
-                      </li>
+                      <Link href="/customer/account">
+                        <li className="hover:bg-gray-100 px-4 duration-200 py-1 cursor-pointer flex items-center gap-2">
+                          <span>
+                            <VscAccount />
+                          </span>
+                          <span>Account</span>
+                        </li>
+                      </Link>
                       <Link href="/user-setting">
                         <li className="hover:bg-gray-100 px-4 duration-200 py-1 cursor-pointer flex items-center gap-2">
                           <span>

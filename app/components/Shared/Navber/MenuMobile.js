@@ -6,11 +6,26 @@ import { MdClose } from "react-icons/md";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { menuCategory } from "@/store/features/categoryFilterSlice/categoryFilterSlice";
-
-export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
+import { AiOutlineUser } from "react-icons/ai";
+import { VscAccount } from "react-icons/vsc";
+import { IoPersonAddOutline, IoSettingsOutline } from "react-icons/io5";
+import { PiSignIn } from "react-icons/pi";
+import { CiLogout } from "react-icons/ci";
+import { UserButton, UserProfile, useClerk } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+export const MenuMobile = ({
+  setMobileMenu,
+  mobileMenu,
+  categories,
+  userImg,
+  userId,
+}) => {
   const [heading, setHeading] = useState("");
   const [subHeading, setSubHeading] = useState("");
   const dispatch = useDispatch();
+
+  const { signOut } = useClerk();
+  const router = useRouter();
   return (
     <ul
       className={`
@@ -19,7 +34,7 @@ export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
         `}
     >
       <li>
-        <div className="w-full mx-auto z-50 py-2 px-6 lg:w-auto flex justify-between shadow-sm">
+        <div className="w-full mx-auto z-50 py-2 px-3 lg:w-auto flex justify-between shadow-sm ">
           <Link href="/">
             <h1 className="text-black font-extrabold text-2xl flex items-center">
               <span className="text-[#F9C1CE] pr-1">
@@ -225,6 +240,67 @@ export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
            ------------------------------------------------*/}
           </div>
         ))}
+        <div>
+          <div className={`  bg-white py-2  rounded`}>
+            <ul className="">
+              {userId ? (
+                <>
+                  <Link href="/customer/account">
+                    <li className="hover:bg-gray-100 px-4 duration-200 py-2 cursor-pointer flex items-center gap-2">
+                      <span>
+                        <img
+                          src={userImg}
+                          alt=""
+                          width={25}
+                          height={35}
+                          className="rounded-full"
+                        />
+                      </span>
+                      <span>My Account</span>
+                    </li>
+                  </Link>
+                  <Link href="/user-setting">
+                    <li className="hover:bg-gray-100 px-5 duration-200 py-2 cursor-pointer flex items-center gap-3">
+                      <span>
+                        <IoSettingsOutline />
+                      </span>
+                      <span>Setting</span>
+                    </li>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link href="/sign-up">
+                    <li className="hover:bg-gray-100 px-5 duration-200 py-2 cursor-pointer flex items-center gap-3">
+                      <span>
+                        <PiSignIn />
+                      </span>
+                      <span>Login</span>
+                    </li>
+                  </Link>
+                  <Link href="/sign-in">
+                    <li className="hover:bg-gray-100 px-5 duration-200 py-2 cursor-pointer flex items-center gap-3">
+                      <span>
+                        <IoPersonAddOutline />
+                      </span>
+                      <span>Register</span>
+                    </li>
+                  </Link>
+                </>
+              )}
+
+              <li
+                className="hover:bg-gray-100 px-5 duration-200 py-2 cursor-pointer text-red-700 flex items-center gap-3"
+                onClick={() => signOut(() => router.push("/"))}
+              >
+                <span>
+                  <CiLogout />
+                </span>
+                <span>Logout</span>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </ul>
   );

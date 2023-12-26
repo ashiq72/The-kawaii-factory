@@ -1,7 +1,18 @@
-import React from "react";
+import AccountHeader from "./AccountHeader";
+import { auth, currentUser } from "@clerk/nextjs";
 
-function CustomerAccount() {
-  return <div>CustomerAccount</div>;
+async function CustomerAccount() {
+  const { userId } = auth();
+  const user = await currentUser();
+
+  return (
+    <div>
+      <div>
+        <AccountHeader user={user} />
+      </div>
+      <div></div>
+    </div>
+  );
 }
 
 export default CustomerAccount;
