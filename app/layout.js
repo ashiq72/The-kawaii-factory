@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import Footer from "./components/Shared/Footer/Footer";
 import { Toaster } from "react-hot-toast";
 import TextScrolling from "./components/Shared/InfiniteScrolling/TextScrolling";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,17 +17,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <StoreProvider>
-      <html lang="en">
-        <body className={inter.className}>
-          <TextScrolling />
-          <MainNavber />
-          <Toaster position="top-center " />
-          <ToastContainer />
-          {children}
-          <Footer />
-        </body>
-      </html>
-    </StoreProvider>
+    <ClerkProvider>
+      <StoreProvider>
+        <html lang="en">
+          <body className={inter.className}>
+            <TextScrolling />
+            <MainNavber />
+            <Toaster position="top-center " />
+            <ToastContainer />
+            {children}
+            <Footer />
+          </body>
+        </html>
+      </StoreProvider>
+    </ClerkProvider>
   );
 }

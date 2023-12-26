@@ -13,6 +13,7 @@ import { MenuMobile } from "./MenuMobile";
 import WishList from "../../WishList/WishList";
 import { useSelector } from "react-redux";
 import { Tooltip, Button } from "@material-tailwind/react";
+import { UserButton } from "@clerk/nextjs";
 // import Cart from "@/app/cart/page";
 
 function Navber({ categories }) {
@@ -115,7 +116,8 @@ function Navber({ categories }) {
           >
             <Link href="/customer/account">
               <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative ">
-                <AiOutlineUser className="text-[18px] md:text-[25px]" />
+                {/* <AiOutlineUser className="text-[18px] md:text-[25px]" /> */}
+                <UserButton />
               </div>
             </Link>
           </Tooltip>
