@@ -1,6 +1,8 @@
 import React from "react";
-
-function AccountHeader({ user }) {
+import { auth, currentUser } from "@clerk/nextjs";
+async function AccountHeader() {
+  const { userId } = auth();
+  const user = await currentUser();
   const backgroundImage =
     "https://i.postimg.cc/3RBC5C9Y/photo-1576919228236-a097c32a5cd4.jpg";
   return (
