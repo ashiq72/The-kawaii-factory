@@ -12,32 +12,9 @@ import Menu from "./Menu";
 import { MenuMobile } from "./MenuMobile";
 import WishList from "../../WishList/WishList";
 import { useSelector } from "react-redux";
-import {
-  Tooltip,
-  Button,
-  Typography,
-  MenuHandler,
-  MenuItem,
-  MenuList,
-  Card,
-  Avatar,
-} from "@material-tailwind/react";
-import { UserButton, UserProfile, useClerk } from "@clerk/nextjs";
-import {
-  CubeTransparentIcon,
-  UserCircleIcon,
-  CodeBracketSquareIcon,
-  Square3Stack3DIcon,
-  ChevronDownIcon,
-  Cog6ToothIcon,
-  InboxArrowDownIcon,
-  LifebuoyIcon,
-  PowerIcon,
-  RocketLaunchIcon,
-  Bars2Icon,
-} from "@heroicons/react/24/solid";
+import { Tooltip } from "@material-tailwind/react";
+import { useClerk } from "@clerk/nextjs";
 import { IoPersonAddOutline } from "react-icons/io5";
-
 import { VscAccount } from "react-icons/vsc";
 import { IoSettingsOutline } from "react-icons/io5";
 import { CiLogout } from "react-icons/ci";
@@ -188,7 +165,7 @@ function Navber({ userImg, userId }) {
                 <ul className="">
                   {userId ? (
                     <>
-                      <Link href="/customer/account">
+                      <Link href="/customer/account-information">
                         <li className="hover:bg-gray-100 px-4 duration-200 py-1 cursor-pointer flex items-center gap-2">
                           <span>
                             <VscAccount />
