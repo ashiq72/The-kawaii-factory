@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { VscInfo } from "react-icons/vsc";
 
 function page() {
@@ -13,12 +14,15 @@ function page() {
       <div className="bg-white rounded mt-4">
         <div className="border-b-2 p-4 px-6 flex justify-between items-center">
           <h2 className="font-semibold">Personal Information</h2>
-          <button className="bg-black text-white px-4 py-2 rounded text-sm">
+          <Link
+            href="/customer/account-information/edit"
+            className="bg-black text-white px-4 py-2 rounded text-sm"
+          >
             Edit
-          </button>
+          </Link>
         </div>
         <div className="flex p-6 gap-8">
-          <div className="flex-1">
+          <div className="flex flex-1 flex-col  gap-6">
             {/* First Name  */}
             <div>
               <h1 className="font-sans text-gray-500">First Name</h1>
@@ -39,7 +43,7 @@ function page() {
           <div className="flex flex-col flex-1 gap-6">
             {/* Last Name  */}
             <div>
-              <h1 className="font-sans text-gray-500">Last Name Name</h1>
+              <h1 className="font-sans text-gray-500">Last Name</h1>
               <h1 className="font-sans">Ahmed</h1>
             </div>
             {/* Mobile Number */}
@@ -87,7 +91,9 @@ function page() {
       </div>
       <div className="bg-white rounded mt-4 py-4 px-6">
         <h1 className="font-sans flex items-center gap-1">
-          <VscInfo />{" "}
+          <span className="">
+            <VscInfo />
+          </span>
           <span>You have no other address entries in your address book.</span>
         </h1>
       </div>
