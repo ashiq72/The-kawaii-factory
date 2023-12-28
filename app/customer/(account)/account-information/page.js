@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { VscInfo } from "react-icons/vsc";
-import PersonalInformation from "./PersonalInformation";
 import { currentUser } from "@clerk/nextjs";
 
 async function getData() {
@@ -17,17 +16,14 @@ async function getData() {
 }
 
 async function page() {
+  const user = await currentUser();
+  const authEmail = user.emailAddresses[0].emailAddress;
   const data = await getData();
-  const {
-    firstName,
-    lastName,
-    email,
-    phone,
-    gender,
-    birth,
-    billingAddress,
-    shippingAddress,
-  } = data.data[0];
+
+  const { email, phone, gender, birth, billingAddress, shippingAddress } =
+    data.data[0];
+
+  // Now you can use the destructured values
 
   // Extract year, month, and day from the Date object
   var dateObject = new Date(birth);
@@ -35,6 +31,9 @@ async function page() {
   var month = dateObject.getUTCMonth() + 1; //
   var day = dateObject.getUTCDate();
   var formattedDate = `${day}/${month}/${year}`;
+
+  console.log(data);
+
   return (
     <div>
       <div>
@@ -54,40 +53,41 @@ async function page() {
             Edit
           </Link>
         </div>
+        {/* First Name  */}
+        <div className="flex flex-col px-6  pt-6">
+          <h1 className="font-sans text-gray-500">First Name</h1>
+          <h1 className="font-sans">{user.firstName}</h1>
+        </div>
         <div className="flex p-6 gap-8">
           <div className="flex flex-1 flex-col  gap-6">
-            {/* First Name  */}
-            <div>
-              <h1 className="font-sans text-gray-500">First Name</h1>
-              <h1 className="font-sans">{firstName}</h1>
-            </div>
             {/* Email Address  */}
             <div>
               <h1 className="font-sans text-gray-500">Email Address</h1>
-              <h1 className="font-sans">{email}</h1>
+              <h1 className="font-sans">{authEmail}</h1>
             </div>
             {/*  Gender */}
             <div>
               <h1 className="font-sans text-gray-500">Gender</h1>
-              <h1 className="font-sans">{gender}</h1>
+              <h1 className="font-sans">
+                {/* {data?.data && data.data.length ? gender : "N/A"} */}
+              </h1>
             </div>
           </div>
 
           <div className="flex flex-col flex-1 gap-6">
-            {/* Last Name  */}
-            <div>
-              <h1 className="font-sans text-gray-500">Last Name</h1>
-              <h1 className="font-sans">{lastName}</h1>
-            </div>
             {/* Mobile Number */}
             <div>
               <h1 className="font-sans text-gray-500">Mobile Number</h1>
-              <h1 className="font-sans">{phone}</h1>
+              <h1 className="font-sans">
+                {/* {data?.data && data.data.length ? phone : "N/A"} */}
+              </h1>
             </div>
             {/* Date of Birth */}
             <div>
               <h1 className="font-sans text-gray-500">Date of Birth</h1>
-              <h1 className="font-sans">{formattedDate}</h1>
+              <h1 className="font-sans">
+                {data?.data && data.data.length ? formattedDate : "N/A"}
+              </h1>
             </div>
           </div>
         </div>
@@ -106,7 +106,9 @@ async function page() {
             <h2 className="font-medium pb-3">Default Billing Address</h2>
             <div className="flex flex-col gap-2 bg-gray-50 p-4 justify-center capitalize ">
               <h1 className="font-sans">ashik Ahmed</h1>
-              <h1 className="font-sans">{billingAddress}</h1>
+              <h1 className="font-sans">
+                {/* {data?.data && data.data.length ? billingAddress : "N/A"} */}
+              </h1>
               <h1 className="font-sans">Keraniganj, Dhaka, -1310 Bangladesh</h1>
             </div>
           </div>
@@ -116,7 +118,9 @@ async function page() {
             <h2 className="font-medium pb-3">Default Shipping Address</h2>
             <div className="flex flex-col gap-2 bg-gray-50 p-4 justify-center capitalize ">
               <h1 className="font-sans">ashik Ahmed</h1>
-              <h1 className="font-sans">{shippingAddress}</h1>
+              <h1 className="font-sans">
+                {/* {data?.data && data.data.length ? shippingAddress : "N/A"} */}
+              </h1>
               <h1 className="font-sans">Keraniganj, Dhaka, -1310 Bangladesh</h1>
             </div>
           </div>
