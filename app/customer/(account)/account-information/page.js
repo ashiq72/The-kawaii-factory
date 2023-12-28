@@ -1,7 +1,40 @@
 import Link from "next/link";
 import { VscInfo } from "react-icons/vsc";
+import PersonalInformation from "./PersonalInformation";
+import { currentUser } from "@clerk/nextjs";
 
-function page() {
+async function getData() {
+  const user = await currentUser();
+
+  const userEmail = user.emailAddresses[0].emailAddress;
+
+  const res = await fetch(`http://localhost:5000/api/v1/user/${userEmail}`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+}
+
+async function page() {
+  const data = await getData();
+  const {
+    firstName,
+    lastName,
+    email,
+    phone,
+    gender,
+    birth,
+    billingAddress,
+    shippingAddress,
+  } = data.data[0];
+
+  // Extract year, month, and day from the Date object
+  var dateObject = new Date(birth);
+  var year = dateObject.getUTCFullYear();
+  var month = dateObject.getUTCMonth() + 1; //
+  var day = dateObject.getUTCDate();
+  var formattedDate = `${day}/${month}/${year}`;
   return (
     <div>
       <div>
@@ -26,17 +59,17 @@ function page() {
             {/* First Name  */}
             <div>
               <h1 className="font-sans text-gray-500">First Name</h1>
-              <h1 className="font-sans">Ashik</h1>
+              <h1 className="font-sans">{firstName}</h1>
             </div>
             {/* Email Address  */}
             <div>
               <h1 className="font-sans text-gray-500">Email Address</h1>
-              <h1 className="font-sans">ahmedashik18k@gmail.com</h1>
+              <h1 className="font-sans">{email}</h1>
             </div>
             {/*  Gender */}
             <div>
               <h1 className="font-sans text-gray-500">Gender</h1>
-              <h1 className="font-sans">Male</h1>
+              <h1 className="font-sans">{gender}</h1>
             </div>
           </div>
 
@@ -44,17 +77,17 @@ function page() {
             {/* Last Name  */}
             <div>
               <h1 className="font-sans text-gray-500">Last Name</h1>
-              <h1 className="font-sans">Ahmed</h1>
+              <h1 className="font-sans">{lastName}</h1>
             </div>
             {/* Mobile Number */}
             <div>
               <h1 className="font-sans text-gray-500">Mobile Number</h1>
-              <h1 className="font-sans">01882402922</h1>
+              <h1 className="font-sans">{phone}</h1>
             </div>
             {/* Date of Birth */}
             <div>
               <h1 className="font-sans text-gray-500">Date of Birth</h1>
-              <h1 className="font-sans">23 Apr 1998</h1>
+              <h1 className="font-sans">{formattedDate}</h1>
             </div>
           </div>
         </div>
@@ -73,7 +106,7 @@ function page() {
             <h2 className="font-medium pb-3">Default Billing Address</h2>
             <div className="flex flex-col gap-2 bg-gray-50 p-4 justify-center capitalize ">
               <h1 className="font-sans">ashik Ahmed</h1>
-              <h1 className="font-sans">keranijong, dhaka</h1>
+              <h1 className="font-sans">{billingAddress}</h1>
               <h1 className="font-sans">Keraniganj, Dhaka, -1310 Bangladesh</h1>
             </div>
           </div>
@@ -83,7 +116,7 @@ function page() {
             <h2 className="font-medium pb-3">Default Shipping Address</h2>
             <div className="flex flex-col gap-2 bg-gray-50 p-4 justify-center capitalize ">
               <h1 className="font-sans">ashik Ahmed</h1>
-              <h1 className="font-sans">keranijong, dhaka</h1>
+              <h1 className="font-sans">{shippingAddress}</h1>
               <h1 className="font-sans">Keraniganj, Dhaka, -1310 Bangladesh</h1>
             </div>
           </div>

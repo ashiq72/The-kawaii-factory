@@ -1,8 +1,42 @@
+// "use client";
+import { currentUser } from "@clerk/nextjs";
 import Link from "next/link";
-import React from "react";
-import { VscInfo } from "react-icons/vsc";
+import { useForm } from "react-hook-form";
+import Edit from "./Edit";
+// import React, { useState } from "react";
 
-function PersonalInfomationEdit() {
+async function PersonalInfomationEdit() {
+  // const [phone, setPhone] = useState("");
+  // const [birth, setBirth] = useState("");
+
+  // const { register, handleSubmit } = useForm();
+  const user = await currentUser();
+  const email = user.emailAddresses[0].emailAddress;
+  // const onSubmit = async (formData) => {
+  //   const user = await currentUser();
+  //   const email = user.emailAddresses[0].emailAddress;
+
+  //   try {
+  //     const res = await fetch(`http://localhost:5000/api/v1/user/${email}`, {
+  //       method: "PATCH",
+  //       headers: {
+  //         "Content-type": "application/json",
+  //       },
+  //       body: JSON.stringify({ phone, birth }),
+  //     });
+
+  //     if (res.ok) {
+  //       // router.refresh();
+  //       // router.push("/");
+  //       console.log(res);
+  //     } else {
+  //       throw new Error("Failed to update a topic");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   return (
     <div>
       <div>
@@ -22,63 +56,7 @@ function PersonalInfomationEdit() {
             Save
           </Link>
         </div>
-        <div className="flex p-6 gap-8">
-          <div className="flex flex-1 flex-col  gap-6">
-            {/* First Name  */}
-            <div>
-              <h1 className="font-sans text-gray-500">First Name</h1>
-              <input
-                type="text"
-                className="border-2 rounded outline-none px-2"
-                placeholder="Ashik"
-              />
-            </div>
-            {/* Email Address  */}
-            <div>
-              <h1 className="font-sans text-gray-500">Email Address</h1>
-              <input
-                type="email"
-                className="border-2 rounded outline-none px-2"
-                placeholder="ahmedashik18k@gmail.com"
-              />
-            </div>
-            {/*  Gender */}
-            <div>
-              <h1 className="font-sans text-gray-500">Gender</h1>
-              <h1 className="font-sans">Male</h1>
-            </div>
-          </div>
-
-          <div className="flex flex-col flex-1 gap-6">
-            {/* Last Name  */}
-            <div>
-              <h1 className="font-sans text-gray-500">Last Name</h1>
-              <input
-                type="text"
-                className="border-2 rounded outline-none px-2"
-                placeholder="Ahmed"
-              />
-            </div>
-            {/* Mobile Number */}
-            <div>
-              <h1 className="font-sans text-gray-500">Mobile Number</h1>
-              <input
-                type="number"
-                className="border-2 rounded outline-none px-2"
-                placeholder="01882402922"
-              />
-            </div>
-            {/* Date of Birth */}
-            <div>
-              <h1 className="font-sans text-gray-500">Date of Birth</h1>
-              <input
-                type="date"
-                className="border-2 rounded outline-none px-2"
-                placeholder="12/12/23"
-              />
-            </div>
-          </div>
-        </div>
+        <Edit email={email} />
       </div>
     </div>
   );
