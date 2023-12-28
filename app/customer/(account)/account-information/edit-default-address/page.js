@@ -1,7 +1,7 @@
 import { currentUser } from "@clerk/nextjs";
-import EditDefaultAddress from "./editDefaultAddress";
+import EditDefaultAddress from "./EditDefaultAddress";
 
-async function DefaultInfomationEdit() {
+async function DefaultAddressEdit() {
   const user = await currentUser();
   const email = user.emailAddresses[0].emailAddress;
   const firstName = user.firstName;
@@ -25,4 +25,4 @@ async function DefaultInfomationEdit() {
   );
 }
 
-export default DefaultInfomationEdit;
+export default DefaultAddressEdit;

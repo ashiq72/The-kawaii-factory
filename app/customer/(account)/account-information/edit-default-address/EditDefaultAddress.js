@@ -3,17 +3,15 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Radio } from "@material-tailwind/react";
 
 function EditDefaultAddress({ email, firstName }) {
   const [user, setUser] = useState(null);
-  const [phone, setPhone] = useState("");
-  const [birth, setBirth] = useState("");
-  const [gender, setGender] = useState("women");
-
   const createUser = user?._id;
-  const phoneDB = user?.phone;
-  const genderDB = user?.gender;
+  const billingAddressDB = user?.billingAddress;
+  const shippingAddressDB = user?.shippingAddress;
+
+  const [billingAddress, setBillingAddress] = useState(billingAddressDB);
+  const [shippingAddress, setShippingAddress] = useState(shippingAddressDB);
 
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -43,7 +41,7 @@ function EditDefaultAddress({ email, firstName }) {
           headers: {
             "Content-type": "application/json",
           },
-          body: JSON.stringify({ phone, birth, gender }),
+          body: JSON.stringify({ billingAddress, shippingAddress }),
         });
         if (res.ok) {
           router.refresh();
@@ -76,33 +74,46 @@ function EditDefaultAddress({ email, firstName }) {
 
   return (
     <form onSubmit={handleSubmit} className=" p-6">
-      {/* First Name  */}
-      <div className="flex flex-col pb-6">
-        <h1 className="font-sans text-gray-500">First Names</h1>
-        <h1>{firstName}</h1>
-      </div>
       <div className="flex gap-8">
         <div className="flex flex-1 flex-col  gap-6">
+          {/* First Name  */}
+          <div className="flex flex-col">
+            <h2 className="font-medium">Default Billing Address</h2>
+          </div>
+
           {/* Email Address  */}
           <div>
-            <h1 className="font-sans text-gray-500">Email Address</h1>
-            <h1>{email}</h1>
+            <h1 className="font-sans text-gray-500">Default Billing Address</h1>
+            <textarea
+              name="Bllinging Address"
+              required
+              onChange={(e) => setBillingAddress(e.target.value)}
+              type="text"
+              className="border-2 rounded outline-none px-2 w-full mt-2"
+              placeholder="Type here..."
+              defaultValue={billingAddressDB}
+            />
           </div>
         </div>
 
         <div className="flex flex-col flex-1 gap-6">
+          {/* First Name  */}
+          <div className="flex flex-col">
+            <h2 className="font-medium ">Default Shipping Address</h2>
+          </div>
+
           {/* Mobile Number */}
           <div>
-            <h1 className="font-sans text-gray-500">Mobile Number*</h1>
-            <input
-              name="phone"
-              required
-              onChange={(e) => setPhone(e.target.value)}
-              type="number"
-              // {...register("name")}
-              className="border-2 rounded outline-none px-2"
+            <h1 className="font-sans text-gray-500">
+              Default Shipping Address*
+            </h1>
+            <textarea
+              name="Shipping Address"
+              onChange={(e) => setShippingAddress(e.target.value)}
+              type="text"
+              className="border-2 rounded outline-none px-2 w-full mt-2"
               placeholder="Type here..."
-              defaultValue={phoneDB}
+              defaultValue={shippingAddressDB}
             />
           </div>
         </div>
