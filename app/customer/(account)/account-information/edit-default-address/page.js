@@ -1,11 +1,11 @@
 import { currentUser } from "@clerk/nextjs";
-import Edit from "./Edit";
+import EditDefaultAddress from "./editDefaultAddress";
 
-async function PersonalInfomationEdit() {
+async function DefaultInfomationEdit() {
   const user = await currentUser();
   const email = user.emailAddresses[0].emailAddress;
   const firstName = user.firstName;
-  console.log(user);
+
   return (
     <div>
       <div>
@@ -17,12 +17,12 @@ async function PersonalInfomationEdit() {
       {/* Personal Information */}
       <div className="bg-white rounded mt-4">
         <div className="border-b-2 p-4 px-6 flex justify-between items-center">
-          <h2 className="font-semibold">Personal Information</h2>
+          <h2 className="font-semibold">Default Information</h2>
         </div>
-        <Edit email={email} firstName={firstName} />
+        <EditDefaultAddress email={email} firstName={firstName} />
       </div>
     </div>
   );
 }
 
-export default PersonalInfomationEdit;
+export default DefaultInfomationEdit;

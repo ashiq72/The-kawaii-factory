@@ -5,17 +5,22 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { Radio } from "@material-tailwind/react";
 
-function Edit({ email, firstName }) {
+function EditDefaultAddress({ email, firstName }) {
+  const [user, setUser] = useState(null);
   const [phone, setPhone] = useState("");
   const [birth, setBirth] = useState("");
-  const [gender, setGender] = useState("");
-  const [user, setUser] = useState(null);
-  console.log(user);
+  const [gender, setGender] = useState("women");
+
+  const createUser = user?._id;
+  const phoneDB = user?.phone;
+  const genderDB = user?.gender;
+
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     // Fetch data from an external API
+
     fetch(`http://localhost:5000/api/v1/user/${email}`)
       .then((response) => response.json())
       .then((result) => {
@@ -32,7 +37,7 @@ function Edit({ email, firstName }) {
     try {
       // Simulate a delay of 5 seconds
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      if (user) {
+      if (createUser) {
         const res = await fetch(`http://localhost:5000/api/v1/user/${email}`, {
           method: "PATCH",
           headers: {
@@ -43,7 +48,6 @@ function Edit({ email, firstName }) {
         if (res.ok) {
           router.refresh();
           router.push("/customer/account-information");
-          console.log(res);
         } else {
           throw new Error("Failed to update a topic");
         }
@@ -53,12 +57,11 @@ function Edit({ email, firstName }) {
           headers: {
             "Content-type": "application/json",
           },
-          body: JSON.stringify({ phone, birth, gender, email, firstName }),
+          body: JSON.stringify({ email, firstName }),
         });
         if (res.ok) {
           router.refresh();
           router.push("/customer/account-information");
-          console.log(res);
         } else {
           throw new Error("Failed to update a topic");
         }
@@ -75,7 +78,7 @@ function Edit({ email, firstName }) {
     <form onSubmit={handleSubmit} className=" p-6">
       {/* First Name  */}
       <div className="flex flex-col pb-6">
-        <h1 className="font-sans text-gray-500">First Name</h1>
+        <h1 className="font-sans text-gray-500">First Names</h1>
         <h1>{firstName}</h1>
       </div>
       <div className="flex gap-8">
@@ -84,26 +87,6 @@ function Edit({ email, firstName }) {
           <div>
             <h1 className="font-sans text-gray-500">Email Address</h1>
             <h1>{email}</h1>
-          </div>
-          {/*  Gender */}
-          <div>
-            <h1 className="font-sans text-gray-500">Gender</h1>
-            {/*<h1 className="font-sans">Male</h1> */}
-            <div className="flex gap-5">
-              <Radio
-                onChange={(e) => setGender(e.target.value)}
-                name="type"
-                label="Men"
-                value="men"
-              />
-              <Radio
-                onChange={(e) => setGender(e.target.value)}
-                name="type"
-                value="womaen"
-                label="Women"
-                defaultChecked
-              />
-            </div>
           </div>
         </div>
 
@@ -118,17 +101,8 @@ function Edit({ email, firstName }) {
               type="number"
               // {...register("name")}
               className="border-2 rounded outline-none px-2"
-              placeholder="01882402922"
-            />
-          </div>
-          {/* Date of Birth */}
-          <div>
-            <h1 className="font-sans text-gray-500">Date of Birth*</h1>
-            <input
-              onChange={(e) => setBirth(e.target.value)}
-              type="date"
-              className="border-2 rounded outline-none px-2"
-              placeholder="12/12/23"
+              placeholder="Type here..."
+              defaultValue={phoneDB}
             />
           </div>
         </div>
@@ -154,4 +128,4 @@ function Edit({ email, firstName }) {
   );
 }
 
-export default Edit;
+export default EditDefaultAddress;

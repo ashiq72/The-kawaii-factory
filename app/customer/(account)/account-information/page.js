@@ -4,11 +4,8 @@ import { currentUser } from "@clerk/nextjs";
 
 async function getData() {
   const user = await currentUser();
-
   const userEmail = user.emailAddresses[0].emailAddress;
-
   const res = await fetch(`http://localhost:5000/api/v1/user/${userEmail}`);
-
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -20,19 +17,32 @@ async function page() {
   const authEmail = user.emailAddresses[0].emailAddress;
   const data = await getData();
 
-  const { email, phone, gender, birth, billingAddress, shippingAddress } =
-    data.data[0];
+  let phone = 0;
+  let gender = "N/A";
+  let birth = "N/A";
+  let billingAddress = "N/A";
+  let shippingAddress = "N/A";
 
-  // Now you can use the destructured values
+  if (data?.data && data.data.length > 0) {
+    // const { email, phone, gender, birth, billingAddress, shippingAddress } =
+    //   data.data[0];
+    phone = data.data[0].phone;
+    gender = data.data[0].gender;
+    billingAddress = data.data[0].billingAddress;
+    shippingAddress = data.data[0].shippingAddress;
 
-  // Extract year, month, and day from the Date object
-  var dateObject = new Date(birth);
-  var year = dateObject.getUTCFullYear();
-  var month = dateObject.getUTCMonth() + 1; //
-  var day = dateObject.getUTCDate();
-  var formattedDate = `${day}/${month}/${year}`;
-
-  console.log(data);
+    // Extract year, month, and day from the Date object
+    var dateObject = new Date(data.data[0].birth);
+    var year = dateObject.getUTCFullYear();
+    var month = dateObject.getUTCMonth() + 1;
+    var day = dateObject.getUTCDate();
+    var formattedDate = `${day}/${month}/${year}`;
+    birth = formattedDate;
+    // Now you can use the destructured values
+    // console.log(email, phone, gender, birth, billingAddress, shippingAddress);
+  } else {
+    console.error("No data available."); // Handle the error appropriately
+  }
 
   return (
     <div>
@@ -47,7 +57,7 @@ async function page() {
         <div className="border-b-2 p-4 px-6 flex justify-between items-center">
           <h2 className="font-semibold">Personal Information</h2>
           <Link
-            href="/customer/account-information/edit"
+            href="/customer/account-information/edit-personal-information"
             className="bg-black text-white px-4 py-2 rounded text-sm"
           >
             Edit
@@ -68,8 +78,9 @@ async function page() {
             {/*  Gender */}
             <div>
               <h1 className="font-sans text-gray-500">Gender</h1>
-              <h1 className="font-sans">
+              <h1 className="font-sans capitalize">
                 {/* {data?.data && data.data.length ? gender : "N/A"} */}
+                {gender}
               </h1>
             </div>
           </div>
@@ -79,15 +90,14 @@ async function page() {
             <div>
               <h1 className="font-sans text-gray-500">Mobile Number</h1>
               <h1 className="font-sans">
-                {/* {data?.data && data.data.length ? phone : "N/A"} */}
+                {phone?.length > 0 ? phone : "N/A"}
+                {/* {phone} */}
               </h1>
             </div>
             {/* Date of Birth */}
             <div>
               <h1 className="font-sans text-gray-500">Date of Birth</h1>
-              <h1 className="font-sans">
-                {data?.data && data.data.length ? formattedDate : "N/A"}
-              </h1>
+              <h1 className="font-sans">{birth?.length > 0 ? birth : "N/A"}</h1>
             </div>
           </div>
         </div>
@@ -96,20 +106,23 @@ async function page() {
       <div className="bg-white rounded mt-4">
         <div className="border-b-2 p-4 px-6 flex justify-between items-center">
           <h2 className="font-semibold">Default Address</h2>
-          <button className="bg-black text-white px-4 py-2 rounded text-sm">
+          <Link
+            href="/customer/account-information/edit-default-address"
+            className="bg-black text-white px-4 py-2 rounded text-sm"
+          >
             Add New Address
-          </button>
+          </Link>
         </div>
         <div className="flex p-6 gap-6">
           {/* Default Billing Address  */}
           <div className="flex-1">
             <h2 className="font-medium pb-3">Default Billing Address</h2>
             <div className="flex flex-col gap-2 bg-gray-50 p-4 justify-center capitalize ">
-              <h1 className="font-sans">ashik Ahmed</h1>
+              <h1 className="font-sans">{user.firstName}</h1>
+
               <h1 className="font-sans">
-                {/* {data?.data && data.data.length ? billingAddress : "N/A"} */}
+                {billingAddress?.length > 0 ? billingAddress : "N/A"}
               </h1>
-              <h1 className="font-sans">Keraniganj, Dhaka, -1310 Bangladesh</h1>
             </div>
           </div>
 
@@ -117,11 +130,11 @@ async function page() {
           <div className="flex-1">
             <h2 className="font-medium pb-3">Default Shipping Address</h2>
             <div className="flex flex-col gap-2 bg-gray-50 p-4 justify-center capitalize ">
-              <h1 className="font-sans">ashik Ahmed</h1>
+              <h1 className="font-sans">{user.firstName}</h1>
+
               <h1 className="font-sans">
-                {/* {data?.data && data.data.length ? shippingAddress : "N/A"} */}
+                {shippingAddress?.length > 0 ? shippingAddress : "N/A"}
               </h1>
-              <h1 className="font-sans">Keraniganj, Dhaka, -1310 Bangladesh</h1>
             </div>
           </div>
         </div>
