@@ -10,12 +10,7 @@ import Wrapper from "../components/Wrapper/Wrapper";
 // import { selectCartTotalPrice } from "@/store/selectors/productSelectors";
 
 const Cart = () => {
-  const [loading, setLoading] = useState(false);
   const cartItems = useSelector((state) => state.cart.cart);
-  console.log(cartItems);
-  // const totalCartPrice = useSelector(selectCartTotalPrice);
-
-  // const totalPrice = parseInt(totalCartPrice + 80);
 
   return (
     <div className="w-full md:py-20">

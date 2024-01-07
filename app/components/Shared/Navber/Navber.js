@@ -25,6 +25,7 @@ import { useSession } from "next-auth/react";
 
 function Navber() {
   const [categories, setCategories] = useState(null);
+
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showCatMenu, setShowCatMenu] = useState("");
   const [wishListOpen, setWishListOpen] = useState(false);
@@ -40,7 +41,7 @@ function Navber() {
     fetch("https://kawaiisss-server.vercel.app/api/v1/categories")
       .then((response) => response.json())
       .then((result) => {
-        setCategories(result);
+        setCategories(result?.data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
