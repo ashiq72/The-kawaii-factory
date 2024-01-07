@@ -16,10 +16,7 @@ async function page() {
         <div className="border-b-2 p-4 px-6 flex justify-between items-center">
           <h2 className="font-semibold">Default Information</h2>
         </div>
-        <EditDefaultAdd
-          email={session?.user?.email}
-          firstName={session?.user?.name}
-        />
+        <EditDefaultAdd email={session?.user?.email} />
       </div>
     </div>
   );

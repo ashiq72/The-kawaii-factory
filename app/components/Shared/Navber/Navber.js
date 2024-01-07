@@ -37,7 +37,7 @@ function Navber() {
 
   useEffect(() => {
     // Fetch data from an external API
-    fetch("https://kawaiisss-server.vercel.app/categories")
+    fetch("https://kawaiisss-server.vercel.app/api/v1/categories")
       .then((response) => response.json())
       .then((result) => {
         setCategories(result);

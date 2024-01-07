@@ -13,7 +13,7 @@ function AccountInformation({ session }) {
       const mail = "ashik@gmail.com";
       try {
         const res = await fetch(
-          `https://kawaiisss-server.vercel.app/api/v1/user/${session?.user?.email}`
+          `http://localhost:5000/api/v1/user/${session?.user?.email}`
         );
 
         if (!res.ok) {

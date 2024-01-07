@@ -18,8 +18,8 @@ function EditPersonalInfo({ session }) {
 
   useEffect(() => {
     // Fetch data from an external API
-    const mail = "ashik@gmail.com";
-    fetch(`http://localhost:5000/api/v1/user/${userEmail}`)
+
+    fetch(`https://kawaiisss-server.vercel.app/api/v1/user/${userEmail}`)
       .then((response) => response.json())
       .then((result) => {
         setUser(result?.data);
@@ -39,7 +39,7 @@ function EditPersonalInfo({ session }) {
       // Simulate a delay of 5 seconds
       await new Promise((resolve) => setTimeout(resolve, 1000));
       const res = await fetch(
-        `http://localhost:5000/api/v1/user/${userEmail}`,
+        `https://kawaiisss-server.vercel.app/api/v1/user/${userEmail}`,
         {
           method: "PATCH",
           headers: {

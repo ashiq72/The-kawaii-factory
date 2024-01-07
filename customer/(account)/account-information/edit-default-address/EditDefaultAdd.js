@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useEffect } from "react";
 
-function EditDefaultAddress({ email, firstName }) {
+function EditDefaultAdd({ email, name }) {
   const [user, setUser] = useState(null);
   const createUser = user?._id;
   const billingAddressDB = user?.billingAddress;
@@ -22,7 +22,7 @@ function EditDefaultAddress({ email, firstName }) {
     fetch(`http://localhost:5000/api/v1/user/${email}`)
       .then((response) => response.json())
       .then((result) => {
-        setUser(result.data[0]);
+        setUser(result.data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -139,4 +139,4 @@ function EditDefaultAddress({ email, firstName }) {
   );
 }
 
-export default EditDefaultAddress;
+export default EditDefaultAdd;
