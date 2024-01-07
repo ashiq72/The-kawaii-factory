@@ -1,11 +1,7 @@
-import { currentUser } from "@clerk/nextjs";
 import EditDefaultAddress from "./EditDefaultAddress";
+import { useSelector } from "react-redux";
 
 async function DefaultAddressEdit() {
-  const user = await currentUser();
-  const email = user.emailAddresses[0].emailAddress;
-  const firstName = user.firstName;
-
   return (
     <div>
       <div>
@@ -19,7 +15,7 @@ async function DefaultAddressEdit() {
         <div className="border-b-2 p-4 px-6 flex justify-between items-center">
           <h2 className="font-semibold">Default Information</h2>
         </div>
-        <EditDefaultAddress email={email} firstName={firstName} />
+        {/* <EditDefaultAddress email={email} firstName={firstName} /> */}
       </div>
     </div>
   );

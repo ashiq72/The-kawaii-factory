@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiSolidShoppingBags } from "react-icons/bi";
 import { FcMenu } from "react-icons/fc";
 import { MdClose } from "react-icons/md";
@@ -11,21 +11,23 @@ import { VscAccount } from "react-icons/vsc";
 import { IoPersonAddOutline, IoSettingsOutline } from "react-icons/io5";
 import { PiSignIn } from "react-icons/pi";
 import { CiLogout } from "react-icons/ci";
-import { UserButton, UserProfile, useClerk } from "@clerk/nextjs";
+
 import { useRouter } from "next/navigation";
-export const MenuMobile = ({
-  setMobileMenu,
-  mobileMenu,
-  categories,
-  userImg,
-  userId,
-}) => {
+import Cookies from "js-cookie";
+import { fetchUserData } from "@/utilis/GetToken/getDataFromToken";
+import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
+export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
   const [heading, setHeading] = useState("");
   const [subHeading, setSubHeading] = useState("");
   const dispatch = useDispatch();
 
-  const { signOut } = useClerk();
   const router = useRouter();
+  const userData = false;
+
+  // User data
+  const { data: session } = useSession();
+
   return (
     <ul
       className={`
@@ -243,17 +245,17 @@ export const MenuMobile = ({
         <div>
           <div className={`  bg-white py-2  rounded`}>
             <ul className="">
-              {userId ? (
+              {session ? (
                 <>
                   <Link href="/customer/account">
                     <li className="hover:bg-gray-100 px-4 duration-200 py-2 cursor-pointer flex items-center gap-2">
                       <span>
                         <img
-                          src={userImg}
+                          src={userData?.userPhoto}
                           alt=""
-                          width={25}
+                          width={35}
                           height={35}
-                          className="rounded-full"
+                          className="rounded-full w-[35px] h-auto"
                         />
                       </span>
                       <span>My Account</span>
@@ -270,7 +272,7 @@ export const MenuMobile = ({
                 </>
               ) : (
                 <>
-                  <Link href="/sign-up">
+                  <Link href="/login">
                     <li className="hover:bg-gray-100 px-5 duration-200 py-2 cursor-pointer flex items-center gap-3">
                       <span>
                         <PiSignIn />
@@ -278,7 +280,7 @@ export const MenuMobile = ({
                       <span>Login</span>
                     </li>
                   </Link>
-                  <Link href="/sign-in">
+                  <Link href="/register">
                     <li className="hover:bg-gray-100 px-5 duration-200 py-2 cursor-pointer flex items-center gap-3">
                       <span>
                         <IoPersonAddOutline />

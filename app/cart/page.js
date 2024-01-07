@@ -7,14 +7,15 @@ import { useSelector } from "react-redux";
 
 import CartItem from "./CartItem";
 import Wrapper from "../components/Wrapper/Wrapper";
-import { selectCartTotalPrice } from "@/store/selectors/productSelectors";
+// import { selectCartTotalPrice } from "@/store/selectors/productSelectors";
 
 const Cart = () => {
   const [loading, setLoading] = useState(false);
   const cartItems = useSelector((state) => state.cart.cart);
-  const totalCartPrice = useSelector(selectCartTotalPrice);
+  console.log(cartItems);
+  // const totalCartPrice = useSelector(selectCartTotalPrice);
 
-  const totalPrice = parseInt(totalCartPrice + 80);
+  // const totalPrice = parseInt(totalCartPrice + 80);
 
   return (
     <div className="w-full md:py-20">
@@ -55,7 +56,7 @@ const Cart = () => {
                     <div className="text-md md:text-lg font-normal text-black flex gap-1 items-center">
                       <span className="font-light text-base">&#2547;</span>
                       <span className="font-sans">
-                        {parseInt(totalCartPrice)}
+                        {/* {parseInt(totalCartPrice)} */}
                       </span>
                     </div>
                   </div>
@@ -86,7 +87,7 @@ const Cart = () => {
                     </div>
                     <div className="text-lg md:text-lg  text-black flex gap-1 items-center">
                       <span className="font-light text-base">&#2547; </span>
-                      <span className="font-sans">{totalPrice}</span>
+                      {/* <span className="font-sans">{totalPrice}</span> */}
                     </div>
                   </div>
                   <div className="text-sm md:text-md py-5  ">

@@ -14,6 +14,7 @@ import { BsCart } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 
 import toast from "react-hot-toast";
+import WishlistButton from "./WishlistButton";
 
 export function ProductCard({ product }) {
   const { _id, name, imageURLs, orginalPrice, discountRate } = product;
@@ -111,7 +112,7 @@ export function ProductCard({ product }) {
               />
             </div>
           ))}
-          {/* Start Button & Wishlist & Add to cart  */}
+          {/* Start Button with Wishlist & Add to cart  */}
           <h1
             className={`absolute top-5 duration-500 z-20 text-2xl flex flex-col gap-2 ${
               hoverCart ? "right-2" : "-right-20"
@@ -122,7 +123,7 @@ export function ProductCard({ product }) {
               className="flex gap-3"
               // onClick={() => }
             >
-              <Tooltip
+              {/* <Tooltip
                 className="z-40 p-1 px-2"
                 content="Add to wishlist"
                 placement="left"
@@ -130,8 +131,8 @@ export function ProductCard({ product }) {
                   mount: { scale: 1, y: 0 },
                   unmount: { scale: 0, y: 25 },
                 }}
-              >
-                <div
+              > */}
+              {/* <div
                   className={`bg-white rounded-full p-1 border-2 ease-in-out duration-100 border-gray-50 hover:border-2 ${
                     wishlistSelected?.includes(_id)
                       ? "hover:border-red-600 text-red-600"
@@ -154,15 +155,16 @@ export function ProductCard({ product }) {
                   ) : (
                     <AiOutlineHeart />
                   )}
-                </div>
-              </Tooltip>
+                </div> */}
+              <WishlistButton id={_id} product={product} />
+              {/* </Tooltip> */}
             </div>
             {/* Quick add to cart  */}
             <div
               className="flex gap-3"
               onClick={() => dispatch(addToCart(product))}
             >
-              <Tooltip
+              {/* <Tooltip
                 className="z-20 py-1 px-2"
                 content="Add to cart"
                 placement="left"
@@ -170,22 +172,22 @@ export function ProductCard({ product }) {
                   mount: { scale: 1, y: 0 },
                   unmount: { scale: 0, y: 25 },
                 }}
+              > */}
+              <div
+                className={`bg-white rounded-full p-1 border-2 ease-in-out duration-100 border-gray-50 hover:border-2 text-[20px] ${
+                  selectedCart.includes(_id)
+                    ? "hover:border-green-600 text-green-600 "
+                    : "hover:border-gray-900"
+                }`}
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent the default checkbox behavior
+                  handleSelectedCart(_id);
+                }}
               >
-                <div
-                  className={`bg-white rounded-full p-1 border-2 ease-in-out duration-100 border-gray-50 hover:border-2 text-[20px] ${
-                    selectedCart.includes(_id)
-                      ? "hover:border-green-600 text-green-600 "
-                      : "hover:border-gray-900"
-                  }`}
-                  onClick={(e) => {
-                    e.preventDefault(); // Prevent the default checkbox behavior
-                    handleSelectedCart(_id);
-                  }}
-                >
-                  {/* <AiOutlineEye /> */}
-                  {selectedCart.includes(_id) ? <BsCart /> : <BsCart />}
-                </div>
-              </Tooltip>
+                {/* <AiOutlineEye /> */}
+                {selectedCart.includes(_id) ? <BsCart /> : <BsCart />}
+              </div>
+              {/* </Tooltip> */}
             </div>
           </h1>
           <Link href={`/product-view/${_id}`}>

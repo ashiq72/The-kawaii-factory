@@ -59,8 +59,8 @@ function AccountWishlists() {
   return (
     <div className="bg-white p-5 rounded mt-2">
       <div className="flex flex-wrap gap-6">
-        {products.map((product) => (
-          <div key={product.id} className="group relative">
+        {products.map((product, index) => (
+          <div key={index} className="group relative">
             <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
               <img
                 src={product.imageSrc}

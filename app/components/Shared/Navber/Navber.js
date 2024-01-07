@@ -13,32 +13,27 @@ import { MenuMobile } from "./MenuMobile";
 import WishList from "../../WishList/WishList";
 import { useSelector } from "react-redux";
 import { Tooltip } from "@material-tailwind/react";
-import { useClerk } from "@clerk/nextjs";
 import { IoPersonAddOutline } from "react-icons/io5";
 import { VscAccount } from "react-icons/vsc";
 import { IoSettingsOutline } from "react-icons/io5";
 import { CiLogout } from "react-icons/ci";
 import { PiSignIn } from "react-icons/pi";
+import Cookies from "js-cookie";
+import { fetchUserData } from "@/utilis/GetToken/getDataFromToken";
+import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 
-import { useRouter } from "next/navigation";
-// import { auth, currentUser } from '@clerk/nextjs';
-
-// import Cart from "@/app/cart/page";
-
-function Navber({ userImg, userId }) {
+function Navber() {
   const [categories, setCategories] = useState(null);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showCatMenu, setShowCatMenu] = useState("");
   const [wishListOpen, setWishListOpen] = useState(false);
-  const [open, setOpen] = useState(false);
+
   const [isAccountMenu, setIsAccountMenu] = React.useState(false);
 
-  // const closeMenu = () => setIsMenuOpen(!isMenuOpen);
   const wishLists = useSelector((state) => state.wishlist.wishlist);
 
-  const cartItems = useSelector((state) => state.cart.cart);
-  const { signOut } = useClerk();
-  const router = useRouter();
+  const cartItems = useSelector((state) => state.cart?.cart);
 
   useEffect(() => {
     // Fetch data from an external API
@@ -51,6 +46,8 @@ function Navber({ userImg, userId }) {
         console.error("Error fetching data:", error);
       });
   }, []);
+
+  const { data: session } = useSession();
 
   return (
     <header
@@ -81,8 +78,6 @@ function Navber({ userImg, userId }) {
           setMobileMenu={setMobileMenu}
           mobileMenu={mobileMenu}
           categories={categories}
-          userImg={userImg}
-          userId={userId}
         />
 
         <div className="flex items-center gap-2  text-black">
@@ -127,7 +122,7 @@ function Navber({ userImg, userId }) {
                 <BsCart className="text-[15px] md:text-[20px]" />
 
                 <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
-                  {cartItems.length}
+                  {cartItems?.length}
                 </div>
               </div>
             </Link>
@@ -141,7 +136,7 @@ function Navber({ userImg, userId }) {
           >
             <div className="relative">
               <div onMouseEnter={() => setIsAccountMenu(!isAccountMenu)}>
-                {userId ? (
+                {/* {userId ? (
                   <>
                     <img
                       src={userImg}
@@ -155,7 +150,9 @@ function Navber({ userImg, userId }) {
                   <>
                     <AiOutlineUser className="text-[18px] md:text-[25px]" />
                   </>
-                )}
+                )} */}
+
+                <AiOutlineUser className="text-[18px] md:text-[25px]" />
               </div>
               <div
                 className={`-right-8 absolute bg-white p-2  rounded ${
@@ -163,7 +160,7 @@ function Navber({ userImg, userId }) {
                 }`}
               >
                 <ul className="">
-                  {userId ? (
+                  {session ? (
                     <>
                       <Link href="/customer/account-information">
                         <li className="hover:bg-gray-100 px-4 duration-200 py-1 cursor-pointer flex items-center gap-2">
@@ -184,7 +181,7 @@ function Navber({ userImg, userId }) {
                     </>
                   ) : (
                     <>
-                      <Link href="/sign-up">
+                      <Link href="/login">
                         <li className="hover:bg-gray-100 px-4 duration-200 py-1 cursor-pointer flex items-center gap-2">
                           <span>
                             <PiSignIn />
@@ -192,7 +189,7 @@ function Navber({ userImg, userId }) {
                           <span>Login</span>
                         </li>
                       </Link>
-                      <Link href="/sign-in">
+                      <Link href="/register">
                         <li className="hover:bg-gray-100 px-4 duration-200 py-1 cursor-pointer flex items-center gap-2">
                           <span>
                             <IoPersonAddOutline />
@@ -205,7 +202,7 @@ function Navber({ userImg, userId }) {
 
                   <li
                     className="hover:bg-gray-100 px-4 duration-200 py-1 cursor-pointer text-red-700 flex items-center gap-2"
-                    onClick={() => signOut(() => router.push("/"))}
+                    // onClick={() => signOut(() => router.push("/"))}
                   >
                     <span>
                       <CiLogout />

@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 import Footer from "./components/Shared/Footer/Footer";
 import { Toaster } from "react-hot-toast";
 import TextScrolling from "./components/Shared/InfiniteScrolling/TextScrolling";
-import { ClerkProvider } from "@clerk/nextjs";
+import AuthProvider from "@/utilis/AuthProvider/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +17,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
+    <AuthProvider>
       <StoreProvider>
         <html lang="en">
           <body className={inter.className}>
@@ -30,6 +30,6 @@ export default function RootLayout({ children }) {
           </body>
         </html>
       </StoreProvider>
-    </ClerkProvider>
+    </AuthProvider>
   );
 }

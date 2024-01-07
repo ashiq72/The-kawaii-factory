@@ -1,8 +1,6 @@
 import React from "react";
-import { auth, currentUser } from "@clerk/nextjs";
+
 async function AccountHeader() {
-  const { userId } = auth();
-  const user = await currentUser();
   const backgroundImage =
     "https://i.postimg.cc/3RBC5C9Y/photo-1576919228236-a097c32a5cd4.jpg";
   return (
@@ -17,8 +15,8 @@ async function AccountHeader() {
     >
       <h1 className=" font-bold text-white lg:text-3xl">
         <span>Welcome, </span>
-        <span>{user.firstName} </span>
-        <span>{user.lastName}</span>
+        {/* <span>{userState.name} </span> */}
+        {/* <span>{user.lastName}</span> */}
       </h1>
     </div>
   );
