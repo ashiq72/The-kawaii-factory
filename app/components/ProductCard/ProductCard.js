@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import toast from "react-hot-toast";
 import WishlistButton from "./WishlistButton";
+import CartButton from "./CartButton";
 
 export function ProductCard({ product }) {
   const { _id, name, imageURLs, orginalPrice, discountRate } = product;
@@ -39,10 +40,6 @@ export function ProductCard({ product }) {
     const discountPrice = orginalPrice - orginalPrice / discountRate;
     return parseInt(discountPrice);
   }
-
-  const { loading, cartItems } = useSelector((state) => state.cart);
-
-  const cartSelected = cartItems.find((item) => item._id === _id);
 
   return (
     <div className="w-80 h-[520px]  border-2 border-gray-50 rounded-md">
@@ -142,10 +139,7 @@ export function ProductCard({ product }) {
               {/* </Tooltip> */}
             </div>
             {/* Quick add to cart  */}
-            <div
-              className="flex gap-3"
-              onClick={() => dispatch(addToCart(product))}
-            >
+            <div className="flex gap-3">
               {/* <Tooltip
                 className="z-20 py-1 px-2"
                 content="Add to cart"
@@ -155,19 +149,7 @@ export function ProductCard({ product }) {
                   unmount: { scale: 0, y: 25 },
                 }}
               > */}
-              <div
-                className={`bg-white rounded-full p-1 border-2 ease-in-out duration-100 border-gray-50 hover:border-2 text-[20px] ${
-                  cartSelected
-                    ? "hover:border-green-600 text-green-600 "
-                    : "hover:border-gray-900"
-                }`}
-                onClick={() => {
-                  toast.success("Added card");
-                }}
-              >
-                {/* <AiOutlineEye /> */}
-                {selectedCart.includes(_id) ? <BsCart /> : <BsCart />}
-              </div>
+              <CartButton product={product} />
               {/* </Tooltip> */}
             </div>
           </h1>

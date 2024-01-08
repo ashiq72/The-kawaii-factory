@@ -41,29 +41,28 @@ export const cartSlice = createSlice({
     },
 
     handleIncrement: (state, action) => {
-      const selectedProduct = state.cart.find(
-        (product) => product._id === action.payload
-      );
-      if (selectedProduct && selectedProduct.cQuantity <= 9) {
-        const unitPrice = parseFloat(selectedProduct.orginalPrice);
-        selectedProduct.orginalPrice = (
-          (unitPrice / selectedProduct.cQuantity) *
-          (selectedProduct.cQuantity += 1)
-        ).toFixed(2);
-        let userCart = JSON.stringify(current(state.cart));
+      const item = action.payload; //_id
+
+      const existItem = state.cartItems.find((x) => x._id === item);
+      if (existItem && existItem.qty <= 9) {
+        const unitPrice = parseFloat(existItem.orginalPrice);
+        existItem.orginalPrice =
+          (unitPrice / existItem.qty) * (existItem.qty += 1).toFixed(2);
+        Cookies.set("cart", JSON.stringify(state));
       }
+      state.itemsPrice = addDecimals(
+        state.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+      );
     },
     handleDecrement: (state, action) => {
-      const selectedProduct = state.cart.find(
-        (product) => product._id === action.payload
-      );
-      if (selectedProduct && selectedProduct.cQuantity >= 2) {
-        const unitPrice = parseFloat(selectedProduct.orginalPrice);
-        selectedProduct.orginalPrice = (
-          (unitPrice / selectedProduct.cQuantity) *
-          (selectedProduct.cQuantity -= 1)
-        ).toFixed(2);
-        let userCart = JSON.stringify(current(state.cart));
+      const item = action.payload; //_id
+
+      const existItem = state.cartItems.find((x) => x._id === item);
+      if (existItem && existItem.qty >= 2) {
+        const unitPrice = parseFloat(existItem.orginalPrice);
+        existItem.orginalPrice =
+          (unitPrice / existItem.qty) * (existItem.qty -= 1).toFixed(2);
+        Cookies.set("cart", JSON.stringify(state));
       }
     },
   },

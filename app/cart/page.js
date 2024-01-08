@@ -8,6 +8,13 @@ import CartItem from "./CartItem";
 const Cart = () => {
   const { loading, cartItems } = useSelector((state) => state.cart);
 
+  const sumOfOriginalPrice = cartItems.reduce(
+    (total, product) => total + product.orginalPrice,
+    0
+  );
+
+  const totalPrice = sumOfOriginalPrice - 5 + 80;
+
   return (
     <div className="w-full md:py-20">
       <div className="w-full max-w-[1580px] px-5 mx-auto ">
@@ -70,7 +77,7 @@ const Cart = () => {
                     <div className="text-md md:text-lg font-normal text-black flex gap-1 items-center">
                       <span className="font-light text-base">&#2547;</span>
                       <span className="font-sans">
-                        {/* {parseInt(totalCartPrice)} */}
+                        {parseInt(sumOfOriginalPrice - 5)}
                       </span>
                     </div>
                   </div>
@@ -101,7 +108,7 @@ const Cart = () => {
                     </div>
                     <div className="text-lg md:text-lg  text-black flex gap-1 items-center">
                       <span className="font-light text-base">&#2547; </span>
-                      {/* <span className="font-sans">{totalPrice}</span> */}
+                      <span className="font-sans">{totalPrice}</span>
                     </div>
                   </div>
                   <div className="text-sm md:text-md py-5  ">

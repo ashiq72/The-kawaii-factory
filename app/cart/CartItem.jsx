@@ -13,7 +13,7 @@ import { FiMinus } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 const CartItem = ({ product }) => {
   const quantity = 1;
-  const { _id, orginalPrice, status, cQuantity } = product;
+  const { _id, orginalPrice, status, qty } = product;
 
   const dispatch = useDispatch();
 
@@ -22,7 +22,6 @@ const CartItem = ({ product }) => {
       toast.error("Remove form cart");
     }
   };
-  const totalPrice = quantity * orginalPrice;
 
   return (
     <div className="flex py-5 gap-3 md:gap-5 border-t">
@@ -60,7 +59,7 @@ const CartItem = ({ product }) => {
                 <span>MRP : </span>
                 <span className="pl-1"> </span>
                 <span>&#2547; </span>
-                <span> {totalPrice}</span>
+                <span> {orginalPrice}</span>
               </div>
             )}
           </div>
@@ -90,7 +89,7 @@ const CartItem = ({ product }) => {
                     <FiMinus />
                   </button>
                   <span className="mx-4 text-base">
-                    {status === "out-of-stock" ? <>0</> : <>{cQuantity}</>}
+                    {status === "out-of-stock" ? <>0</> : <>{qty}</>}
                   </span>
                   <button
                     disabled={status === "out-of-stock"}
