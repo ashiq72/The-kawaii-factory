@@ -12,6 +12,7 @@ import { CiLogout } from "react-icons/ci";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import toast from "react-hot-toast";
+import { AiOutlineUser } from "react-icons/ai";
 
 export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
   const [heading, setHeading] = useState("");

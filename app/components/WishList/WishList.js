@@ -22,6 +22,10 @@ export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
     }
   };
 
+  const sumOfOriginalPrice = wishLists
+    .filter((product) => product.status !== "out-of-stock")
+    .reduce((total, product) => total + product.orginalPrice, 0);
+
   return (
     <Transition.Root show={wishListOpen} as={Fragment}>
       <Dialog as="div" className="relative z-50" onClose={setOpen}>
@@ -102,12 +106,33 @@ export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
                                           {/* </a> */}
                                         </h3>
                                         <p className="ml-4 flex">
-                                          <span>&#2547; </span>
-                                          <span> {product.orginalPrice}</span>
+                                          <span
+                                            className={
+                                              product.status === "out-of-stock"
+                                                ? "text-red-600 line-through"
+                                                : ""
+                                            }
+                                          >
+                                            &#2547;{" "}
+                                          </span>
+                                          {product.status === "out-of-stock" ? (
+                                            <span className="text-red-600 line-through">
+                                              {" "}
+                                              00.00{" "}
+                                            </span>
+                                          ) : (
+                                            <span> {product.orginalPrice}</span>
+                                          )}
                                         </p>
                                       </div>
-                                      <p className="mt-1 text-sm text-gray-500">
-                                        {/* {product.color} */} red
+                                      <p
+                                        className={`mt-1 text-sm text-gray-500 ${
+                                          product.status === "out-of-stock"
+                                            ? "text-red-600 line-through"
+                                            : ""
+                                        }`}
+                                      >
+                                        {product.status}
                                       </p>
                                     </div>
                                     <div className="flex flex-1 items-end justify-between lg:text-sm text-[10px]">
@@ -165,18 +190,18 @@ export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>$262.00</p>
+                        <p>TK {sumOfOriginalPrice}</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">
                         Shipping and taxes calculated at checkout.
                       </p>
                       <div className="mt-6">
-                        <a
-                          href="#"
+                        <Link
+                          href="/checkout"
                           className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-gray-700"
                         >
                           Checkout
-                        </a>
+                        </Link>
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
