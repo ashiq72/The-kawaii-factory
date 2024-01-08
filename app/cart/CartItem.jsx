@@ -4,7 +4,7 @@ import {
   removeFromCart,
 } from "@/store/features/cartSlice/cartSlice";
 import Image from "next/image";
-import React, { useState } from "react";
+
 import toast from "react-hot-toast";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { BsPlusLg } from "react-icons/bs";
@@ -12,7 +12,7 @@ import { FiMinus } from "react-icons/fi";
 
 import { useDispatch } from "react-redux";
 const CartItem = ({ product }) => {
-  const [quantity, setQuantity] = useState(1);
+  const quantity = 1;
   const { _id, orginalPrice, status, cQuantity } = product;
 
   const dispatch = useDispatch();

@@ -1,21 +1,40 @@
 "use client";
-import React, { useMemo, useState } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
-
 import { useSelector } from "react-redux";
-
 import CartItem from "./CartItem";
-import Wrapper from "../components/Wrapper/Wrapper";
-// import { selectCartTotalPrice } from "@/store/selectors/productSelectors";
 
 const Cart = () => {
-  const cartItems = useSelector((state) => state.cart.cart);
+  const { loading, cartItems } = useSelector((state) => state.cart);
 
   return (
     <div className="w-full md:py-20">
-      <Wrapper>
-        {cartItems?.length > 0 && (
+      <div className="w-full max-w-[1580px] px-5 mx-auto ">
+        {/*If there have cart item */}
+        {cartItems.length === 0 ? (
+          <div className="flex-[2] flex flex-col items-center pb-[50px] md:-mt-14 mt-5">
+            <Image
+              src="https://i.postimg.cc/SRnNpJvh/ezgif-com-webp-to-jpg-1.jpg"
+              alt=""
+              width={300}
+              height={300}
+              className="w-[300px] md:w-[400px]"
+            />
+            <span className="text-xl font-bold">Your cart is empty</span>
+            <span className="text-center mt-4">
+              Looks like you have not added anything in your cart.
+              <br />
+              Go ahead and explore top categories.
+            </span>
+            <Link
+              href="/products"
+              className="py-4 px-8 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 mt-8"
+            >
+              Continue Shopping
+            </Link>
+          </div>
+        ) : (
           <>
             {/* HEADING AND PARAGRAPH START */}
             <div className="text-center max-w-[800px] mx-auto mt-8 md:mt-0">
@@ -108,32 +127,7 @@ const Cart = () => {
             {/* CART CONTENT END */}
           </>
         )}
-
-        {/* This is empty screen */}
-        {cartItems?.length < 1 && (
-          <div className="flex-[2] flex flex-col items-center pb-[50px] md:-mt-14 mt-5">
-            <Image
-              src="https://i.postimg.cc/SRnNpJvh/ezgif-com-webp-to-jpg-1.jpg"
-              alt=""
-              width={300}
-              height={300}
-              className="w-[300px] md:w-[400px]"
-            />
-            <span className="text-xl font-bold">Your cart is empty</span>
-            <span className="text-center mt-4">
-              Looks like you have not added anything in your cart.
-              <br />
-              Go ahead and explore top categories.
-            </span>
-            <Link
-              href="/products"
-              className="py-4 px-8 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 mt-8"
-            >
-              Continue Shopping
-            </Link>
-          </div>
-        )}
-      </Wrapper>
+      </div>
     </div>
   );
 };

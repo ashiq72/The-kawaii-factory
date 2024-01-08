@@ -7,7 +7,6 @@ import { AiOutlineUser } from "react-icons/ai";
 import { BiMenuAltRight } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { BiSolidShoppingBags } from "react-icons/bi";
-import Wrapper from "../../Wrapper/Wrapper";
 import Menu from "./Menu";
 import { MenuMobile } from "./MenuMobile";
 import WishList from "../../WishList/WishList";
@@ -18,10 +17,7 @@ import { VscAccount } from "react-icons/vsc";
 import { IoSettingsOutline } from "react-icons/io5";
 import { CiLogout } from "react-icons/ci";
 import { PiSignIn } from "react-icons/pi";
-import Cookies from "js-cookie";
-import { fetchUserData } from "@/utilis/GetToken/getDataFromToken";
 import { useSession } from "next-auth/react";
-// import { useSession } from "next-auth/react";
 
 function Navber() {
   const [categories, setCategories] = useState(null);
@@ -34,7 +30,7 @@ function Navber() {
 
   const wishLists = useSelector((state) => state.wishlist.wishlist);
 
-  const cartItems = useSelector((state) => state.cart?.cart);
+  const { loading, cartItems } = useSelector((state) => state.cart);
 
   useEffect(() => {
     // Fetch data from an external API
@@ -54,7 +50,7 @@ function Navber() {
     <header
       className={`w-full h-[50px] lg:h-[80px] bg-white flex items-center justify-between sticky top-0 shadow-sm transition-transform duration-300 z-30 `}
     >
-      <Wrapper className="h-[60px] flex justify-between items-center">
+      <div className="h-[60px] flex justify-between items-center w-full max-w-[1580px] px-5 mx-auto">
         <Link href="/">
           <h1 className="text-black font-extrabold xl:text-2xl text-xl flex items-center">
             <span className="text-[#F9C1CE] pr-1">
@@ -232,7 +228,7 @@ function Navber() {
           </div>
           {/* Mobile icon end */}
         </div>
-      </Wrapper>
+      </div>
     </header>
   );
 }

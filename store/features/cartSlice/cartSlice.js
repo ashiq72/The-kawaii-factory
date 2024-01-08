@@ -1,40 +1,36 @@
 import { createSlice, current } from "@reduxjs/toolkit";
-// const userCartState = JSON.parse(localStorage.getItem("cart")) || [];
-// const userWishlistState = JSON.parse(localStorage.getItem("cart")) || [];
+import Cookies from "js-cookie";
 
-const initialState = {
-  cart: [],
-};
+const initialState = Cookies.get("cart")
+  ? { ...JSON.parse(Cookies.get("cart")), loading: true }
+  : {
+      loading: true,
+      cartItems: [],
+      shippingAddress: {},
+      paymentMethod: "",
+    };
 
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const selectedProduct = state.cart?.find(
-        (product) => product._id === action.payload._id
-      );
-      if (!selectedProduct) {
-        const product = { ...action.payload, cQuantity: 1 };
-        state.cart?.push(product);
+      const item = action.payload;
+      const existItem = state.cartItems.find((x) => x._id === item._id);
+
+      if (existItem) {
+        state.cartItems = state.cartItems.map((x) =>
+          x._id === item._id ? item : x
+        );
       } else {
-        selectedProduct.cQuantity += 1;
-        state.cart = state.cart
-          .filter((product) => product._id !== selectedProduct._id)
-          .concat(selectedProduct);
+        state.cartItems = [...state.cartItems, item];
       }
-      let userCart = JSON.stringify(state.cart);
-      localStorage.setItem("cart", userCart);
+      Cookies.set("cart", JSON.stringify(state));
     },
 
     removeFromCart: (state, action) => {
-      const productIdToRemove = action.payload._id;
-      state.cart = state.cart.filter(
-        (product) => product._id !== productIdToRemove
-      );
-
-      let userCart = JSON.stringify(state.cart || []);
-      localStorage.setItem("cart", userCart);
+      state.cartItems = state.cartItems.filter((x) => x.id !== action.payload);
+      Cookies.set("cart", JSON.stringify(state));
     },
 
     handleIncrement: (state, action) => {
