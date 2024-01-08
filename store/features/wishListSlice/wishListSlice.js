@@ -1,42 +1,36 @@
-import { createSlice, current } from "@reduxjs/toolkit";
-// const userWishlistState = JSON.parse(localStorage.getItem("wishlist")) || [];
+import { createSlice } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 
-const initialState = {
-  wishlist: [],
-};
+const initialState = Cookies.get("wishList")
+  ? { ...JSON.parse(Cookies.get("wishList")), loading: true }
+  : {
+      loading: true,
+      wishListItems: [],
+    };
 
 export const wishListSlice = createSlice({
   name: "wishlist",
   initialState,
   reducers: {
     addToWishList: (state, action) => {
-      const selectedProduct = state.wishlist?.find(
-        (product) => product._id === action.payload._id
-      );
-      if (!selectedProduct) {
-        const product = { ...action.payload, wQuantity: 1 };
-        state.wishlist?.push(product);
-        let userWishlist = JSON.stringify(current(state.wishlist));
-        localStorage.setItem("wishlist", userWishlist);
+      const item = action.payload;
+      const wishListItems = state.wishListItems.find((x) => x._id === item._id);
+      if (wishListItems) {
+        state.wishListItems = state.wishListItems.map((x) =>
+          x._id === item._id ? item : x
+        );
       } else {
-        selectedProduct.wQuantity += 1;
-        state.wishlist
-          .filter((product) => product._id !== selectedProduct._id)
-          .push(selectedProduct);
-        // state.selectedWishlist = true;
-        let userWishlist = JSON.stringify(current(state.wishlist));
-        localStorage.setItem("wishlist", userWishlist);
+        state.wishListItems = [...state.wishListItems, item];
       }
+
+      Cookies.set("wishList", JSON.stringify(state));
     },
+
     removeFromWishList: (state, action) => {
-      state.wishlist = state.wishlist.filter(
-        (product) => product._id !== action.payload._id
+      state.wishListItems = state.wishListItems.filter(
+        (x) => x._id !== action.payload
       );
-      state.selectedWishlist = state.selectedWishlist.filter(
-        (id) => id !== action.payload._id
-      );
-      let userWishlist = JSON.stringify(state.wishlist);
-      localStorage.setItem("wishlist", userWishlist);
+      Cookies.set("wishList", JSON.stringify(state));
     },
   },
 });

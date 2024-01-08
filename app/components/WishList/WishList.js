@@ -5,12 +5,9 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import {
-  removeFromCart,
-  removeFromWishList,
-} from "@/store/features/wishListSlice/wishListSlice";
 import { toast } from "react-hot-toast";
 import { addToCart } from "@/store/features/cartSlice/cartSlice";
+import { removeFromWishList } from "@/store/features/wishListSlice/wishListSlice";
 
 export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
   const [open, setOpen] = useState(true);
@@ -57,7 +54,7 @@ export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
                     <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                       <div className="flex items-start justify-between">
                         <Dialog.Title className="text-lg font-medium text-gray-900">
-                          Shopping cart
+                          Wishlist
                         </Dialog.Title>
                         <div className="ml-3 flex h-7 items-center">
                           <button
@@ -71,89 +68,98 @@ export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
                           </button>
                         </div>
                       </div>
+                      {!wishLists.length > 0 ? (
+                        <div className="py-5 text-base">
+                          You have not added any wishlist products
+                        </div>
+                      ) : (
+                        <div className="mt-8">
+                          <div className="flow-root">
+                            <ul
+                              role="list"
+                              className="-my-6 divide-y divide-gray-200"
+                            >
+                              {wishLists?.map((product, i) => (
+                                <li key={i} className="flex py-6">
+                                  <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                    {product?.imageURLs?.map((img, index) => (
+                                      <Image
+                                        src={img}
+                                        key={index}
+                                        width={340}
+                                        height={300}
+                                        alt="card-image"
+                                      />
+                                    ))}
+                                  </div>
 
-                      <div className="mt-8">
-                        <div className="flow-root">
-                          <ul
-                            role="list"
-                            className="-my-6 divide-y divide-gray-200"
-                          >
-                            {wishLists?.map((product, i) => (
-                              <li key={i} className="flex py-6">
-                                <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                  {product?.imageURLs?.map((img, index) => (
-                                    <Image
-                                      src={img}
-                                      key={index}
-                                      width={340}
-                                      height={300}
-                                      alt="card-image"
-                                    />
-                                  ))}
-                                </div>
-
-                                <div className="lg:ml-4 ml-2 flex flex-1 flex-col">
-                                  <div>
-                                    <div className="flex justify-between lg:text-sm text-[10px] font-medium text-gray-900">
-                                      <h3>
-                                        {/* <a href={product.href}> */}
-                                        {product.name}
-                                        {/* </a> */}
-                                      </h3>
-                                      <p className="ml-4 flex">
-                                        <span>&#2547; </span>
-                                        <span> {product.orginalPrice}</span>
+                                  <div className="lg:ml-4 ml-2 flex flex-1 flex-col">
+                                    <div>
+                                      <div className="flex justify-between lg:text-sm text-[10px] font-medium text-gray-900">
+                                        <h3>
+                                          {/* <a href={product.href}> */}
+                                          {product.name}
+                                          {/* </a> */}
+                                        </h3>
+                                        <p className="ml-4 flex">
+                                          <span>&#2547; </span>
+                                          <span> {product.orginalPrice}</span>
+                                        </p>
+                                      </div>
+                                      <p className="mt-1 text-sm text-gray-500">
+                                        {/* {product.color} */} red
                                       </p>
                                     </div>
-                                    <p className="mt-1 text-sm text-gray-500">
-                                      {/* {product.color} */} red
-                                    </p>
-                                  </div>
-                                  <div className="flex flex-1 items-end justify-between lg:text-sm text-[10px]">
-                                    {/* <p className="text-gray-500">
+                                    <div className="flex flex-1 items-end justify-between lg:text-sm text-[10px]">
+                                      {/* <p className="text-gray-500">
                                       Qty {product.wQuantity}
                                     </p> */}
-                                    {/* Add to cart  */}
-                                    <div className="flex">
-                                      <button
-                                        onClick={() => {
-                                          addToCart(product);
-                                          handleButtonClick(
-                                            "addtocart",
-                                            product.name
-                                          );
-                                          dispatch(removeFromWishList(product));
-                                        }}
-                                        type="button"
-                                        className="font-normal hover:bg-green-500 text-green-500 border-2 border-green-200 rounded-md px-2 hover:text-white duration-700 ease-in-out"
-                                      >
-                                        Add to cart
-                                      </button>
-                                    </div>
-                                    {/* Remove from cart  */}
-                                    <div className="flex">
-                                      <button
-                                        onClick={() => {
-                                          dispatch(removeFromWishList(product));
+                                      {/* Add to cart  */}
+                                      <div className="flex">
+                                        <button
+                                          onClick={() => {
+                                            addToCart(product);
+                                            handleButtonClick(
+                                              "addtocart",
+                                              product.name
+                                            );
+                                            dispatch(
+                                              removeFromWishList(product._id)
+                                            );
+                                          }}
+                                          type="button"
+                                          className="font-normal hover:bg-green-500 text-green-500 border-2 border-green-200 rounded-md px-2 hover:text-white duration-700 ease-in-out"
+                                        >
+                                          Add to cart
+                                        </button>
+                                      </div>
+                                      {/* Remove from cart  */}
+                                      <div className="flex">
+                                        <button
+                                          onClick={() => {
+                                            dispatch(
+                                              removeFromWishList(product._id)
+                                            );
 
-                                          handleButtonClick(
-                                            "removeformwishlist",
-                                            product.name
-                                          );
-                                        }}
-                                        type="button"
-                                        className="font-normal text-red-600 border-2 border-red-200 rounded-md px-2 hover:bg-red-400 hover:text-white duration-700 ease-in-out"
-                                      >
-                                        Remove
-                                      </button>
+                                            handleButtonClick(
+                                              "removeformwishlist",
+                                              product.name
+                                            );
+                                          }}
+                                          type="button"
+                                          className="font-normal text-red-600 border-2 border-red-200 rounded-md px-2 hover:bg-red-400 hover:text-white duration-700 ease-in-out"
+                                        >
+                                          Remove
+                                        </button>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              </li>
-                            ))}
-                          </ul>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
 
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
@@ -167,7 +173,7 @@ export default function WishList({ wishListOpen, setWishListOpen, wishLists }) {
                       <div className="mt-6">
                         <a
                           href="#"
-                          className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                          className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-gray-700"
                         >
                           Checkout
                         </a>

@@ -1,22 +1,18 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BiSolidShoppingBags } from "react-icons/bi";
 import { FcMenu } from "react-icons/fc";
 import { MdClose } from "react-icons/md";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { menuCategory } from "@/store/features/categoryFilterSlice/categoryFilterSlice";
-import { AiOutlineUser } from "react-icons/ai";
-import { VscAccount } from "react-icons/vsc";
 import { IoPersonAddOutline, IoSettingsOutline } from "react-icons/io5";
 import { PiSignIn } from "react-icons/pi";
 import { CiLogout } from "react-icons/ci";
-
 import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
-import { fetchUserData } from "@/utilis/GetToken/getDataFromToken";
-import { useSession } from "next-auth/react";
-// import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import toast from "react-hot-toast";
+
 export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
   const [heading, setHeading] = useState("");
   const [subHeading, setSubHeading] = useState("");
@@ -247,21 +243,35 @@ export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
             <ul className="">
               {session ? (
                 <>
-                  <Link href="/customer/account">
+                  <Link
+                    onClick={() => setMobileMenu(!mobileMenu)}
+                    href="/customer/account-information"
+                  >
                     <li className="hover:bg-gray-100 px-4 duration-200 py-2 cursor-pointer flex items-center gap-2">
                       <span>
-                        <img
-                          src={userData?.userPhoto}
-                          alt=""
-                          width={35}
-                          height={35}
-                          className="rounded-full w-[35px] h-auto"
-                        />
+                        {session?.user?.user_photo ? (
+                          <>
+                            <img
+                              src={session?.user?.user_photo}
+                              alt=""
+                              width={35}
+                              height={35}
+                              className="rounded-full w-8 h-8"
+                            />
+                          </>
+                        ) : (
+                          <>
+                            <AiOutlineUser className="text-[18px] md:text-[25px]" />
+                          </>
+                        )}
                       </span>
                       <span>My Account</span>
                     </li>
                   </Link>
-                  <Link href="/user-setting">
+                  <Link
+                    onClick={() => setMobileMenu(!mobileMenu)}
+                    href="/user-setting"
+                  >
                     <li className="hover:bg-gray-100 px-5 duration-200 py-2 cursor-pointer flex items-center gap-3">
                       <span>
                         <IoSettingsOutline />
@@ -269,10 +279,28 @@ export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
                       <span>Setting</span>
                     </li>
                   </Link>
+                  <li
+                    className="hover:bg-gray-100 px-5 duration-200 py-2 cursor-pointer text-red-700 flex items-center gap-3"
+                    onClick={() =>
+                      signOut(() => {
+                        router.push("/");
+                        setMobileMenu(!mobileMenu);
+                        toast.error("Logout you account");
+                      })
+                    }
+                  >
+                    <span>
+                      <CiLogout />
+                    </span>
+                    <span>Logout</span>
+                  </li>
                 </>
               ) : (
                 <>
-                  <Link href="/login">
+                  <Link
+                    onClick={() => setMobileMenu(!mobileMenu)}
+                    href="/login"
+                  >
                     <li className="hover:bg-gray-100 px-5 duration-200 py-2 cursor-pointer flex items-center gap-3">
                       <span>
                         <PiSignIn />
@@ -280,7 +308,10 @@ export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
                       <span>Login</span>
                     </li>
                   </Link>
-                  <Link href="/register">
+                  <Link
+                    onClick={() => setMobileMenu(!mobileMenu)}
+                    href="/register"
+                  >
                     <li className="hover:bg-gray-100 px-5 duration-200 py-2 cursor-pointer flex items-center gap-3">
                       <span>
                         <IoPersonAddOutline />
@@ -290,16 +321,6 @@ export const MenuMobile = ({ setMobileMenu, mobileMenu, categories }) => {
                   </Link>
                 </>
               )}
-
-              <li
-                className="hover:bg-gray-100 px-5 duration-200 py-2 cursor-pointer text-red-700 flex items-center gap-3"
-                onClick={() => signOut(() => router.push("/"))}
-              >
-                <span>
-                  <CiLogout />
-                </span>
-                <span>Logout</span>
-              </li>
             </ul>
           </div>
         </div>

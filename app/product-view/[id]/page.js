@@ -2,7 +2,7 @@ import ProductDetails from "@/app/components/ProductDetails/ProductsDetails";
 
 const ProductView = async ({ params }) => {
   const res = await fetch(
-    `https://server-kawaiisss.vercel.app/api/v1/product/${params.id}`,
+    `https://kawaiisss-server.vercel.app/api/v1/product/${params.id}`,
     {
       cache: "no-store",
     }

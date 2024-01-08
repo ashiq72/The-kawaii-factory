@@ -28,7 +28,7 @@ function Navber() {
 
   const [isAccountMenu, setIsAccountMenu] = React.useState(false);
 
-  const wishLists = useSelector((state) => state.wishlist.wishlist);
+  const { wishListItems } = useSelector((state) => state.wishlist);
 
   const { loading, cartItems } = useSelector((state) => state.cart);
 
@@ -46,6 +46,7 @@ function Navber() {
 
   const { data: session } = useSession();
 
+  // console.log(session?.user?.user_photo);
   return (
     <header
       className={`w-full h-[50px] lg:h-[80px] bg-white flex items-center justify-between sticky top-0 shadow-sm transition-transform duration-300 z-30 `}
@@ -94,10 +95,10 @@ function Navber() {
                 <WishList
                   wishListOpen={wishListOpen}
                   setWishListOpen={setWishListOpen}
-                  wishLists={wishLists}
+                  wishLists={wishListItems}
                 />
                 <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
-                  {wishLists?.length}
+                  {wishListItems?.length}
                 </div>
               </div>
             </button>
@@ -133,23 +134,21 @@ function Navber() {
           >
             <div className="relative">
               <div onMouseEnter={() => setIsAccountMenu(!isAccountMenu)}>
-                {/* {userId ? (
+                {session?.user?.user_photo ? (
                   <>
                     <img
-                      src={userImg}
+                      src={session?.user?.user_photo}
                       alt=""
                       width={35}
                       height={35}
-                      className="rounded-full"
+                      className="rounded-full w-8 h-8"
                     />
                   </>
                 ) : (
                   <>
                     <AiOutlineUser className="text-[18px] md:text-[25px]" />
                   </>
-                )} */}
-
-                <AiOutlineUser className="text-[18px] md:text-[25px]" />
+                )}
               </div>
               <div
                 className={`-right-8 absolute bg-white p-2  rounded ${
@@ -175,6 +174,20 @@ function Navber() {
                           <span>Setting</span>
                         </li>
                       </Link>
+                      <li
+                        className="hover:bg-gray-100 px-4 duration-200 py-1 cursor-pointer text-red-700 flex items-center gap-2"
+                        onClick={() =>
+                          signOut(() => {
+                            toast.error("Logout you account");
+                            router.push("/");
+                          })
+                        }
+                      >
+                        <span>
+                          <CiLogout />
+                        </span>
+                        <span>Logout</span>
+                      </li>
                     </>
                   ) : (
                     <>
@@ -196,16 +209,6 @@ function Navber() {
                       </Link>
                     </>
                   )}
-
-                  <li
-                    className="hover:bg-gray-100 px-4 duration-200 py-1 cursor-pointer text-red-700 flex items-center gap-2"
-                    // onClick={() => signOut(() => router.push("/"))}
-                  >
-                    <span>
-                      <CiLogout />
-                    </span>
-                    <span>Logout</span>
-                  </li>
                 </ul>
               </div>
             </div>

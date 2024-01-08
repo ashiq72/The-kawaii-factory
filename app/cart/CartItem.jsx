@@ -19,7 +19,7 @@ const CartItem = ({ product }) => {
 
   const handleButtonClick = (type, name) => {
     if (type === "removeformCart") {
-      toast.error("Remove form cart"); // Displays a success message
+      toast.error("Remove form cart");
     }
   };
   const totalPrice = quantity * orginalPrice;
@@ -66,7 +66,7 @@ const CartItem = ({ product }) => {
           </div>
         </div>
 
-        {/* PRODUCT SUBTITLE */}
+        {/* PRODUCT Stutas */}
         <div
           className={`lg:text-sm text-xs font-medium text-black/[0.5] capitalize ${
             status === "out-of-stock" ? "text-red-400" : ""
@@ -105,7 +105,7 @@ const CartItem = ({ product }) => {
           </div>
           <div
             onClick={() => {
-              dispatch(removeFromCart(product));
+              dispatch(removeFromCart(product._id));
 
               handleButtonClick("removeformCart", product.name);
             }}

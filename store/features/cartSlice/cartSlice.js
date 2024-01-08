@@ -10,6 +10,10 @@ const initialState = Cookies.get("cart")
       paymentMethod: "",
     };
 
+const addDecimals = (num) => {
+  return (Math.round(num * 100) / 100).toFixed(2);
+};
+
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -25,11 +29,14 @@ export const cartSlice = createSlice({
       } else {
         state.cartItems = [...state.cartItems, item];
       }
+      state.itemsPrice = addDecimals(
+        state.cartItems.reduce((acc, item) => acc + item.price, 0)
+      );
       Cookies.set("cart", JSON.stringify(state));
     },
 
     removeFromCart: (state, action) => {
-      state.cartItems = state.cartItems.filter((x) => x.id !== action.payload);
+      state.cartItems = state.cartItems.filter((x) => x._id !== action.payload);
       Cookies.set("cart", JSON.stringify(state));
     },
 

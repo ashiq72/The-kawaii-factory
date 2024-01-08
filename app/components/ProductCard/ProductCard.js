@@ -40,12 +40,9 @@ export function ProductCard({ product }) {
     return parseInt(discountPrice);
   }
 
-  const wishlistSelected = useSelector(
-    (state) => state.wishlist.selectedWishlist
-  );
   const { loading, cartItems } = useSelector((state) => state.cart);
 
-  const foundCartItem = cartItems.find((item) => item._id === _id);
+  const cartSelected = cartItems.find((item) => item._id === _id);
 
   return (
     <div className="w-80 h-[520px]  border-2 border-gray-50 rounded-md">
@@ -141,7 +138,7 @@ export function ProductCard({ product }) {
                     <AiOutlineHeart />
                   )}
                 </div> */}
-              <WishlistButton id={_id} product={product} />
+              <WishlistButton product={product} />
               {/* </Tooltip> */}
             </div>
             {/* Quick add to cart  */}
@@ -160,7 +157,7 @@ export function ProductCard({ product }) {
               > */}
               <div
                 className={`bg-white rounded-full p-1 border-2 ease-in-out duration-100 border-gray-50 hover:border-2 text-[20px] ${
-                  foundCartItem
+                  cartSelected
                     ? "hover:border-green-600 text-green-600 "
                     : "hover:border-gray-900"
                 }`}
