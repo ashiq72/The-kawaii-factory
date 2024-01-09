@@ -19,7 +19,7 @@ export default function Hero() {
             slidesPerView={1}
             loop={true}
             // style={{
-            //   "--swiper-navigation-color": "#fff",
+
             // }}
             autoplay={{
               delay: 5000,
