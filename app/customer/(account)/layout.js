@@ -8,7 +8,7 @@ async function CustomerAccount({ children }) {
         <AccountHeader />
       </div>
       <div className="py-12">
-        <div style={{ display: "flex" }} className="xl:w-3/4 mx-auto ">
+        <div className="flex lg:flex-row flex-col xl:w-3/4 mx-auto ">
           {/* Sidebar */}
 
           <AccountSidebar />

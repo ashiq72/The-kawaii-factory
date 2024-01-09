@@ -7,8 +7,8 @@ function AccountContactUs() {
       <div>
         <h1 className=" font-bold text-lg">CONTACT US</h1>
       </div>
-      <div className="flex bg-white p-6 gap-6 mt-2 rounded">
-        <div className="flex flex-1 items-start gap-4 border-r-2 border-gray-100">
+      <div className="flex flex-col lg:flex-row bg-white p-6 gap-6 mt-2 rounded">
+        <div className="flex flex-1 items-start gap-4 lg:border-r-2 lg:border-b-0 border-b-2 lg:pb-0 pb-6 border-gray-100">
           <div className=" p-2 rounded-full border-2 border-gray-100">
             <FiPhoneCall />
           </div>
