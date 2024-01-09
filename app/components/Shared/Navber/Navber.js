@@ -17,7 +17,7 @@ import { VscAccount } from "react-icons/vsc";
 import { IoSettingsOutline } from "react-icons/io5";
 import { CiLogout } from "react-icons/ci";
 import { PiSignIn } from "react-icons/pi";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 function Navber() {
   const [categories, setCategories] = useState(null);
