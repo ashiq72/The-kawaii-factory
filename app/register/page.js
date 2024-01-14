@@ -17,7 +17,7 @@ export default function SignUpTwo() {
       setLoading(true);
       axios
         .post("/api/auth/register", userState)
-        // .post("http://kawaiisss/api/v1/user", userState)
+        // .post("http://kawaiisss-server/api/v1/user", userState)
         .then((res) => {
           setLoading(false);
           toast.success("Create your account");

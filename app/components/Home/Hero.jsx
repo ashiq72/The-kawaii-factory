@@ -33,7 +33,9 @@ export default function Hero() {
                   alt=""
                   height={300}
                   width={1920}
+                  placeholder="empty"
                   style={{ height: "calc(100vh - 12vh)" }}
+                  priority
                 />
               </div>
             </SwiperSlide>
@@ -44,6 +46,7 @@ export default function Hero() {
                   alt=""
                   height={900}
                   width={1920}
+                  priority
                   style={{ height: "calc(100vh - 12vh)" }}
                 />
               </div>
@@ -55,6 +58,7 @@ export default function Hero() {
                   alt=""
                   height={900}
                   width={1920}
+                  priority
                   style={{ height: "calc(100vh - 12vh)" }}
                 />
               </div>
@@ -83,6 +87,7 @@ export default function Hero() {
                   alt=""
                   height={900}
                   width={1920}
+                  priority
                   style={{ height: "calc(100vh - 20vh)" }}
                 />
               </div>
@@ -94,6 +99,7 @@ export default function Hero() {
                   alt=""
                   height={900}
                   width={1920}
+                  priority
                   style={{ height: "calc(100vh - 20vh)" }}
                 />
               </div>
@@ -105,6 +111,7 @@ export default function Hero() {
                   alt=""
                   height={900}
                   width={1920}
+                  priority
                   style={{ height: "calc(100vh - 20vh)" }}
                 />
               </div>

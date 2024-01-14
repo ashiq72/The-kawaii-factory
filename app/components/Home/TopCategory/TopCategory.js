@@ -24,12 +24,15 @@ export const TopCategory = () => {
             }}
             className="bg-pink-100 rounded flex justify-between items-center lg:px-8 px-4 py-5 hover:shadow-xl duration-200 hover:underline cursor-pointer"
           >
-            <span className=" text-gray-600">
+            <span className="w-auto h-auto text-gray-600">
               <Image
                 alt=" "
                 src="https://i.postimg.cc/7LznkTjY/ezgif-com-png-to-jpg-converted-removebg-preview.png"
                 width="40"
                 height="40"
+                priority
+                placeholder="empty"
+                className="w-auto h-auto"
               />
             </span>
 
@@ -114,6 +117,7 @@ export const TopCategory = () => {
                 src="https://i.postimg.cc/qBDCtJfd/ezgif-com-crop-2-removebg-preview.png"
                 width="40"
                 height="40"
+                className="w-auto h-auto"
               />
             </span>
 
@@ -151,6 +155,7 @@ export const TopCategory = () => {
                 src="https://i.postimg.cc/9XqH5bBH/ezgif-com-crop-3-removebg-preview.png"
                 width="40"
                 height="40"
+                className="w-auto h-auto"
               />
             </span>
 
@@ -196,6 +201,7 @@ export const TopCategory = () => {
                 src="https://i.postimg.cc/8zVs2jQN/shoes-removebg-preview.png"
                 width="50"
                 height="50"
+                className="w-auto h-auto"
               />
             </span>
 

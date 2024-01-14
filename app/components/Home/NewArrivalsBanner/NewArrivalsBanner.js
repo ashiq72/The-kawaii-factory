@@ -10,6 +10,7 @@ export default function NewArrivalsBanner() {
           src="https://new-ella-demo.myshopify.com/cdn/shop/files/banner-milance.gif?v=1641367523&width=2000"
           width="2000"
           height="2000"
+          priority
         />
       </div>
       <div className="lg:hidden flex">
@@ -18,6 +19,7 @@ export default function NewArrivalsBanner() {
           src="https://new-ella-demo.myshopify.com/cdn/shop/files/h16f4-slideshow2-mb-1.jpg?v=1640599001&width=750"
           width="2000"
           height="2000"
+          priority
         />
       </div>
     </div>
